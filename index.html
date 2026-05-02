@@ -534,7 +534,7 @@
             <input type="text" id="qaName" placeholder="Name" autocomplete="name" required />
             <input type="email" id="qaEmail" placeholder="Email" autocomplete="email" required />
             <textarea id="qaText" placeholder="Paste your document text or describe your situation"></textarea>
-            <input type="file" id="qaFile" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" />
+            <input type="file" id="qaFile" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" multiple />
             <p class="file-note">Accepted: PDF, Word, TXT, JPG, PNG — max 10MB</p>
             <button type="button" class="hero-card-btn" id="qaSubmit" onclick="submitQuickAnswer()">Get a Quick Answer</button>
             <p class="qa-form-note">Your summary arrives by email automatically — usually within minutes.</p>
@@ -655,62 +655,96 @@
     <a href="mailto:info@reorkai.com">info@reorkai.com</a>
   </footer>
 
-  <script>
-    async function submitQuickAnswer() {
-      const name = document.getElementById('qaName').value.trim();
-      const email = document.getElementById('qaEmail').value.trim();
-      const text = document.getElementById('qaText').value.trim();
-      const fileInput = document.getElementById('qaFile');
-      const btn = document.getElementById('qaSubmit');
+<script src="https://js.stripe.com/v3/"></script>
 
-      if (!email) { alert('Please enter your email.'); return; }
+<script>
+const stripe = Stripe("pk_live_51T0XgcGvqZwjvtcDNJuieYqPKusObP3DA2qbKD90hB3HbgsRwH3aCx39lXfghrJ2ToVoUr9R1eOWgPepJdQbUiuM00IagRjUTe");
 
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
+async function submitQuickAnswer() {
+  const name  = document.getElementById('qaName').value.trim();
+  const email = document.getElementById('qaEmail').value.trim();
+  const text  = document.getElementById('qaText').value.trim();
+  const btn   = document.getElementById('qaSubmit');
+
+  if (!email) {
+    alert('Please enter your email.');
+    return;
+  }
+
+  btn.textContent = 'Redirecting to payment...';
+  btn.disabled = true;
+
+  localStorage.setItem('reorkFormData', JSON.stringify({ name, email, text }));
+
+  try {
+    const response = await fetch('https://reork-backend.onrender.com/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, text })
+    });
+
+    const session = await response.json();
+
+    if (session.id) {
+      stripe.redirectToCheckout({ sessionId: session.id });
+    } else {
+      throw new Error('No session ID returned');
+    }
+
+  } catch (err) {
+    alert('Payment failed. Please try again.');
+    btn.textContent = 'Get a Quick Answer';
+    btn.disabled = false;
+  }
+}
+
+(async function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('payment') === 'success') {
+    const savedData = localStorage.getItem('reorkFormData');
+
+    if (savedData) {
+      let success = false;
 
       try {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('question', text);
-        if (fileInput.files[0]) {
-          formData.append('attachments', fileInput.files[0]);
-        }
-
         const response = await fetch('https://reork-backend.onrender.com/api/quick-answer', {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: savedData
         });
-
-        if (response.ok) {
-          document.getElementById('qaForm').style.display = 'none';
-          document.getElementById('qaSuccess').classList.add('visible');
-        } else {
-          // Fallback — send text only to Zapier if backend not ready
-          const zapierForm = document.createElement('form');
-          zapierForm.method = 'POST';
-          zapierForm.action = 'https://hooks.zapier.com/hooks/catch/26852495/upu38vb/';
-          zapierForm.target = '_blank';
-          ['name', 'email', 'text'].forEach((field, i) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = field;
-            input.value = [name, email, text][i];
-            zapierForm.appendChild(input);
-          });
-          document.body.appendChild(zapierForm);
-          zapierForm.submit();
-          document.body.removeChild(zapierForm);
-          document.getElementById('qaForm').style.display = 'none';
-          document.getElementById('qaSuccess').classList.add('visible');
-        }
+        if (response.ok) success = true;
       } catch (err) {
-        alert('Something went wrong. Please try again or email us at help@reorkai.com');
-        btn.textContent = 'Get a Quick Answer';
-        btn.disabled = false;
+        console.error('Post-payment submission error:', err);
       }
+
+      localStorage.removeItem('reorkFormData');
+
+      const form = document.getElementById('qaForm');
+      if (form) {
+        if (success) {
+          form.innerHTML = `
+            <div style="text-align:center; padding:48px 24px; background:#1a1a1a; border-radius:12px; border:1px solid #f97316;">
+              <div style="font-size:56px; margin-bottom:16px;">✅</div>
+              <h2 style="color:#f97316; font-size:26px; margin-bottom:10px; font-weight:700;">YOU'RE ALL SET</h2>
+              <p style="color:#e5e7eb; font-size:16px; margin-bottom:6px;">Payment received. Your document is being processed.</p>
+              <p style="color:#e5e7eb; font-size:16px;">Your summary will arrive by email — usually within minutes.</p>
+            </div>
+          `;
+        } else {
+          form.innerHTML = `
+            <div style="text-align:center; padding:48px 24px;">
+              <p style="color:#ef4444; font-size:16px;">Something went wrong. Please email help@reorkai.com and we will process your document manually.</p>
+            </div>
+          `;
+        }
+      }
+
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
-  </script>
+  }
+})();
+</script>
+  
 
 </body>
 </html>
