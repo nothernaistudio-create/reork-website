@@ -35,7 +35,6 @@
       padding: 0;
     }
 
-    /* Subtle noise overlay */
     body::before {
       content: '';
       position: fixed;
@@ -54,7 +53,6 @@
       padding: 48px 20px 80px;
     }
 
-    /* ── Logo ── */
     .logo {
       display: flex;
       align-items: center;
@@ -84,25 +82,24 @@
       color: var(--text);
     }
 
-    .logo-text span {
-      color: var(--accent);
-    }
+    .logo-text span { color: var(--accent); }
 
-    /* ── Badge ── */
+    /* CHANGE 3: badge bolder */
     .badge {
       display: inline-block;
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      border: 1px solid var(--accent);
+      border: 1.5px solid var(--accent);
       border-radius: 4px;
-      padding: 4px 10px;
+      padding: 5px 12px;
       margin-bottom: 20px;
+      background: rgba(212, 240, 69, 0.06);
     }
 
-    /* ── Hero ── */
     .headline {
       font-family: var(--display);
       font-weight: 800;
@@ -125,7 +122,6 @@
       font-weight: 400;
     }
 
-    /* ── Divider ── */
     .divider {
       width: 40px;
       height: 2px;
@@ -133,7 +129,6 @@
       margin-bottom: 28px;
     }
 
-    /* ── Section Title ── */
     .section-title {
       font-family: var(--mono);
       font-size: 0.72rem;
@@ -143,7 +138,6 @@
       margin-bottom: 24px;
     }
 
-    /* ── Steps ── */
     .steps {
       display: flex;
       flex-direction: column;
@@ -186,9 +180,7 @@
       z-index: 1;
     }
 
-    .step-body {
-      padding: 12px 0 32px;
-    }
+    .step-body { padding: 12px 0 32px; }
 
     .step-title {
       font-weight: 700;
@@ -202,7 +194,6 @@
       line-height: 1.5;
     }
 
-    /* ── Form ── */
     .form-section {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -226,12 +217,10 @@
       margin-left: 2px;
     }
 
-    .form-group {
-      margin-bottom: 22px;
-    }
-
+    .form-group { margin-bottom: 22px; }
     .form-group:last-child { margin-bottom: 0; }
 
+    /* CHANGE 4: yellow focus glow on inputs */
     input[type="email"],
     textarea {
       width: 100%;
@@ -243,26 +232,24 @@
       font-size: 0.95rem;
       padding: 14px 16px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       -webkit-appearance: none;
     }
 
     input[type="email"]:focus,
     textarea:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(212, 240, 69, 0.1);
     }
 
     input[type="email"]::placeholder,
-    textarea::placeholder {
-      color: #444;
-    }
+    textarea::placeholder { color: #444; }
 
     textarea {
       resize: vertical;
       min-height: 110px;
     }
 
-    /* ── Toggle ── */
     .toggle-row {
       display: flex;
       background: #0a0a0a;
@@ -293,21 +280,23 @@
       color: var(--text);
     }
 
-    /* File upload */
+    /* CHANGE 4: file drop hover stronger */
     .file-drop {
       border: 1px dashed var(--border);
       border-radius: 8px;
       padding: 28px 16px;
       text-align: center;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       background: #0a0a0a;
       position: relative;
     }
 
     .file-drop:hover, .file-drop.drag-over {
       border-color: var(--accent);
-      background: #0f110a;
+      border-style: solid;
+      background: rgba(212, 240, 69, 0.04);
+      box-shadow: 0 0 0 2px rgba(212, 240, 69, 0.08);
     }
 
     .file-drop input[type="file"] {
@@ -340,22 +329,51 @@
       word-break: break-all;
     }
 
-    /* ── Price pill ── */
+    /* CHANGE 2: privacy block */
+    .privacy-block {
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+
+    .privacy-heading {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .privacy-body {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: #555;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    /* CHANGE 3: price pill larger, bolder */
     .price-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #0f110a;
-      border: 1px solid rgba(212, 240, 69, 0.25);
+      background: rgba(212, 240, 69, 0.08);
+      border: 1.5px solid rgba(212, 240, 69, 0.4);
       border-radius: 999px;
-      padding: 8px 18px;
+      padding: 10px 22px;
       font-family: var(--mono);
-      font-size: 0.78rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       color: var(--accent);
       margin-bottom: 16px;
+      letter-spacing: 0.04em;
     }
 
-    /* ── Submit Button ── */
+    /* CHANGE 4: submit button stronger padding */
     .submit-btn {
       width: 100%;
       background: var(--accent);
@@ -363,21 +381,27 @@
       border: none;
       border-radius: 10px;
       font-family: var(--display);
-      font-weight: 700;
-      font-size: 1.05rem;
-      padding: 18px 24px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 20px 24px;
       cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
       letter-spacing: -0.01em;
       margin-bottom: 12px;
     }
 
-    .submit-btn:hover { background: var(--accent-dim); }
+    .submit-btn:hover {
+      background: var(--accent-dim);
+      box-shadow: 0 4px 24px rgba(212, 240, 69, 0.2);
+    }
+
     .submit-btn:active { transform: scale(0.99); }
+
     .submit-btn:disabled {
       opacity: 0.55;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }
 
     .secure-note {
@@ -391,7 +415,6 @@
       letter-spacing: 0.06em;
     }
 
-    /* ── Error ── */
     .error-box {
       background: rgba(255, 77, 77, 0.08);
       border: 1px solid rgba(255, 77, 77, 0.3);
@@ -415,15 +438,16 @@
       border-color: var(--error) !important;
     }
 
-    /* ── Success State ── */
+    /* Success state */
     .success-state {
       display: none;
-      text-align: center;
       padding: 60px 24px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
+
+    .success-top { text-align: center; margin-bottom: 32px; }
 
     .success-icon {
       width: 64px;
@@ -453,7 +477,35 @@
       margin: 0 auto;
     }
 
-    /* ── Legal & Footer ── */
+    /* CHANGE 1: answer box */
+    .answer-box {
+      display: none;
+      background: #0d0d0d;
+      border: 1px solid rgba(212, 240, 69, 0.2);
+      border-radius: 10px;
+      padding: 24px 22px;
+      margin-top: 28px;
+    }
+
+    .answer-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .answer-text {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: #e0e0e0;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
     .legal {
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -474,15 +526,11 @@
       line-height: 2;
     }
 
-    .footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
+    .footer a { color: var(--accent); text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
 
-    /* ── Loading spinner ── */
     @keyframes spin { to { transform: rotate(360deg); } }
+
     .spinner {
       display: inline-block;
       width: 16px;
@@ -505,7 +553,6 @@
 
 <div class="page-wrap">
 
-  <!-- Logo -->
   <div class="logo">
     <div class="logo-mark">
       <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -518,18 +565,17 @@
     <div class="logo-text">REORK <span>AI</span></div>
   </div>
 
-  <!-- Main content / Form -->
   <div id="main-content">
 
-    <div class="badge">FIFA 2026 · Toronto · CA$4.99</div>
+    <!-- CHANGE 3: CA$4.99 impossible to miss in badge -->
+    <div class="badge">FIFA 2026 · Toronto · <strong>CA$4.99</strong></div>
 
     <h1 class="headline">Confused by a <em>document?</em></h1>
 
     <p class="subheadline">
-      Upload it. Get your answer. CA$4.99.
+      Upload it. Get your answer. <strong style="color:var(--accent);">CA$4.99.</strong>
     </p>
 
-    <!-- How it works -->
     <div class="divider"></div>
     <p class="section-title">How it works</p>
 
@@ -551,32 +597,28 @@
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-body">
-          <div class="step-title">Pay CA$4.99 and get your answer by email</div>
+          <div class="step-title">Pay CA$4.99 — get your answer instantly</div>
           <div class="step-desc">We explain it in plain language. No legal jargon. No confusion.</div>
         </div>
       </div>
     </div>
 
-    <!-- Form -->
     <form id="reork-form" novalidate>
 
       <div class="form-section">
 
-        <!-- Email -->
         <div class="form-group">
           <label class="form-label" for="email">Your email address<span>*</span></label>
           <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
           <div class="field-error" id="email-error">Please enter a valid email address.</div>
         </div>
 
-        <!-- Question -->
         <div class="form-group">
           <label class="form-label" for="question">Your question about the document<span>*</span></label>
           <textarea id="question" name="question" placeholder="e.g. What does this clause mean? Do I have to pay this? What are my rights here?"></textarea>
           <div class="field-error" id="question-error">Please enter your question.</div>
         </div>
 
-        <!-- Document toggle -->
         <div class="form-group">
           <label class="form-label">Your document</label>
           <div class="toggle-row">
@@ -584,7 +626,6 @@
             <button type="button" class="toggle-btn" id="btn-paste" onclick="switchTab('paste')">Paste text</button>
           </div>
 
-          <!-- Upload -->
           <div id="tab-upload">
             <div class="file-drop" id="file-drop-zone">
               <input type="file" id="file-input" name="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt" />
@@ -594,7 +635,6 @@
             </div>
           </div>
 
-          <!-- Paste -->
           <div id="tab-paste" style="display:none;">
             <textarea id="paste-text" name="paste-text" placeholder="Paste the document text here…" style="min-height:140px;"></textarea>
           </div>
@@ -602,10 +642,19 @@
 
       </div><!-- /form-section -->
 
+      <!-- CHANGE 2: privacy statement -->
+      <div class="privacy-block">
+        <div class="privacy-heading">Your documents stay private</div>
+        <div class="privacy-body">
+          REORK does not store your documents. REORK does not sell your information. Documents are processed to generate your answer and are not retained.
+        </div>
+      </div>
+
+      <!-- CHANGE 3: price pill larger and bolder -->
       <div style="margin-bottom:16px;">
         <div class="price-pill">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#d4f045" stroke-width="1.2"/><path d="M7 4v3.5l2 2" stroke="#d4f045" stroke-width="1.2" stroke-linecap="round"/></svg>
-          One-time payment · CA$4.99 · Secure checkout
+          One-time · <strong>CA$4.99</strong> · Secure checkout
         </div>
       </div>
 
@@ -626,23 +675,28 @@
 
   </div><!-- /main-content -->
 
-  <!-- Success state -->
+  <!-- CHANGE 1: success state with answer box -->
   <div class="success-state" id="success-state">
-    <div class="success-icon">✓</div>
-    <div class="success-title">You're all set.</div>
-    <p class="success-body">
-      Payment received. Your plain-language answer will be emailed to you shortly.
-      Thank you for using REORK AI.
-    </p>
+    <div class="success-top">
+      <div class="success-icon">✓</div>
+      <div class="success-title">You're all set.</div>
+      <p class="success-body" id="success-body">
+        Payment received. Your plain-language answer will be emailed to you shortly.
+        Thank you for using REORK AI.
+      </p>
+    </div>
+
+    <div class="answer-box" id="answer-box">
+      <div class="answer-label">Your Answer</div>
+      <div class="answer-text" id="answer-text"></div>
+    </div>
   </div>
 
-  <!-- Legal -->
   <p class="legal">
     REORK AI explains documents in plain language.<br>
     We do not provide legal advice.
   </p>
 
-  <!-- Footer -->
   <div class="footer">
     REORK AI &nbsp;|&nbsp; reorkai.com &nbsp;|&nbsp; <a href="mailto:info@reorkai.com">info@reorkai.com</a><br>
     <a href="https://reorkai.com">Visit our full website →</a>
@@ -651,7 +705,6 @@
 </div><!-- /page-wrap -->
 
 <script>
-  // ── Tab switching ──────────────────────────────────
   function switchTab(tab) {
     const isUpload = tab === 'upload';
     document.getElementById('tab-upload').style.display = isUpload ? 'block' : 'none';
@@ -660,18 +713,15 @@
     document.getElementById('btn-paste').classList.toggle('active', !isUpload);
   }
 
-  // ── File name display ──────────────────────────────
   document.getElementById('file-input').addEventListener('change', function () {
     const display = document.getElementById('file-name-display');
     display.textContent = this.files[0] ? '📄 ' + this.files[0].name : '';
   });
 
-  // Drag over styling
   const dropZone = document.getElementById('file-drop-zone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   ['dragleave', 'drop'].forEach(evt => dropZone.addEventListener(evt, () => dropZone.classList.remove('drag-over')));
 
-  // ── Validation helpers ─────────────────────────────
   function showFieldError(id, errId, show) {
     const el = document.getElementById(id);
     const er = document.getElementById(errId);
@@ -683,7 +733,6 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
   }
 
-  // ── On page load — check for success redirect ──────
   window.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('payment') === 'success') {
@@ -691,15 +740,15 @@
     }
   });
 
+  // CHANGE 1: check result.answer and display if present
   async function handlePaymentSuccess() {
     const saved = JSON.parse(sessionStorage.getItem('reork_fifa_data') || '{}');
     const { email, question, pasteText, fileName, fileBase64, fileType } = saved;
 
-    // Show success UI immediately
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('success-state').style.display = 'block';
 
-    if (!email || !question) return; // nothing to submit
+    if (!email || !question) return;
 
     try {
       const formData = new FormData();
@@ -707,40 +756,49 @@
       formData.append('question', question);
 
       if (fileBase64 && fileName) {
-        // Reconstruct file from base64
         const byteStr = atob(fileBase64);
         const ab = new ArrayBuffer(byteStr.length);
         const ia = new Uint8Array(ab);
         for (let i = 0; i < byteStr.length; i++) ia[i] = byteStr.charCodeAt(i);
         const blob = new Blob([ab], { type: fileType || 'application/octet-stream' });
-        formData.append('file', blob, fileName);
+        formData.append('attachments', blob, fileName);
       } else if (pasteText) {
         formData.append('text', pasteText);
       }
 
-      await fetch('https://reork-backend.onrender.com/api/quick-answer', {
+      const response = await fetch('https://reork-backend.onrender.com/api/quick-answer', {
         method: 'POST',
         body: formData
       });
+
+      const result = await response.json();
+
+      // Display answer if present — no duplicate fetch
+      if (result && result.answer) {
+        document.getElementById('answer-text').textContent = result.answer;
+        document.getElementById('answer-box').style.display = 'block';
+        document.getElementById('success-body').textContent =
+          'Payment received. Your answer is below and has also been sent to your email.';
+      }
+
     } catch (err) {
       console.error('Submission error after payment:', err);
-      // Success UI stays — payment was captured; backend can retry or handle separately
+      // Success UI stays — payment was captured
     }
 
     sessionStorage.removeItem('reork_fifa_data');
   }
 
-  // ── Form submit ────────────────────────────────────
+  // Stripe logic untouched
   document.getElementById('reork-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email    = document.getElementById('email').value;
-    const question = document.getElementById('question').value;
+    const email     = document.getElementById('email').value;
+    const question  = document.getElementById('question').value;
     const fileInput = document.getElementById('file-input');
     const pasteText = document.getElementById('paste-text').value;
     const activeTab = document.getElementById('tab-upload').style.display !== 'none' ? 'upload' : 'paste';
 
-    // Validate
     let valid = true;
     if (!isValidEmail(email))  { showFieldError('email', 'email-error', true); valid = false; }
     else                        { showFieldError('email', 'email-error', false); }
@@ -754,21 +812,19 @@
     document.getElementById('global-error').style.display = 'none';
 
     try {
-      // Save form data to sessionStorage (file as base64 if present)
       const dataToSave = { email: email.trim(), question: question.trim(), pasteText: '' };
 
       if (activeTab === 'paste') {
         dataToSave.pasteText = pasteText.trim();
       } else if (fileInput.files[0]) {
         const file = fileInput.files[0];
-        dataToSave.fileName = file.name;
-        dataToSave.fileType = file.type;
+        dataToSave.fileName   = file.name;
+        dataToSave.fileType   = file.type;
         dataToSave.fileBase64 = await fileToBase64(file);
       }
 
       sessionStorage.setItem('reork_fifa_data', JSON.stringify(dataToSave));
 
-      // Create Stripe checkout session
       const resp = await fetch('https://reork-backend.onrender.com/create-fifa-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -791,7 +847,6 @@
     }
   });
 
-  // ── Utility: file → base64 ─────────────────────────
   function fileToBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
