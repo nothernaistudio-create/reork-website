@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REORK AI — COMMAND COCKPIT</title>
+  <style>
+    :root {
+      --bg:      #0a0a0b;
+      --panel:   #111114;
+      --border:  #1e1e24;
+      --border2: #2a2a34;
+      --lime:    #aaff00;
+      --lime2:   #88cc00;
+      --orange:  #ff5500;
+      --orange2: #cc4400;
+      --text:    #e8e8e8;
+      --muted:   #666670;
+      --soft:    #3a3a46;
+      --claude:  #4488ff;
+      --gpt:     #10a37f;
+      --coord:   #ff9900;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 2px solid var(--lime);
+      padding: 18px 24px 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-title {
+      font-size: clamp(16px, 3.5vw, 26px);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--lime);
+      font-weight: 700;
+    }
+    .header-badge {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--muted);
+      padding: 3px 8px;
+    }
+    .header-status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--lime);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--lime);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+    /* MAIN GRID */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      padding: 2px;
+    }
+    .col-full { grid-column: 1 / -1; }
+    @media (max-width: 680px) {
+      main { grid-template-columns: 1fr; }
+      .col-full { grid-column: 1; }
+    }
+
+    /* SECTION */
+    .section {
+      background: var(--panel);
+      padding: 22px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sec-num {
+      font-size: 9px;
+      letter-spacing: 5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border2);
+      padding-bottom: 8px;
+    }
+    .sec-title {
+      font-size: clamp(15px, 2.5vw, 20px);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--lime);
+      font-weight: 700;
+    }
+    .sec-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      letter-spacing: 0.5px;
+    }
+
+    /* INPUT ROW */
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .txt {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 11px 13px;
+      outline: none;
+      transition: border-color 0.15s;
+      border-radius: 1px;
+    }
+    .txt::placeholder { color: var(--soft); }
+    .txt:focus { border-color: var(--lime); }
+
+    .mic {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      font-size: 17px;
+      width: 46px; min-width: 46px;
+      cursor: pointer;
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .mic:hover { border-color: var(--lime); color: var(--lime); }
+    .mic.on { border-color: var(--orange); color: var(--orange); animation: pulse 0.7s infinite; }
+    .mic.hide { display: none; }
+
+    /* BUTTONS */
+    .btn {
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 14px 18px;
+      border: none;
+      cursor: pointer;
+      border-radius: 1px;
+      transition: background 0.15s, opacity 0.15s;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .btn-lime   { background: var(--lime);   color: #000; }
+    .btn-lime:hover:not(:disabled)   { background: var(--lime2); }
+
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-orange:hover:not(:disabled) { background: var(--orange2); }
+
+    .btn-ghost-lime {
+      background: transparent;
+      color: var(--lime);
+      border: 2px solid var(--lime);
+    }
+    .btn-ghost-lime:hover:not(:disabled) { background: rgba(170,255,0,0.06); }
+
+    .btn-ghost-orange {
+      background: transparent;
+      color: var(--orange);
+      border: 2px solid var(--orange);
+    }
+    .btn-ghost-orange:hover:not(:disabled) { background: rgba(255,85,0,0.06); }
+
+    /* STATUS */
+    .status {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      min-height: 16px;
+      line-height: 1.5;
+    }
+    .status.ok  { color: var(--lime); }
+    .status.err { color: #ff3333; }
+    .status.run { color: var(--muted); }
+
+    /* SPINNER */
+    .spin {
+      display: inline-block;
+      width: 11px; height: 11px;
+      border: 2px solid var(--muted);
+      border-top-color: var(--lime);
+      border-radius: 50%;
+      animation: rot 0.6s linear infinite;
+    }
+    @keyframes rot { to { transform: rotate(360deg); } }
+
+    /* MEETING RESPONSE PANELS */
+    .meeting-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .meeting-cols { grid-template-columns: 1fr; } }
+
+    .res-box {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 1px;
+      padding: 14px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .res-box.show { display: flex; }
+
+    .res-label {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border2);
+    }
+    .lbl-claude { color: var(--claude); border-color: var(--claude) !important; }
+    .lbl-gpt    { color: var(--gpt);   border-color: var(--gpt)   !important; }
+    .lbl-coord  { color: var(--coord); border-color: var(--coord) !important; }
+
+    .res-text {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .coord-box {
+      background: rgba(255,153,0,0.04);
+      border: 1px solid rgba(255,153,0,0.25);
+      border-radius: 1px;
+      padding: 14px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .coord-box.show { display: flex; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border2);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    footer span {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-title">REORK AI — Command Cockpit</div>
+  <div class="header-badge">Internal Operations Only</div>
+  <div class="header-status">
+    <div class="pulse-dot"></div>
+    System Online
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- S1 — NEW TASK -->
+  <section class="section">
+    <div class="sec-num">Section 01</div>
+    <div class="sec-title">New Task</div>
+    <div class="input-row">
+      <input class="txt" id="s1Input" type="text"
+             placeholder="Describe your task..." autocomplete="off" />
+      <button class="mic hide" id="s1Mic" title="Voice input">🎙</button>
+    </div>
+    <button class="btn btn-lime" id="s1Btn" data-lbl="Send to Command" onclick="sendTask()">
+      Send to Command
+    </button>
+    <div class="status" id="s1St"></div>
+  </section>
+
+  <!-- S3 — CONTINUITY PACKAGE -->
+  <section class="section">
+    <div class="sec-num">Section 03</div>
+    <div class="sec-title">Continuity Package</div>
+    <p class="sec-desc">Triggers the continuity generator. A package link will arrive in Gmail when ready. No input required.</p>
+    <button class="btn btn-orange" id="s3Btn" data-lbl="Generate Package" onclick="genContinuity()">
+      Generate Package
+    </button>
+    <div class="status" id="s3St"></div>
+  </section>
+
+  <!-- S2 — CEO MEETING (full width) -->
+  <section class="section col-full">
+    <div class="sec-num">Section 02</div>
+    <div class="sec-title">CEO Meeting</div>
+    <div class="input-row">
+      <input class="txt" id="s2Input" type="text"
+             placeholder="Your question or decision..." autocomplete="off" />
+      <button class="mic hide" id="s2Mic" title="Voice input">🎙</button>
+    </div>
+    <button class="btn btn-lime" id="s2Btn" data-lbl="Run Meeting" onclick="runMeeting()">
+      Run Meeting
+    </button>
+    <div class="status" id="s2St"></div>
+
+    <div class="meeting-cols">
+      <div class="res-box" id="claudeBox">
+        <div class="res-label lbl-claude">Claude CEO V9 — Engineering</div>
+        <div class="res-text" id="claudeTxt"></div>
+      </div>
+      <div class="res-box" id="gptBox">
+        <div class="res-label lbl-gpt">REORK CEO — Strategy</div>
+        <div class="res-text" id="gptTxt"></div>
+      </div>
+    </div>
+    <div class="coord-box" id="coordBox">
+      <div class="res-label lbl-coord">⚡ Coordinated Summary</div>
+      <div class="res-text" id="coordTxt"></div>
+    </div>
+  </section>
+
+  <!-- S4 — CEO INBOX -->
+  <section class="section">
+    <div class="sec-num">Section 04</div>
+    <div class="sec-title">CEO Inbox</div>
+    <p class="sec-desc">
+      Opens the REORK Command Center Google Sheet — CEO Inbox tab in a new browser tab.<br><br>
+      <span style="color:var(--orange)">⚠ Needs Sheet ID update.</span>
+      Open cockpit.html, find <code style="color:var(--lime)">INBOX_URL</code> at top of &lt;script&gt; and replace 1RGGYSZ_9IHZLGsDPa6JXpNOZJRBz5WCiitrBujEef7M and 1641610903 with Allan's values.
+    </p>
+    <button class="btn btn-ghost-lime" onclick="openInbox()">
+      Open CEO Inbox
+    </button>
+  </section>
+
+  <!-- S5 — COMMAND CENTER -->
+  <section class="section">
+    <div class="sec-num">Section 05</div>
+    <div class="sec-title">Command Center</div>
+    <p class="sec-desc">
+      Opens the REORK Command Center Google Sheet — main view in a new browser tab.<br><br>
+      <span style="color:var(--orange)">⚠ Needs Sheet ID update.</span>
+      Find <code style="color:var(--lime)">SHEET_URL</code> at top of &lt;script&gt; and replace SHEET_ID_HERE with Allan's value.
+    </p>
+    <button class="btn btn-ghost-orange" onclick="openSheet()">
+      Open Command Center
+    </button>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>REORK AI — reorkai.com — info@reorkai.com</span>
+  <span>Command Cockpit v1.0</span>
+</footer>
+
+<script>
+  // ── UPDATE THESE TWO URLS WITH REAL SHEET ID + GID ──────────────────────────
+  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit#gid=0';
+  const INBOX_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit#gid=INBOX_GID_HERE';
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  const TASK_HOOK        = 'https://hooks.zapier.com/hooks/catch/26852495/4yl8k3r/';
+  const CONTINUITY_HOOK  = 'https://hooks.zapier.com/hooks/catch/26852495/4yljr4c/';
+  const MEETING_ENDPOINT = 'https://reork-backend.onrender.com/api/meeting';
+
+  // Helpers
+  function setStatus(id, html, cls) {
+    const el = document.getElementById(id);
+    el.innerHTML = html;
+    el.className = 'status ' + (cls || '');
+  }
+  function btnLoad(id, label) {
+    const b = document.getElementById(id);
+    b.disabled = true;
+    b.innerHTML = '<span class="spin"></span>' + label;
+  }
+  function btnReset(id) {
+    const b = document.getElementById(id);
+    b.disabled = false;
+    b.textContent = b.dataset.lbl;
+  }
+
+  // ── S1 — NEW TASK ─────────────────────────────────────────────────────────────
+  async function sendTask() {
+    const val = document.getElementById('s1Input').value.trim();
+    if (!val) { setStatus('s1St', 'Enter a task first.', 'err'); return; }
+    btnLoad('s1Btn', 'Sending...');
+    setStatus('s1St', '<span class="spin"></span> Sending to Command Center...', 'run');
+    try {
+      const r = await fetch(TASK_HOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: val }),
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      setStatus('s1St', '✔ Task logged to Command Center.', 'ok');
+      document.getElementById('s1Input').value = '';
+    } catch(e) {
+      console.error(e);
+      setStatus('s1St', '✖ Send failed. Check connection.', 'err');
+    }
+    btnReset('s1Btn');
+  }
+  document.getElementById('s1Input').addEventListener('keydown', e => { if (e.key === 'Enter') sendTask(); });
+
+  // ── S2 — CEO MEETING ──────────────────────────────────────────────────────────
+  async function runMeeting() {
+    const val = document.getElementById('s2Input').value.trim();
+    if (!val) { setStatus('s2St', 'Enter a question or decision first.', 'err'); return; }
+    ['claudeBox','gptBox','coordBox'].forEach(id => document.getElementById(id).classList.remove('show'));
+    btnLoad('s2Btn', 'Running Meeting...');
+    setStatus('s2St', '<span class="spin"></span> Calling both CEOs — this may take 20–30 seconds...', 'run');
+    try {
+      const r = await fetch(MEETING_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: val }),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || 'HTTP ' + r.status);
+
+      document.getElementById('claudeTxt').textContent = d.claude_ceo || '(no response)';
+      document.getElementById('gptTxt').textContent    = d.reork_ceo  || '(no response)';
+      document.getElementById('coordTxt').textContent  = d.coordinated_summary || '(no summary)';
+      document.getElementById('claudeBox').classList.add('show');
+      document.getElementById('gptBox').classList.add('show');
+      document.getElementById('coordBox').classList.add('show');
+      setStatus('s2St', '✔ Meeting complete.', 'ok');
+    } catch(e) {
+      console.error(e);
+      setStatus('s2St', '✖ Meeting failed. Check connection.', 'err');
+    }
+    btnReset('s2Btn');
+  }
+  document.getElementById('s2Input').addEventListener('keydown', e => { if (e.key === 'Enter') runMeeting(); });
+
+  // ── S3 — CONTINUITY ───────────────────────────────────────────────────────────
+  async function genContinuity() {
+    btnLoad('s3Btn', 'Triggering...');
+    setStatus('s3St', '<span class="spin"></span> Sending trigger...', 'run');
+    try {
+      const r = await fetch(CONTINUITY_HOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      setStatus('s3St', '✔ Package generating. Check Gmail for link.', 'ok');
+    } catch(e) {
+      console.error(e);
+      setStatus('s3St', '✖ Trigger failed. Check connection.', 'err');
+    }
+    btnReset('s3Btn');
+  }
+
+  // ── S4 + S5 — LINKS ───────────────────────────────────────────────────────────
+  function openInbox()  { window.open(INBOX_URL,  '_blank', 'noopener'); }
+  function openSheet()  { window.open(SHEET_URL,  '_blank', 'noopener'); }
+
+  // ── VOICE INPUT ───────────────────────────────────────────────────────────────
+  (function initVoice() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) return; // hide buttons stays hidden, nothing breaks
+
+    function attachMic(micId, inputId) {
+      const mic   = document.getElementById(micId);
+      const input = document.getElementById(inputId);
+      mic.classList.remove('hide');
+      let active = false, rec = null;
+
+      mic.addEventListener('click', () => {
+        if (active) { rec && rec.stop(); return; }
+        rec = new SR();
+        rec.lang = 'en-US';
+        rec.interimResults = false;
+        rec.maxAlternatives = 1;
+        rec.onstart  = () => { active = true;  mic.classList.add('on'); mic.title = 'Listening — click to stop'; };
+        rec.onresult = (ev) => { input.value = ev.results[0][0].transcript; input.focus(); };
+        rec.onerror  = (ev) => console.warn('Speech:', ev.error);
+        rec.onend    = () => { active = false; mic.classList.remove('on'); mic.title = 'Voice input'; };
+        rec.start();
+      });
+    }
+
+    attachMic('s1Mic', 's1Input');
+    attachMic('s2Mic', 's2Input');
+  })();
+</script>
+
+</body>
+</html>
