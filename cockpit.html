@@ -366,8 +366,7 @@
     <div class="sec-title">CEO Inbox</div>
     <p class="sec-desc">
       Opens the REORK Command Center Google Sheet — CEO Inbox tab in a new browser tab.<br><br>
-      <span style="color:var(--orange)">⚠ Needs Sheet ID update.</span>
-      Open cockpit.html, find <code style="color:var(--lime)">INBOX_URL</code> at top of &lt;script&gt; and replace 1RGGYSZ_9IHZLGsDPa6JXpNOZJRBz5WCiitrBujEef7M and 1641610903 with Allan's values.
+      Opens directly to the CEO Inbox tab.
     </p>
     <button class="btn btn-ghost-lime" onclick="openInbox()">
       Open CEO Inbox
@@ -380,8 +379,7 @@
     <div class="sec-title">Command Center</div>
     <p class="sec-desc">
       Opens the REORK Command Center Google Sheet — main view in a new browser tab.<br><br>
-      <span style="color:var(--orange)">⚠ Needs Sheet ID update.</span>
-      Find <code style="color:var(--lime)">SHEET_URL</code> at top of &lt;script&gt; and replace SHEET_ID_HERE with Allan's value.
+      Opens the main Command Center view.
     </p>
     <button class="btn btn-ghost-orange" onclick="openSheet()">
       Open Command Center
@@ -398,8 +396,8 @@
 
 <script>
   // ── UPDATE THESE TWO URLS WITH REAL SHEET ID + GID ──────────────────────────
-  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit#gid=0';
-  const INBOX_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit#gid=INBOX_GID_HERE';
+  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1RGGYSZ_9IHZLGsDPa6JXpNOZJRBz5WCiitrBujEef7M/edit';
+  const INBOX_URL = 'https://docs.google.com/spreadsheets/d/1RGGYSZ_9IHZLGsDPa6JXpNOZJRBz5WCiitrBujEef7M/edit#gid=164161903';
   // ─────────────────────────────────────────────────────────────────────────────
 
   const TASK_HOOK        = 'https://hooks.zapier.com/hooks/catch/26852495/4yl8k3r/';
