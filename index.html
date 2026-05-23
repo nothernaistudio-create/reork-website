@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>REORK AI – Complex Documents. Clear Answers.</title>
+  <title>REORK AI — AI Systems for Business</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -18,8 +18,10 @@
       --muted: #888890;
       --soft: #555560;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Barlow', sans-serif;
       background: var(--black);
@@ -27,28 +29,33 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
+
+    /* Crosshatch texture */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(45deg,  rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 12px),
         repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 12px);
       pointer-events: none;
       z-index: 0;
     }
+
+    /* Orange ambient glow */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 600px 600px at 0% 100%, rgba(255,85,0,0.18), transparent 65%),
-        radial-gradient(ellipse 600px 600px at 100% 100%, rgba(255,85,0,0.15), transparent 65%),
-        radial-gradient(ellipse 400px 300px at 50% 100%, rgba(255,85,0,0.08), transparent 60%);
+        radial-gradient(ellipse 700px 500px at 0% 100%,   rgba(255,85,0,0.14), transparent 65%),
+        radial-gradient(ellipse 700px 500px at 100% 100%, rgba(255,85,0,0.11), transparent 65%),
+        radial-gradient(ellipse 500px 300px at 50% 100%,  rgba(255,85,0,0.07), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
+    /* ── NAV ──────────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -57,28 +64,41 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
-      background: #000000;
+      padding: 0 48px;
+      background: #000;
       border-bottom: 1px solid var(--border);
     }
-    .logo { display: flex; align-items: center; }
-    .logo img { height: 44px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 6px;
+      color: var(--orange);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
+
     .nav-cta {
       background: transparent;
       color: var(--orange);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       letter-spacing: 3px;
       text-transform: uppercase;
       padding: 9px 22px;
@@ -87,323 +107,248 @@
       border: 1px solid var(--orange);
       transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     }
-    .nav-cta:hover { background: var(--orange); color: #111; box-shadow: 0 0 20px rgba(255,85,0,0.4); }
-
-    .fifa-banner {
-      position: relative;
-      z-index: 2;
-      margin-top: 72px;
-      background: rgba(255,85,0,0.06);
-      border-bottom: 1px solid rgba(255,85,0,0.2);
-      padding: 9px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--soft);
-      letter-spacing: 0.5px;
-    }
-    .fifa-banner a {
-      color: var(--orange);
-      text-decoration: none;
-      font-weight: 600;
-      margin-left: 6px;
-      transition: color 0.2s;
-    }
-    .fifa-banner a:hover { color: var(--orange2); }
-
-    /* PRIVACY BANNER — prominent, near top */
-    .privacy-banner {
-      position: relative;
-      z-index: 2;
-      background: rgba(255,85,0,0.07);
-      border-bottom: 1px solid rgba(255,85,0,0.2);
-      padding: 14px 24px;
-      text-align: center;
-    }
-    .privacy-banner-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 4px;
-      color: var(--orange);
-      margin-bottom: 4px;
-      text-transform: uppercase;
-    }
-    .privacy-banner-text {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
+    .nav-cta:hover {
+      background: var(--orange);
+      color: #111;
+      box-shadow: 0 0 24px rgba(255,85,0,0.4);
     }
 
+    /* ── HERO ─────────────────────────────────────────────────── */
     .hero {
       position: relative;
       z-index: 1;
-      min-height: calc(100vh - 72px);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 80px 24px 60px;
+      padding: 140px 24px 80px;
     }
+
     .hero-eyebrow {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 6px;
+      font-size: 13px;
+      letter-spacing: 7px;
       text-transform: uppercase;
       color: var(--orange);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.2s;
+      animation: fadeUp 0.55s ease forwards 0.15s;
     }
+
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 9vw, 110px);
-      line-height: 0.93;
+      font-size: clamp(60px, 9.5vw, 120px);
+      line-height: 0.92;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--text);
-      max-width: 860px;
+      max-width: 900px;
       opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.35s;
-    }
-    .hero h1 .accent { color: var(--orange); text-shadow: 0 0 40px rgba(255,85,0,0.45); }
-    .hero-sub {
-      margin-top: 28px;
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.65;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.5s;
+      animation: fadeUp 0.6s ease forwards 0.3s;
     }
 
-    .hero-cards {
-      margin-top: 56px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      width: 100%;
-      max-width: 1200px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.65s;
-      align-items: stretch;
+    .hero h1 .accent {
+      color: var(--orange);
+      text-shadow: 0 0 48px rgba(255,85,0,0.4);
     }
-    .hero-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 28px 20px 24px;
+
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 460px;
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.45s;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--orange);
+      margin: 36px auto 0;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+    }
+
+    /* ── CARDS ────────────────────────────────────────────────── */
+    .cards-section {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 100%;
+      max-width: 1080px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 40px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       transition: border-color 0.25s, transform 0.25s, background 0.25s, box-shadow 0.25s;
     }
-    .hero-card:hover { border-color: var(--border-orange); background: var(--panel-hover); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,85,0,0.12); }
-    .hero-card-icon { font-size: 22px; margin-bottom: 14px; opacity: 0.85; }
-    .hero-card-title {
+
+    .card:hover {
+      border-color: var(--border-orange);
+      background: var(--panel-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(255,85,0,0.1);
+    }
+
+    .card-number {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--orange);
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 14px;
+      line-height: 1;
     }
-    .hero-card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
-    .card-body { flex: 1; width: 100%; display: flex; flex-direction: column; }
 
-    /* UNIFIED BUTTON */
-    .hero-card-btn {
-      display: block;
-      width: 100%;
+    .card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 32px;
+    }
+
+    .card-btn {
+      display: inline-block;
       background: transparent;
       color: var(--orange);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 2px;
+      font-size: 14px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      padding: 11px 12px;
+      padding: 11px 24px;
       border-radius: 3px;
       text-decoration: none;
       border: 1px solid var(--orange);
       transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       cursor: pointer;
-      text-align: center;
-      margin-top: 12px;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .hero-card-btn:hover { background: var(--orange); color: #111; box-shadow: 0 0 20px rgba(255,85,0,0.35); }
-    .hero-card-btn.disabled {
-      color: var(--orange);
-      border-color: var(--orange);
-      cursor: default;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .qa-form-note { font-size: 12px; color: var(--soft); margin-top: 8px; }
-
-    /* FORMS — identical structure for QA and Contract */
-    .card-form {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-      flex: 1;
-    }
-    .card-form input,
-    .card-form textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      font-size: 14px;
-      padding: 10px 14px;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-    .card-form input::placeholder,
-    .card-form textarea::placeholder { color: var(--soft); }
-    .card-form input:focus,
-    .card-form textarea:focus { border-color: var(--border-orange); }
-    .card-form textarea { min-height: 72px; }
-    .card-form input[type="file"] {
-      padding: 8px 10px;
-      font-size: 13px;
-      color: var(--muted);
-      cursor: pointer;
-    }
-    .card-form input[type="file"]::file-selector-button {
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--orange);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      padding: 4px 10px;
-      margin-right: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .card-form input[type="file"]::file-selector-button:hover { background: rgba(255,85,0,0.1); }
-    .file-note { font-size: 11px; color: var(--soft); text-align: left; }
-
-    .form-status {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
-      min-height: 18px;
+      align-self: stretch;
       text-align: center;
-      line-height: 1.5;
-    }
-    .form-status.success { color: #22c55e; }
-    .form-status.error { color: #ef4444; }
-
-    /* GUIDED HELP PREVIEW */
-    .app-preview {
-      position: relative;
-      width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 12px;
-      flex: 1;
-      min-height: 160px;
-    }
-    .app-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      opacity: 0.7;
-      border-radius: 6px;
-    }
-    .app-preview-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.45);
-      border-radius: 6px;
-    }
-    .app-preview-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      letter-spacing: 6px;
-      color: var(--orange);
-      text-transform: uppercase;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.8);
     }
 
+    .card-btn:hover {
+      background: var(--orange);
+      color: #111;
+      box-shadow: 0 0 24px rgba(255,85,0,0.35);
+    }
+
+    /* ── WHAT WE BUILD ────────────────────────────────────────── */
     .divider {
       position: relative;
       z-index: 1;
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,85,0,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,85,0,0.45), transparent);
     }
 
-    .section {
+    .proof-section {
       position: relative;
       z-index: 1;
       padding: 100px 24px;
-      max-width: 1100px;
+      max-width: 1080px;
       margin: 0 auto;
       text-align: center;
     }
+
     .section-label {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 6px;
       text-transform: uppercase;
       color: var(--orange);
       margin-bottom: 20px;
     }
-    .section h2 {
+
+    .proof-section h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(42px, 6vw, 72px);
+      font-size: clamp(40px, 5.5vw, 68px);
       text-transform: uppercase;
-      line-height: 0.93;
-      margin-bottom: 28px;
+      line-height: 0.95;
+      margin-bottom: 24px;
       letter-spacing: 3px;
     }
-    .section p { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 600px; margin: 0 auto 20px auto; }
 
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 32px 28px;
-      transition: border-color 0.25s, transform 0.25s;
-      text-align: center;
+    .proof-section > p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto 64px;
     }
-    .card:hover { border-color: var(--border-orange); transform: translateY(-4px); }
-    .card-icon { font-size: 28px; margin-bottom: 16px; }
-    .card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-    .card p { font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0; }
 
-    .services-grid {
+    .proof-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
       border-radius: 6px;
       overflow: hidden;
-      margin-top: 48px;
     }
-    .service-item { background: var(--panel); padding: 36px 32px; transition: background 0.2s; }
-    .service-item:hover { background: #1c1c20; }
-    .service-item h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
-    .service-item p { font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0; }
 
+    .proof-item {
+      background: var(--panel);
+      padding: 36px 28px;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .proof-item:hover { background: var(--panel-hover); }
+
+    .proof-item h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    .proof-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── CTA ──────────────────────────────────────────────────── */
     .cta-section {
       position: relative;
       z-index: 1;
@@ -411,9 +356,50 @@
       padding: 100px 24px;
       border-top: 1px solid var(--border);
     }
-    .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); text-transform: uppercase; line-height: 0.93; margin-bottom: 20px; letter-spacing: 3px; }
-    .cta-section p { font-size: 17px; color: var(--muted); margin-bottom: 44px; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .cta-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 84px);
+      text-transform: uppercase;
+      line-height: 0.93;
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #111;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 17px 52px;
+      border-radius: 3px;
+      text-decoration: none;
+      border: 1px solid var(--orange);
+      transition: box-shadow 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 36px rgba(255,85,0,0.55);
+      transform: translateY(-3px);
+    }
+
     .btn-ghost {
       background: transparent;
       color: var(--text);
@@ -421,147 +407,120 @@
       font-size: 18px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      padding: 16px 48px;
+      padding: 17px 48px;
       border-radius: 3px;
       text-decoration: none;
-      border: 1px solid var(--orange);
+      border: 1px solid var(--border);
       white-space: nowrap;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
     }
-    .btn-ghost:hover { background: var(--orange); color: #111; box-shadow: 0 0 30px rgba(255,85,0,0.45); transform: translateY(-3px); }
 
+    .btn-ghost:hover {
+      border-color: var(--muted);
+      color: var(--text);
+      transform: translateY(-3px);
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
     footer {
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 28px 40px;
+      padding: 28px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 5px; color: var(--orange); text-decoration: none; text-transform: uppercase; }
-    footer p { font-size: 13px; color: var(--soft); }
-    footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
-    footer a:hover { color: var(--orange); }
-    .footer-privacy { font-size: 12px; color: var(--soft); width: 100%; text-align: center; padding-top: 12px; border-top: 1px solid var(--border); margin-top: 8px; line-height: 1.7; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .footer-wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 5px;
+      color: var(--orange);
+      text-decoration: none;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 1100px) { .hero-cards { grid-template-columns: repeat(2, 1fr); max-width: 740px; gap: 20px; } }
-    @media (max-width: 600px) {
-      .hero-cards { grid-template-columns: 1fr; max-width: 420px; gap: 16px; }
-      nav { padding: 0 20px; }
+    footer p { font-size: 13px; color: var(--soft); }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--orange); }
+
+    /* ── ANIMATION ────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .cards-grid  { grid-template-columns: 1fr; max-width: 480px; }
+      .proof-grid  { grid-template-columns: 1fr; }
+      nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .services-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
       .cta-buttons { flex-direction: column; align-items: center; }
-      .cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
-    <div class="logo">
-      <a href="#home"><img src="data:image/jpeg;base64,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" alt="REORK AI" /></a>
-    </div>
+    <a href="#hero" class="nav-wordmark">REORK AI</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contract-review">Contract Review</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#proof">What We Build</a></li>
+      <li><a href="#demo">Contact</a></li>
     </ul>
-    <a href="#qaCard" class="nav-cta">Start</a>
+    <a href="#demo" class="nav-cta">Book a Demo</a>
   </nav>
 
-  <div class="fifa-banner">
-    Visiting Toronto for FIFA 2026? Plain-language document help for visitors.
-    <a href="/fifa">Get help at reorkai.com/fifa →</a>
-  </div>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-eyebrow">Chaos to Structure</div>
+    <h1>AI Systems<br><span class="accent">For Business.</span></h1>
+    <p class="hero-sub">Custom AI built for the way your business actually operates. Less manual work. Faster decisions. Better margins.</p>
+    <div class="hero-divider"></div>
+  </section>
 
-  <div class="privacy-banner">
-    <div class="privacy-banner-heading">Your Documents Stay Private</div>
-    <div class="privacy-banner-text">REORK does not store your documents. REORK does not sell your information. Documents are processed to generate your answer and are not retained.</div>
-  </div>
+  <!-- CARDS -->
+  <section class="cards-section" id="systems">
+    <div class="cards-grid">
 
-  <section class="hero" id="home">
-    <div class="hero-eyebrow">Chaos to structure</div>
-    <h1>Complex Documents.<br><span class="accent">Clear Answers.</span></h1>
-    <p class="hero-sub">Upload a document or describe your situation. REORK explains what it means and what to do next.</p>
-
-    <div class="hero-cards">
-
-      <!-- CARD 1: QUICK ANSWER -->
-      <div class="hero-card" id="qaCard">
-        <div class="hero-card-icon">⚡</div>
-        <div class="hero-card-title">Quick Answer</div>
-        <div class="hero-card-desc">Get a plain-language explanation sent to your inbox.</div>
-        <div class="card-body">
-          <div class="card-form">
-            <input type="text" id="qaName" placeholder="Your name" autocomplete="name" />
-            <input type="email" id="qaEmail" placeholder="Your email" autocomplete="email" />
-            <input type="file" id="qaFile" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt" />
-            <div class="file-note">PDF, JPG, PNG, WEBP, or TXT</div>
-            <textarea id="qaText" placeholder="Paste your question or document text"></textarea>
-          </div>
-          <div class="form-status" id="qaStatus"></div>
-        </div>
-        <button class="hero-card-btn" id="qaSubmit" onclick="submitQuickAnswer()">CA$9.99 — Get My Answer</button>
-        <div class="qa-form-note">Secure checkout. No signup required.</div>
+      <!-- Card 1: Business Diagnostic -->
+      <div class="card">
+        <div class="card-number">01 — DIAGNOSE</div>
+        <div class="card-icon">🔎</div>
+        <h3>Business Diagnostic</h3>
+        <p>Tell us how your business runs. We map where AI can cut friction, reduce admin, and recover lost time — and give you a plain-language breakdown of where to start.</p>
+        <a href="mailto:info@reorkai.com?subject=Business Diagnostic" class="card-btn">Start Diagnostic</a>
       </div>
 
-      <!-- CARD 2: CONTRACT REVIEW -->
-      <div class="hero-card" id="contract-review">
-        <div class="hero-card-icon">📋</div>
-        <div class="hero-card-title">Contract Review</div>
-        <div class="hero-card-desc">Upload your contract. Get a plain-language breakdown delivered to your inbox.</div>
-        <div class="card-body">
-          <div class="card-form">
-            <input type="text" id="contractName" placeholder="Your name" autocomplete="name" />
-            <input type="email" id="contractEmail" placeholder="Your email" autocomplete="email" />
-            <input type="file" id="contractFile" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt" />
-            <div class="file-note">PDF, JPG, PNG, WEBP, or TXT — max 4MB</div>
-            <textarea id="contractMessage" placeholder="Or paste contract text here"></textarea>
-          </div>
-          <div class="form-status" id="contractStatus"></div>
-        </div>
-        <button class="hero-card-btn" id="contractSubmit" onclick="submitContractReview()">CA$29.99 — Get My Review</button>
-        <div class="qa-form-note">Secure checkout. No signup required.</div>
+      <!-- Card 2: Trades Quote -->
+      <div class="card">
+        <div class="card-number">02 — QUOTE</div>
+        <div class="card-icon">🏗️</div>
+        <h3>Trades Quote</h3>
+        <p>Built for trades and field service businesses. Get a scoped quote for automating your estimates, job notes, scheduling, and client communication — on your timeline.</p>
+        <a href="mailto:info@reorkai.com?subject=Trades AI Quote" class="card-btn">Get a Quote</a>
       </div>
 
-      <!-- CARD 3: GUIDED HELP -->
-      <div class="hero-card">
-        <div class="hero-card-icon">🧭</div>
-        <div class="hero-card-title">Guided Help</div>
-        <div class="hero-card-desc">Walk through confusing situations step by step with REORK.</div>
-        <div class="card-body">
-          <div class="app-preview">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="REORK App Preview" />
-            <div class="app-preview-overlay">
-              <span class="app-preview-label">Coming Soon</span>
-            </div>
-          </div>
-        </div>
-        <button class="hero-card-btn disabled" disabled aria-disabled="true">Coming Soon</button>
-        <div class="qa-form-note">&nbsp;</div>
-      </div>
-
-      <!-- CARD 4: FOR BUSINESS -->
-      <div class="hero-card">
-        <div class="hero-card-icon">🏢</div>
-        <div class="hero-card-title">For Business</div>
-        <div class="hero-card-desc">Use REORK clarity for intake, contracts, client communication, and workflows.</div>
-        <div class="card-body">
-          <p style="font-size:13px; color:var(--soft); line-height:1.7; margin-bottom:12px;">Custom document clarity pipelines for small businesses. CA$500–2,000/month. Built around your workflow.</p>
-          <p style="font-size:13px; color:var(--soft); line-height:1.7;">White-label options available. We build it once — it runs for you.</p>
-        </div>
-        <a href="mailto:info@reorkai.com" class="hero-card-btn">Contact Us</a>
-        <div class="qa-form-note">We respond within one business day.</div>
+      <!-- Card 3: Demo Request -->
+      <div class="card">
+        <div class="card-number">03 — SEE IT</div>
+        <div class="card-icon">▶</div>
+        <h3>Demo Request</h3>
+        <p>See a live REORK AI system running for a real business scenario. No slides. No fluff. A working demo scoped to your industry so you can evaluate it against your actual workflow.</p>
+        <a href="mailto:info@reorkai.com?subject=Demo Request" class="card-btn">Request Demo</a>
       </div>
 
     </div>
@@ -569,373 +528,58 @@
 
   <div class="divider"></div>
 
-  <section class="section" id="about">
-    <p class="section-label">What REORK does</p>
-    <h2>It turns confusion<br>into direction.</h2>
-    <p>REORK reads messy, stressful, or complicated information and breaks it into plain language.</p>
-    <p>It does not replace professionals. It helps you understand what you are looking at, what matters, and what your next step should be.</p>
-    <div class="cards">
-      <div class="card"><div class="card-icon">📄</div><h3>Understand</h3><p>Get the plain meaning of documents, letters, records, forms, and notices.</p></div>
-      <div class="card"><div class="card-icon">🔍</div><h3>Explain</h3><p>See what matters, what is uncertain, and what needs attention.</p></div>
-      <div class="card"><div class="card-icon">➡️</div><h3>Act</h3><p>Know the next practical step instead of being left stuck.</p></div>
+  <!-- WHAT WE BUILD -->
+  <section class="proof-section" id="proof">
+    <p class="section-label">What We Build</p>
+    <h2>Systems That<br>Do the Work.</h2>
+    <p>REORK AI builds custom automation and AI pipelines that fit inside your existing operations — not the other way around.</p>
+
+    <div class="proof-grid">
+      <div class="proof-item">
+        <h3>Document Processing</h3>
+        <p>Contracts, estimates, reports, and records — extracted, summarised, and routed automatically without manual review.</p>
+      </div>
+      <div class="proof-item">
+        <h3>Client Communication</h3>
+        <p>Automated follow-ups, quote responses, job updates, and intake flows that keep clients informed without adding to your team's plate.</p>
+      </div>
+      <div class="proof-item">
+        <h3>Workflow Intelligence</h3>
+        <p>Connect your existing tools — CRM, scheduling, invoicing — and add AI decision layers that cut the steps between input and output.</p>
+      </div>
+      <div class="proof-item">
+        <h3>Trades & Field Service</h3>
+        <p>From job-site notes to finished invoices: AI that understands the trades and automates the back-office work you're doing manually.</p>
+      </div>
+      <div class="proof-item">
+        <h3>Custom Data Pipelines</h3>
+        <p>Structured outputs from unstructured inputs. Turn emails, PDFs, forms, and voice notes into clean, usable business data.</p>
+      </div>
+      <div class="proof-item">
+        <h3>White-Label Systems</h3>
+        <p>Need AI under your brand? We build and hand off — or run it for you. Fully scoped, fully yours.</p>
+      </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <section class="section" id="how">
-    <p class="section-label">How it works</p>
-    <h2>Simple input.<br>Useful output.</h2>
-    <p>You give REORK the situation. REORK gives back structure.</p>
-    <div class="cards">
-      <div class="card"><div class="card-icon">1</div><h3>Upload or paste</h3><p>Send the document, letter, notice, record, or situation details.</p></div>
-      <div class="card"><div class="card-icon">2</div><h3>REORK breaks it down</h3><p>It identifies the plain meaning, key details, dates, risks, and next actions.</p></div>
-      <div class="card"><div class="card-icon">3</div><h3>You move forward</h3><p>You get a clearer path instead of staring at confusing paperwork.</p></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <div class="section" id="services">
-    <p class="section-label">Who REORK helps</p>
-    <h2>Real situations.<br>Real guidance.</h2>
-    <p>REORK was built from real experience navigating the systems that most people find overwhelming.</p>
-    <div class="services-grid">
-      <div class="service-item"><h3>Government &amp; CRA</h3><p>Tax notices, benefit letters, government correspondence. Understand what it means and what you owe — or don't.</p></div>
-      <div class="service-item"><h3>Legal Documents</h3><p>Lease agreements, notices, legal letters. Know what you're reading before you sign or respond.</p></div>
-      <div class="service-item"><h3>Medical Records</h3><p>Lab results, diagnoses, insurance denials. Plain language so you can ask the right questions.</p></div>
-      <div class="service-item"><h3>Financial &amp; Insurance</h3><p>Statements, claims, policy documents. Understand what you're entitled to and what steps to take.</p></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <section class="cta-section">
-    <h2>Ready to get<br><span style="color:var(--orange)">Answers?</span></h2>
-    <p>No signup required. Upload your document and see for yourself.</p>
+  <!-- CTA -->
+  <section class="cta-section" id="demo">
+    <h2>Ready to See<br><span style="color:var(--orange)">What's Possible?</span></h2>
+    <p>Start with a diagnostic or book a live demo. No commitment, no jargon.</p>
     <div class="cta-buttons">
-      <a href="#qaCard" class="btn-ghost">Quick Answer</a>
-      <a href="#contract-review" class="btn-ghost">Contract Review</a>
-      <a href="mailto:info@reorkai.com" class="btn-ghost">For Business</a>
+      <a href="mailto:info@reorkai.com?subject=Business Diagnostic" class="btn-primary">Start Diagnostic</a>
+      <a href="mailto:info@reorkai.com?subject=Demo Request" class="btn-ghost">Book a Demo</a>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <a href="#home" class="footer-logo">REORK AI</a>
-    <p>© 2026 REORK AI — 1000148882 Ontario Inc. Built for the people who need it.</p>
+    <a href="#hero" class="footer-wordmark">REORK AI</a>
+    <p>© 2026 REORK AI — 1000148882 Ontario Inc.</p>
     <a href="mailto:info@reorkai.com">info@reorkai.com</a>
-    <div class="footer-privacy">
-      REORK does not store your documents. REORK does not sell your information. Documents are processed to generate your answer and are not retained. &nbsp;|&nbsp; Not legal, financial, medical, or immigration advice.
-    </div>
   </footer>
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-const stripe = Stripe("pk_live_51T0XgcGvqZwjvtcDNJuieYqPKusObP3DA2qbKD90hB3HbgsRwH3aCx39lXfghrJ2ToVoUr9R1eOWgPepJdQbUiuM00IagRjUTe");
-const MAX_FILE_BYTES = 4 * 1024 * 1024;
-
-// ── QUICK ANSWER ──────────────────────────────────────────────
-async function submitQuickAnswer() {
-  const name   = document.getElementById('qaName').value.trim();
-  const email  = document.getElementById('qaEmail').value.trim();
-  const text   = document.getElementById('qaText').value.trim();
-  const file   = document.getElementById('qaFile').files[0];
-  const btn    = document.getElementById('qaSubmit');
-  const status = document.getElementById('qaStatus');
-
-  status.textContent = '';
-  status.className = 'form-status';
-
-  if (!email) {
-    status.textContent = 'Please enter your email.';
-    status.className = 'form-status error';
-    return;
-  }
-  if (!text && !file) {
-    status.textContent = 'Please paste your question or upload a file.';
-    status.className = 'form-status error';
-    return;
-  }
-  if (file && file.size > MAX_FILE_BYTES) {
-    status.textContent = 'File is too large. Please upload a file under 4MB or paste the text instead.';
-    status.className = 'form-status error';
-    return;
-  }
-
-  btn.textContent = 'Saving your file...';
-  btn.disabled = true;
-
-  const qaMeta = { name, email, text, hasFile: !!file, fileName: file ? file.name : '' };
-
-  if (file) {
-    const reader = new FileReader();
-    reader.onerror = function() {
-      status.textContent = 'Could not read your file. Please try again or paste the text instead.';
-      status.className = 'form-status error';
-      btn.textContent = 'CA$9.99 — Get My Answer';
-      btn.disabled = false;
-    };
-    reader.onload = async function(e) {
-      try {
-        localStorage.setItem('reorkQAData', JSON.stringify(qaMeta));
-        localStorage.setItem('reorkQAFile', JSON.stringify({ base64: e.target.result, name: file.name, type: file.type }));
-      } catch(storageErr) {
-        status.textContent = 'Could not save your file before payment. Please paste the text instead.';
-        status.className = 'form-status error';
-        btn.textContent = 'CA$9.99 — Get My Answer';
-        btn.disabled = false;
-        return;
-      }
-      btn.textContent = 'Redirecting to payment...';
-      await redirectToQACheckout(qaMeta, btn, status);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    try {
-      localStorage.setItem('reorkQAData', JSON.stringify(qaMeta));
-      localStorage.removeItem('reorkQAFile');
-    } catch(storageErr) {
-      status.textContent = 'Something went wrong. Please try again.';
-      status.className = 'form-status error';
-      btn.textContent = 'CA$9.99 — Get My Answer';
-      btn.disabled = false;
-      return;
-    }
-    btn.textContent = 'Redirecting to payment...';
-    await redirectToQACheckout(qaMeta, btn, status);
-  }
-}
-
-async function redirectToQACheckout(meta, btn, status) {
-  try {
-    const response = await fetch('https://reork-backend.onrender.com/create-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: meta.name, email: meta.email, text: meta.text })
-    });
-    const session = await response.json();
-    if (session.id) {
-      stripe.redirectToCheckout({ sessionId: session.id });
-    } else {
-      throw new Error('No session ID');
-    }
-  } catch (err) {
-    status.textContent = 'Something went wrong. Try again or email help@reorkai.com';
-    status.className = 'form-status error';
-    btn.textContent = 'CA$9.99 — Get My Answer';
-    btn.disabled = false;
-  }
-}
-
-// ── CONTRACT REVIEW ───────────────────────────────────────────
-async function submitContractReview() {
-  const name    = document.getElementById('contractName').value.trim();
-  const email   = document.getElementById('contractEmail').value.trim();
-  const file    = document.getElementById('contractFile').files[0];
-  const message = document.getElementById('contractMessage').value.trim();
-  const status  = document.getElementById('contractStatus');
-  const btn     = document.getElementById('contractSubmit');
-
-  status.textContent = '';
-  status.className = 'form-status';
-
-  if (!email) {
-    status.textContent = 'Please enter your email.';
-    status.className = 'form-status error';
-    return;
-  }
-  if (!file && !message) {
-    status.textContent = 'Please upload a file or paste your contract text.';
-    status.className = 'form-status error';
-    return;
-  }
-  if (file && file.size > MAX_FILE_BYTES) {
-    status.textContent = 'File is too large. Please upload a file under 4MB or paste the text instead.';
-    status.className = 'form-status error';
-    return;
-  }
-
-  btn.textContent = 'Saving your file...';
-  btn.disabled = true;
-
-  const contractMeta = { name, email, message, hasFile: !!file, fileName: file ? file.name : '' };
-
-  if (file) {
-    const reader = new FileReader();
-    reader.onerror = function() {
-      status.textContent = 'Could not read your file. Please try again or paste the text instead.';
-      status.className = 'form-status error';
-      btn.textContent = 'CA$29.99 — Get My Review';
-      btn.disabled = false;
-    };
-    reader.onload = async function(e) {
-      try {
-        localStorage.setItem('reorkContractMeta', JSON.stringify(contractMeta));
-        localStorage.setItem('reorkContractFile', JSON.stringify({ base64: e.target.result, name: file.name, type: file.type }));
-      } catch(storageErr) {
-        status.textContent = 'Could not save your file before payment. Please paste the contract text instead.';
-        status.className = 'form-status error';
-        btn.textContent = 'CA$29.99 — Get My Review';
-        btn.disabled = false;
-        return;
-      }
-      btn.textContent = 'Redirecting to payment...';
-      await redirectToContractCheckout(contractMeta, btn, status);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    try {
-      localStorage.setItem('reorkContractMeta', JSON.stringify(contractMeta));
-      localStorage.removeItem('reorkContractFile');
-    } catch(storageErr) {
-      status.textContent = 'Something went wrong. Please try again.';
-      status.className = 'form-status error';
-      btn.textContent = 'CA$29.99 — Get My Review';
-      btn.disabled = false;
-      return;
-    }
-    btn.textContent = 'Redirecting to payment...';
-    await redirectToContractCheckout(contractMeta, btn, status);
-  }
-}
-
-async function redirectToContractCheckout(meta, btn, status) {
-  try {
-    const response = await fetch('https://reork-backend.onrender.com/create-contract-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: meta.name, email: meta.email, message: meta.message, hasFile: meta.hasFile, fileName: meta.fileName })
-    });
-    const session = await response.json();
-    if (session.id) {
-      stripe.redirectToCheckout({ sessionId: session.id });
-    } else {
-      throw new Error('No session ID');
-    }
-  } catch (err) {
-    status.textContent = 'Something went wrong. Try again or email help@reorkai.com';
-    status.className = 'form-status error';
-    btn.textContent = 'CA$29.99 — Get My Review';
-    btn.disabled = false;
-  }
-}
-
-// ── PAYMENT RETURN HANDLER ────────────────────────────────────
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const paid = params.get('payment');
-
-  function showCardMessage(cardId, html) {
-    const card = document.getElementById(cardId);
-    if (card) card.innerHTML = html;
-  }
-
-  const successHTML = (title, msg) => `
-    <div style="padding:40px 20px; text-align:center;">
-      <div style="font-size:36px; margin-bottom:16px;">✅</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:#22c55e; margin-bottom:12px;">${title}</h3>
-      <p style="color:#888890; font-size:14px; line-height:1.7;">${msg}</p>
-    </div>`;
-
-  const errorHTML = (msg) => `
-    <div style="padding:40px 20px; text-align:center;">
-      <p style="color:#ef4444; font-size:14px; line-height:1.7;">${msg}</p>
-    </div>`;
-
-  const missingDataMsg = 'Payment received, but your saved form data was not found. Please email help@reorkai.com with your payment email and document. We will process it manually.';
-
-  if (paid === 'success') {
-    const metaRaw = localStorage.getItem('reorkQAData');
-    const fileRaw = localStorage.getItem('reorkQAFile');
-    if (!metaRaw) {
-      showCardMessage('qaCard', errorHTML(missingDataMsg));
-    } else {
-      const meta = JSON.parse(metaRaw);
-      const formData = new FormData();
-      formData.append('name', meta.name || '');
-      formData.append('email', meta.email || '');
-      formData.append('text', meta.text || '');
-      if (fileRaw) {
-        try {
-          const fileObj = JSON.parse(fileRaw);
-          const byteString = atob(fileObj.base64.split(',')[1]);
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-          const blob = new Blob([ab], { type: fileObj.type });
-          formData.append('attachments', blob, fileObj.name);
-        } catch(e) {}
-      }
-      fetch('https://reork-backend.onrender.com/api/quick-answer', { method: 'POST', body: formData })
-      .then(r => { if (!r.ok) throw new Error('Failed'); return r.json(); })
-      .then((result) => {
-        localStorage.removeItem('reorkQAData');
-        localStorage.removeItem('reorkQAFile');
-        let msg = "Payment received. Your Quick Answer is being processed and will be sent to your inbox shortly.";
-        let answerBlock = '';
-        if (result && result.answer && result.answer.trim().length > 0) {
-          answerBlock = `<div style="margin-top:20px; padding:18px; background:rgba(255,85,0,0.07); border:1px solid rgba(255,85,0,0.3); border-radius:6px; text-align:left;"><div style="font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:3px; color:#ff5500; margin-bottom:10px;">YOUR ANSWER</div><div style="font-size:14px; color:#f0f0f2; line-height:1.7; white-space:pre-wrap;">${result.answer.trim()}</div></div>`;
-        }
-        showCardMessage('qaCard', successHTML("YOU'RE ALL SET", msg) + answerBlock);
-      })
-      .catch(() => {
-        showCardMessage('qaCard', errorHTML('Something went wrong processing your answer. Please email help@reorkai.com and we will handle it manually.'));
-      });
-    }
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-
-  if (paid === 'contract-success') {
-    const metaRaw = localStorage.getItem('reorkContractMeta');
-    const fileRaw = localStorage.getItem('reorkContractFile');
-    if (!metaRaw) {
-      showCardMessage('contract-review', errorHTML(missingDataMsg));
-    } else {
-      const meta = JSON.parse(metaRaw);
-      const formData = new FormData();
-      formData.append('name', meta.name || '');
-      formData.append('email', meta.email || '');
-      formData.append('message', meta.message || '');
-      formData.append('hasFile', meta.hasFile || false);
-      formData.append('fileName', meta.fileName || '');
-      if (fileRaw) {
-        try {
-          const fileObj = JSON.parse(fileRaw);
-          const byteString = atob(fileObj.base64.split(',')[1]);
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-          const blob = new Blob([ab], { type: fileObj.type });
-          formData.append('file', blob, fileObj.name);
-        } catch(e) {}
-      }
-      fetch('https://reork-backend.onrender.com/api/contract-review', { method: 'POST', body: formData })
-      .then(r => { if (!r.ok) throw new Error('Failed'); return r.json(); })
-      .then(() => {
-        localStorage.removeItem('reorkContractMeta');
-        localStorage.removeItem('reorkContractFile');
-        showCardMessage('contract-review', successHTML("REVIEW SUBMITTED", "Payment received. Your contract review is being processed and will be sent to your inbox shortly."));
-      })
-      .catch(() => {
-        showCardMessage('contract-review', errorHTML('Something went wrong processing your review. Please email help@reorkai.com and we will handle it manually.'));
-      });
-    }
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-
-  if (paid === 'cancelled') {
-    const cancelHTML = `<div style="padding:32px 20px; text-align:center;"><div style="font-size:32px; margin-bottom:12px;">↩️</div><p style="color:#888890; font-size:14px; line-height:1.7;">Payment was cancelled. No charge was completed. You can try again whenever you're ready.</p></div>`;
-    showCardMessage('qaCard', cancelHTML);
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-
-  if (paid === 'contract-cancelled') {
-    const cancelHTML = `<div style="padding:32px 20px; text-align:center;"><div style="font-size:32px; margin-bottom:12px;">↩️</div><p style="color:#888890; font-size:14px; line-height:1.7;">Payment was cancelled. No charge was completed. You can try again whenever you're ready.</p></div>`;
-    showCardMessage('contract-review', cancelHTML);
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-})();
-</script>
 
 </body>
 </html>
