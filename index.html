@@ -432,6 +432,121 @@
 
     footer a:hover { color: var(--orange); }
 
+    /* ── MODALS ───────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 100%;
+      max-width: 500px;
+      padding: 40px 36px 36px;
+      position: relative;
+      animation: fadeUp 0.25s ease forwards;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .modal-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--orange);
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+
+    .modal h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 28px;
+      line-height: 1;
+    }
+
+    .modal-form { display: flex; flex-direction: column; gap: 10px; }
+
+    .modal-form input,
+    .modal-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .modal-form input::placeholder,
+    .modal-form textarea::placeholder { color: var(--soft); }
+    .modal-form input:focus,
+    .modal-form textarea:focus { border-color: var(--border-orange); }
+    .modal-form textarea { min-height: 96px; resize: vertical; }
+
+    .modal-submit {
+      background: var(--orange);
+      color: #111;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border-radius: 3px;
+      border: 1px solid var(--orange);
+      width: 100%;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .modal-submit:hover { background: #111; color: var(--orange); box-shadow: 0 0 24px rgba(255,85,0,0.3); }
+    .modal-submit:disabled { opacity: 0.55; cursor: default; pointer-events: none; }
+
+    .modal-status { font-size: 13px; color: var(--muted); min-height: 18px; text-align: center; margin-top: 6px; line-height: 1.5; }
+    .modal-status.error { color: #ef4444; }
+
+    .modal-body { }
+    .modal-thankyou {
+      display: none;
+      text-align: center;
+      padding: 12px 0 8px;
+    }
+    .modal-thankyou.show { display: block; }
+    .modal-thankyou-icon { font-size: 44px; margin-bottom: 18px; }
+    .modal-thankyou h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      letter-spacing: 3px;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .modal-thankyou p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
     /* ── ANIMATION ────────────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -459,7 +574,7 @@
       <li><a href="#proof">What We Build</a></li>
       <li><a href="mailto:info@reorkai.com">Contact</a></li>
     </ul>
-    <a href="https://reork-backend.onrender.com/api/demo-access-request" class="nav-cta">Book a Demo</a>
+    <button onclick="openModal('demo')" class="nav-cta">Book a Demo</button>
   </nav>
 
   <!-- HERO -->
@@ -480,7 +595,7 @@
         <div class="card-icon">🔎</div>
         <h3>Business Diagnostic</h3>
         <p>Tell us how your business runs. We map where AI can cut friction, reduce admin, and recover lost time — and give you a plain-language breakdown of where to start.</p>
-        <a href="https://reork-backend.onrender.com/api/business-diagnostic" class="card-btn">Start Diagnostic</a>
+        <button onclick="openModal('diagnostic')" class="card-btn">Start Diagnostic</button>
       </div>
 
       <!-- Card 2: Trades Quote -->
@@ -489,7 +604,7 @@
         <div class="card-icon">🏗️</div>
         <h3>Trades Quote</h3>
         <p>Built for trades and field service businesses. Get a scoped quote for automating your estimates, job notes, scheduling, and client communication — on your timeline.</p>
-        <a href="https://reork-backend.onrender.com/api/trades-quote" class="card-btn">Get a Quote</a>
+        <button onclick="openModal('trades')" class="card-btn">Get a Quote</button>
       </div>
 
       <!-- Card 3: Demo Request -->
@@ -498,7 +613,7 @@
         <div class="card-icon">▶</div>
         <h3>Demo Request</h3>
         <p>See a live REORK AI system running for a real business scenario. No slides. No fluff. A working demo scoped to your industry so you can evaluate it against your actual workflow.</p>
-        <a href="https://reork-backend.onrender.com/api/demo-access-request" class="card-btn">Request Demo</a>
+        <button onclick="openModal('demo')" class="card-btn">Request Demo</button>
       </div>
 
     </div>
@@ -547,10 +662,135 @@
     <h2>Ready to See<br><span style="color:var(--orange)">What's Possible?</span></h2>
     <p>Start with a diagnostic or book a live demo. No commitment, no jargon.</p>
     <div class="cta-buttons">
-      <a href="https://reork-backend.onrender.com/api/business-diagnostic" class="btn-primary">Start Diagnostic</a>
-      <a href="https://reork-backend.onrender.com/api/demo-access-request" class="btn-primary">Book a Demo</a>
+      <button onclick="openModal('diagnostic')" class="btn-primary">Start Diagnostic</button>
+      <button onclick="openModal('demo')" class="btn-primary">Book a Demo</button>
     </div>
   </section>
+
+  <!-- MODAL: BUSINESS DIAGNOSTIC -->
+  <div class="modal-overlay" id="modal-diagnostic" onclick="overlayClick(event,'diagnostic')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('diagnostic')">&times;</button>
+      <div class="modal-body" id="modal-body-diagnostic">
+        <div class="modal-eyebrow">01 — DIAGNOSE</div>
+        <h2>Business Diagnostic</h2>
+        <form class="modal-form" onsubmit="submitModal(event,'diagnostic','https://reork-backend.onrender.com/api/business-diagnostic')">
+          <input type="text"  name="name"      placeholder="Your name"                   required />
+          <input type="email" name="email"     placeholder="Your email"                  required />
+          <input type="text"  name="business_type" placeholder="Business type (e.g. Accounting, Retail, Construction)" required />
+          <textarea           name="headache"  placeholder="What is your biggest operational headache?" required></textarea>
+          <button type="submit" class="modal-submit" id="submit-diagnostic">Send My Diagnostic</button>
+          <div class="modal-status" id="status-diagnostic"></div>
+        </form>
+      </div>
+      <div class="modal-thankyou" id="thankyou-diagnostic">
+        <div class="modal-thankyou-icon">✅</div>
+        <h3>You're In.</h3>
+        <p>We've received your diagnostic request. Expect a plain-language breakdown in your inbox within one business day.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TRADES QUOTE -->
+  <div class="modal-overlay" id="modal-trades" onclick="overlayClick(event,'trades')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('trades')">&times;</button>
+      <div class="modal-body" id="modal-body-trades">
+        <div class="modal-eyebrow">02 — QUOTE</div>
+        <h2>Trades Quote</h2>
+        <form class="modal-form" onsubmit="submitModal(event,'trades','https://reork-backend.onrender.com/api/trades-quote')">
+          <input type="text"  name="name"       placeholder="Your name"                  required />
+          <input type="email" name="email"      placeholder="Your email"                 required />
+          <input type="text"  name="trade_type" placeholder="Trade type (e.g. Plumbing, Electrical, HVAC)" required />
+          <textarea           name="automate"   placeholder="What do you want automated?" required></textarea>
+          <button type="submit" class="modal-submit" id="submit-trades">Get My Quote</button>
+          <div class="modal-status" id="status-trades"></div>
+        </form>
+      </div>
+      <div class="modal-thankyou" id="thankyou-trades">
+        <div class="modal-thankyou-icon">✅</div>
+        <h3>Quote Request Sent.</h3>
+        <p>We'll scope your automation and get back to you with a detailed quote within one business day.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DEMO REQUEST -->
+  <div class="modal-overlay" id="modal-demo" onclick="overlayClick(event,'demo')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('demo')">&times;</button>
+      <div class="modal-body" id="modal-body-demo">
+        <div class="modal-eyebrow">03 — SEE IT</div>
+        <h2>Demo Request</h2>
+        <form class="modal-form" onsubmit="submitModal(event,'demo','https://reork-backend.onrender.com/api/demo-access-request')">
+          <input type="text"  name="name"    placeholder="Your name"             required />
+          <input type="email" name="email"   placeholder="Your email"            required />
+          <input type="text"  name="company" placeholder="Company"               required />
+          <textarea           name="see"     placeholder="What would you like to see?" required></textarea>
+          <button type="submit" class="modal-submit" id="submit-demo">Request My Demo</button>
+          <div class="modal-status" id="status-demo"></div>
+        </form>
+      </div>
+      <div class="modal-thankyou" id="thankyou-demo">
+        <div class="modal-thankyou-icon">✅</div>
+        <h3>Demo Requested.</h3>
+        <p>We'll be in touch to schedule your live demo — scoped to your industry and workflow.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById('modal-' + id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById('modal-' + id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function overlayClick(e, id) {
+      if (e.target === document.getElementById('modal-' + id)) closeModal(id);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        ['diagnostic','trades','demo'].forEach(function(id) { closeModal(id); });
+      }
+    });
+
+    async function submitModal(e, id, url) {
+      e.preventDefault();
+      const form    = e.target;
+      const btn     = document.getElementById('submit-' + id);
+      const status  = document.getElementById('status-' + id);
+
+      const data = {};
+      new FormData(form).forEach(function(v, k) { data[k] = v; });
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.textContent = '';
+      status.className = 'modal-status';
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Server error');
+        document.getElementById('modal-body-' + id).style.display = 'none';
+        document.getElementById('thankyou-' + id).classList.add('show');
+      } catch (err) {
+        status.textContent = 'Something went wrong. Please try again or email info@reorkai.com';
+        status.className = 'modal-status error';
+        btn.disabled = false;
+        btn.textContent = form.querySelector('[type=submit]').dataset.label || 'Submit';
+      }
+    }
+  </script>
 
   <!-- FOOTER -->
   <footer>
