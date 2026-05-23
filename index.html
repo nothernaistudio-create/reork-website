@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>REORK AI — AI Systems for Business</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --orange: #ff5500;
@@ -70,13 +70,10 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .nav-wordmark {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 6px;
-      color: var(--orange);
-      text-decoration: none;
-      text-transform: uppercase;
+    .nav-logo {
+      display: block;
+      height: 45px;
+      width: auto;
     }
 
     .nav-links {
@@ -128,9 +125,10 @@
     }
 
     .hero-eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px;
-      letter-spacing: 7px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 6px;
       text-transform: uppercase;
       color: var(--orange);
       margin-bottom: 24px;
@@ -328,10 +326,8 @@
       background: var(--panel);
       padding: 36px 28px;
       text-align: left;
-      transition: background 0.2s;
+      cursor: default;
     }
-
-    .proof-item:hover { background: var(--panel-hover); }
 
     .proof-item h3 {
       font-family: 'Bebas Neue', sans-serif;
@@ -476,13 +472,13 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-wordmark">REORK AI</a>
+    <a href="#hero"><img src="REORK logo_2.png" alt="REORK AI" class="nav-logo" /></a>
     <ul class="nav-links">
       <li><a href="#systems">Systems</a></li>
       <li><a href="#proof">What We Build</a></li>
-      <li><a href="#demo">Contact</a></li>
+      <li><a href="mailto:info@reorkai.com">Contact</a></li>
     </ul>
-    <a href="#demo" class="nav-cta">Book a Demo</a>
+    <a href="/api/demo-access-request" class="nav-cta">Book a Demo</a>
   </nav>
 
   <!-- HERO -->
@@ -503,7 +499,7 @@
         <div class="card-icon">🔎</div>
         <h3>Business Diagnostic</h3>
         <p>Tell us how your business runs. We map where AI can cut friction, reduce admin, and recover lost time — and give you a plain-language breakdown of where to start.</p>
-        <a href="mailto:info@reorkai.com?subject=Business Diagnostic" class="card-btn">Start Diagnostic</a>
+        <a href="/api/business-diagnostic" class="card-btn">Start Diagnostic</a>
       </div>
 
       <!-- Card 2: Trades Quote -->
@@ -512,7 +508,7 @@
         <div class="card-icon">🏗️</div>
         <h3>Trades Quote</h3>
         <p>Built for trades and field service businesses. Get a scoped quote for automating your estimates, job notes, scheduling, and client communication — on your timeline.</p>
-        <a href="mailto:info@reorkai.com?subject=Trades AI Quote" class="card-btn">Get a Quote</a>
+        <a href="/api/trades-quote" class="card-btn">Get a Quote</a>
       </div>
 
       <!-- Card 3: Demo Request -->
@@ -521,7 +517,7 @@
         <div class="card-icon">▶</div>
         <h3>Demo Request</h3>
         <p>See a live REORK AI system running for a real business scenario. No slides. No fluff. A working demo scoped to your industry so you can evaluate it against your actual workflow.</p>
-        <a href="mailto:info@reorkai.com?subject=Demo Request" class="card-btn">Request Demo</a>
+        <a href="/api/demo-access-request" class="card-btn">Request Demo</a>
       </div>
 
     </div>
@@ -570,8 +566,8 @@
     <h2>Ready to See<br><span style="color:var(--orange)">What's Possible?</span></h2>
     <p>Start with a diagnostic or book a live demo. No commitment, no jargon.</p>
     <div class="cta-buttons">
-      <a href="mailto:info@reorkai.com?subject=Business Diagnostic" class="btn-primary">Start Diagnostic</a>
-      <a href="mailto:info@reorkai.com?subject=Demo Request" class="btn-ghost">Book a Demo</a>
+      <a href="/api/business-diagnostic" class="btn-primary">Start Diagnostic</a>
+      <a href="/api/demo-access-request" class="btn-ghost">Book a Demo</a>
     </div>
   </section>
 
