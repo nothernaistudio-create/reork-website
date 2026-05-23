@@ -686,8 +686,21 @@
       </div>
       <div class="modal-thankyou" id="thankyou-diagnostic">
         <div class="modal-thankyou-icon">✅</div>
-        <h3>You're In.</h3>
-        <p>We've received your diagnostic request. Expect a plain-language breakdown in your inbox within one business day.</p>
+        <h3>Your Diagnostic</h3>
+        <p style="margin-bottom:16px;">A copy is on its way to your inbox. Here's your result:</p>
+        <div id="diagnostic-result" style="
+          text-align:left;
+          background:rgba(255,85,0,0.06);
+          border:1px solid rgba(255,85,0,0.25);
+          border-radius:4px;
+          padding:18px 20px;
+          font-size:13px;
+          color:var(--text);
+          line-height:1.75;
+          white-space:pre-wrap;
+          max-height:340px;
+          overflow-y:auto;
+        "></div>
       </div>
     </div>
   </div>
@@ -782,6 +795,14 @@
           body: JSON.stringify(data)
         });
         if (!res.ok) throw new Error('Server error');
+        const json = await res.json().catch(function() { return {}; });
+
+        // For business-diagnostic: inject the returned diagnostic text
+        if (id === 'diagnostic' && json.diagnostic) {
+          const resultEl = document.getElementById('diagnostic-result');
+          if (resultEl) resultEl.textContent = json.diagnostic;
+        }
+
         document.getElementById('modal-body-' + id).style.display = 'none';
         document.getElementById('thankyou-' + id).classList.add('show');
       } catch (err) {
