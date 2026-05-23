@@ -675,10 +675,11 @@
         <div class="modal-eyebrow">01 — DIAGNOSE</div>
         <h2>Business Diagnostic</h2>
         <form class="modal-form" onsubmit="submitModal(event,'diagnostic','https://reork-backend.onrender.com/api/business-diagnostic')">
-          <input type="text"  name="name"      placeholder="Your name"                   required />
-          <input type="email" name="email"     placeholder="Your email"                  required />
-          <input type="text"  name="business_type" placeholder="Business type (e.g. Accounting, Retail, Construction)" required />
-          <textarea           name="headache"  placeholder="What is your biggest operational headache?" required></textarea>
+          <input type="text"  name="name"          placeholder="Your name"                              required />
+          <input type="email" name="email"         placeholder="Your email"                             required />
+          <input type="text"  name="business_name" placeholder="Business name"                         required />
+          <input type="text"  name="industry"      placeholder="Industry (e.g. Retail, Construction, Accounting)" required />
+          <textarea           name="pain_point"    placeholder="What is your biggest operational headache?" required></textarea>
           <button type="submit" class="modal-submit" id="submit-diagnostic">Send My Diagnostic</button>
           <div class="modal-status" id="status-diagnostic"></div>
         </form>
@@ -699,10 +700,10 @@
         <div class="modal-eyebrow">02 — QUOTE</div>
         <h2>Trades Quote</h2>
         <form class="modal-form" onsubmit="submitModal(event,'trades','https://reork-backend.onrender.com/api/trades-quote')">
-          <input type="text"  name="name"       placeholder="Your name"                  required />
-          <input type="email" name="email"      placeholder="Your email"                 required />
-          <input type="text"  name="trade_type" placeholder="Trade type (e.g. Plumbing, Electrical, HVAC)" required />
-          <textarea           name="automate"   placeholder="What do you want automated?" required></textarea>
+          <input type="text"  name="name"  placeholder="Your name"                                   required />
+          <input type="email" name="email" placeholder="Your email"                                  required />
+          <input type="text"  name="trade" placeholder="Trade type (e.g. Plumbing, Electrical, HVAC)" required />
+          <textarea           name="job"   placeholder="What do you want automated? Describe the job or workflow." required></textarea>
           <button type="submit" class="modal-submit" id="submit-trades">Get My Quote</button>
           <div class="modal-status" id="status-trades"></div>
         </form>
@@ -726,7 +727,7 @@
           <input type="text"  name="name"    placeholder="Your name"             required />
           <input type="email" name="email"   placeholder="Your email"            required />
           <input type="text"  name="company" placeholder="Company"               required />
-          <textarea           name="see"     placeholder="What would you like to see?" required></textarea>
+          <textarea           name="use_case" placeholder="What would you like to see?" required></textarea>
           <button type="submit" class="modal-submit" id="submit-demo">Request My Demo</button>
           <div class="modal-status" id="status-demo"></div>
         </form>
