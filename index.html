@@ -538,6 +538,128 @@
     }
     .modal-thankyou p { font-size: 15px; color: var(--muted); line-height: 1.7; }
 
+    /* ── TRUST LINE ──────────────────────────────────────────── */
+    .trust-line {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px 96px;
+      display: flex;
+      justify-content: center;
+    }
+    .trust-line p {
+      max-width: 700px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.9;
+      border-left: 2px solid rgba(255,85,0,0.5);
+      padding-left: 24px;
+      text-align: left;
+    }
+
+    /* ── LIVE EXAMPLE ─────────────────────────────────────────── */
+    .example-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .example-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .example-text .section-label { margin-bottom: 20px; }
+    .example-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 5.5vw, 68px);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+    }
+    .example-copy {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .example-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .example-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--orange);
+      border-radius: 4px;
+      padding: 14px 18px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .example-bullets li:hover {
+      background: var(--panel-hover);
+      border-color: var(--border-orange);
+      border-left-color: var(--orange);
+    }
+    .example-bullets li::before {
+      content: '→';
+      color: var(--orange);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────── */
+    .hiw-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hiw-section .section-label { margin-bottom: 52px; }
+    .hiw-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .hiw-step {
+      background: var(--panel);
+      padding: 40px 28px 36px;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .hiw-step:hover { background: var(--panel-hover); }
+    .hiw-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 2px;
+      color: var(--orange);
+      opacity: 0.35;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .hiw-step p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
     /* ── ANIMATION ────────────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -552,10 +674,15 @@
       }
       .service-card:nth-child(n) { grid-column: auto; }
       .proof-grid  { grid-template-columns: 1fr; }
+      .example-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hiw-steps { grid-template-columns: 1fr 1fr; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       footer { flex-direction: column; text-align: center; }
       .cta-buttons { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 560px) {
+      .hiw-steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -618,6 +745,11 @@
     </div>
   </section>
 
+  <!-- TRUST LINE -->
+  <div class="trust-line">
+    <p>Built for small businesses that run on emails, notes, photos, quotes, customer requests, and repeated follow-ups. No jargon. No giant software project. We start with one workflow that wastes time and make it easier to run.</p>
+  </div>
+
   <div class="divider"></div>
 
   <!-- WHAT WE BUILD -->
@@ -650,6 +782,52 @@
       <div class="proof-item">
         <h3>White-Label Systems</h3>
         <p>Need AI under your brand? We build and hand off — or run it for you. Fully scoped, fully yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LIVE EXAMPLE -->
+  <section class="example-section" id="live-example">
+    <div class="example-inner">
+      <div class="example-text">
+        <p class="section-label">Live Example</p>
+        <h2>Photo In.<br><span style="color:var(--orange)">Listing Out.</span></h2>
+        <p class="example-copy">Take a photo of a part, tool, tire, or item. REORK identifies it, creates a clean listing, suggests a price range, stores the record, and prepares buyer replies.</p>
+      </div>
+      <ul class="example-bullets">
+        <li>Photo or voice input</li>
+        <li>AI-generated item summary</li>
+        <li>Facebook / Kijiji listing copy</li>
+        <li>Price range suggestion</li>
+        <li>Inventory record saved</li>
+        <li>Buyer replies drafted</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw-section" id="how-it-works">
+    <p class="section-label">How It Works</p>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-num">01</div>
+        <p>Show us the repetitive task.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">02</div>
+        <p>We map the workflow.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">03</div>
+        <p>We build a simple AI-assisted system that fits how you already work.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">04</div>
+        <p>You approve, test, and use it.</p>
       </div>
     </div>
   </section>
