@@ -583,6 +583,27 @@
       font-size: 15px;
       color: var(--muted);
       line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .btn-live {
+      display: inline-block;
+      background: transparent;
+      color: var(--orange);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border-radius: 3px;
+      border: 1px solid var(--orange);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-live:hover {
+      background: var(--orange);
+      color: #111;
+      box-shadow: 0 0 24px rgba(255,85,0,0.35);
+      transform: translateY(-2px);
     }
     .example-bullets {
       list-style: none;
@@ -795,6 +816,7 @@
         <p class="section-label">Live Example</p>
         <h2>Photo In.<br><span style="color:var(--orange)">Listing Out.</span></h2>
         <p class="example-copy">Take a photo of a part, tool, tire, or item. REORK identifies it, creates a clean listing, suggests a price range, stores the record, and prepares buyer replies.</p>
+        <a href="https://reork-backend.onrender.com/parts-cockpit" target="_blank" rel="noopener" class="btn-live">See It Live</a>
       </div>
       <ul class="example-bullets">
         <li>Photo or voice input</li>
