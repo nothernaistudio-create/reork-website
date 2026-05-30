@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>REORK AI — AI Systems for Business</title>
+  <title>REORK AI — AI Systems for Small Business</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -96,14 +96,15 @@
       background: transparent;
       color: var(--orange);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 3px;
+      font-size: 14px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       padding: 9px 22px;
       border-radius: 3px;
       text-decoration: none;
       border: 1px solid var(--orange);
       transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
     .nav-cta:hover {
       background: var(--orange);
@@ -126,7 +127,7 @@
 
     .hero-eyebrow {
       font-family: 'Barlow', sans-serif;
-      font-size: 17px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 6px;
       text-transform: uppercase;
@@ -138,12 +139,12 @@
 
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 9.5vw, 120px);
+      font-size: clamp(58px, 9vw, 112px);
       line-height: 0.92;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--text);
-      max-width: 900px;
+      max-width: 960px;
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.3s;
     }
@@ -153,28 +154,39 @@
       text-shadow: 0 0 48px rgba(255,85,0,0.4);
     }
 
+    .hero-chaos {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 22px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.42s;
+    }
+
     .hero-sub {
       margin-top: 28px;
       font-size: 17px;
       color: var(--muted);
-      max-width: 460px;
-      line-height: 1.7;
-      letter-spacing: 0.3px;
+      max-width: 580px;
+      line-height: 1.75;
+      letter-spacing: 0.2px;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.45s;
+      animation: fadeUp 0.6s ease forwards 0.56s;
     }
 
     .hero-divider {
       width: 48px;
       height: 2px;
       background: var(--orange);
-      margin: 36px auto 0;
+      margin: 40px auto 0;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.55s;
+      animation: fadeUp 0.6s ease forwards 0.66s;
     }
 
-    /* ── CARDS ────────────────────────────────────────────────── */
-    .cards-section {
+    /* ── SERVICE BLOCKS ───────────────────────────────────────── */
+    .service-section {
       position: relative;
       z-index: 1;
       padding: 0 24px 120px;
@@ -183,89 +195,64 @@
       align-items: center;
     }
 
-    .cards-grid {
+    .service-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
       width: 100%;
       max-width: 1080px;
       opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.65s;
+      animation: fadeUp 0.7s ease forwards 0.75s;
     }
 
-    .card {
+    .service-card {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 40px 32px 32px;
+      padding: 32px 26px 28px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      transition: border-color 0.25s, transform 0.25s, background 0.25s, box-shadow 0.25s;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s;
     }
 
-    .card:hover {
+    .service-card:hover {
       border-color: var(--border-orange);
       background: var(--panel-hover);
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(255,85,0,0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(255,85,0,0.09);
     }
 
-    .card-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--orange);
-      margin-bottom: 24px;
-      opacity: 0.7;
-    }
+    .service-card:nth-child(1) { grid-column: 1 / 3; }
+    .service-card:nth-child(2) { grid-column: 3 / 5; }
+    .service-card:nth-child(3) { grid-column: 5 / 7; }
+    .service-card:nth-child(4) { grid-column: 2 / 4; }
+    .service-card:nth-child(5) { grid-column: 4 / 6; }
 
-    .card-icon {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .card h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
-      letter-spacing: 2.5px;
+    .service-trigger {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--soft);
       text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .service-arrow {
+      font-size: 20px;
+      color: var(--orange);
+      margin-bottom: 18px;
       line-height: 1;
+      opacity: 0.85;
     }
 
-    .card p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.7;
-      flex: 1;
-      margin-bottom: 32px;
-    }
-
-    .card-btn {
-      display: inline-block;
-      background: transparent;
-      color: var(--orange);
+    .service-result {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
+      font-size: 22px;
       letter-spacing: 2.5px;
+      color: var(--text);
+      line-height: 1.12;
       text-transform: uppercase;
-      padding: 11px 24px;
-      border-radius: 3px;
-      text-decoration: none;
-      border: 1px solid var(--orange);
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      white-space: nowrap;
-      align-self: stretch;
-      text-align: center;
-    }
-
-    .card-btn:hover {
-      background: var(--orange);
-      color: #111;
-      box-shadow: 0 0 24px rgba(255,85,0,0.35);
     }
 
     /* ── WHAT WE BUILD ────────────────────────────────────────── */
@@ -368,6 +355,9 @@
       color: var(--muted);
       margin-bottom: 48px;
       line-height: 1.7;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-buttons {
@@ -382,14 +372,15 @@
       color: #111;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 18px;
-      letter-spacing: 4px;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
-      padding: 17px 52px;
+      padding: 18px 56px;
       border-radius: 3px;
       text-decoration: none;
       border: 1px solid var(--orange);
       transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
       white-space: nowrap;
+      cursor: pointer;
     }
 
     .btn-primary:hover {
@@ -555,7 +546,11 @@
 
     /* ── RESPONSIVE ───────────────────────────────────────────── */
     @media (max-width: 860px) {
-      .cards-grid  { grid-template-columns: 1fr; max-width: 480px; }
+      .service-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+      .service-card:nth-child(n) { grid-column: auto; }
       .proof-grid  { grid-template-columns: 1fr; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
@@ -570,50 +565,54 @@
   <nav>
     <a href="#hero"><img src="REORK logo_2.png" alt="REORK AI" class="nav-logo" /></a>
     <ul class="nav-links">
-      <li><a href="#systems">Systems</a></li>
+      <li><a href="#systems">What We Handle</a></li>
       <li><a href="#proof">What We Build</a></li>
       <li><a href="mailto:info@reorkai.com">Contact</a></li>
     </ul>
-    <button onclick="openModal('demo')" class="nav-cta">Book a Demo</button>
+    <button onclick="openModal('conversation')" class="nav-cta">Book a Conversation</button>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-eyebrow">Chaos to Structure</div>
-    <h1>AI Systems<br><span class="accent">For Business.</span></h1>
-    <p class="hero-sub">Custom AI built for the way your business actually operates. Less manual work. Faster decisions. Better margins.</p>
+    <div class="hero-eyebrow">REORK AI</div>
+    <h1>AI Systems for<br><span class="accent">Small Business</span></h1>
+    <p class="hero-chaos">Chaos to Structure.</p>
+    <p class="hero-sub">REORK builds practical AI workflows that handle repetitive work — emails, notes, leads, photos, quotes, and follow-ups — so you spend less time on admin and more time on the job.</p>
     <div class="hero-divider"></div>
   </section>
 
-  <!-- CARDS -->
-  <section class="cards-section" id="systems">
-    <div class="cards-grid">
+  <!-- SERVICE BLOCKS -->
+  <section class="service-section" id="systems">
+    <div class="service-grid">
 
-      <!-- Card 1: Business Diagnostic -->
-      <div class="card">
-        <div class="card-number">01 — DIAGNOSE</div>
-        <div class="card-icon">🔎</div>
-        <h3>Business Diagnostic</h3>
-        <p>Tell us how your business runs. We map where AI can cut friction, reduce admin, and recover lost time — and give you a plain-language breakdown of where to start.</p>
-        <button onclick="openModal('diagnostic')" class="card-btn">Start Diagnostic</button>
+      <div class="service-card">
+        <div class="service-trigger">Emails pile up</div>
+        <div class="service-arrow">→</div>
+        <div class="service-result">AI drafts the replies</div>
       </div>
 
-      <!-- Card 2: Trades Quote -->
-      <div class="card">
-        <div class="card-number">02 — QUOTE</div>
-        <div class="card-icon">🏗️</div>
-        <h3>Trades Quote</h3>
-        <p>Built for trades and field service businesses. Get a scoped quote for automating your estimates, job notes, scheduling, and client communication — on your timeline.</p>
-        <button onclick="openModal('trades')" class="card-btn">Get a Quote</button>
+      <div class="service-card">
+        <div class="service-trigger">Photo or details come in</div>
+        <div class="service-arrow">→</div>
+        <div class="service-result">Listing or quote generated</div>
       </div>
 
-      <!-- Card 3: Demo Request -->
-      <div class="card">
-        <div class="card-number">03 — SEE IT</div>
-        <div class="card-icon">▶</div>
-        <h3>Demo Request</h3>
-        <p>See a live REORK AI system running for a real business scenario. No slides. No fluff. A working demo scoped to your industry so you can evaluate it against your actual workflow.</p>
-        <button onclick="openModal('demo')" class="card-btn">Request Demo</button>
+      <div class="service-card">
+        <div class="service-trigger">Lead arrives</div>
+        <div class="service-arrow">→</div>
+        <div class="service-result">Follow-up drafted automatically</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-trigger">Job notes</div>
+        <div class="service-arrow">→</div>
+        <div class="service-result">Clean summary &amp; next steps</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-trigger">Same questions every day</div>
+        <div class="service-arrow">→</div>
+        <div class="service-result">Answers drafted instantly</div>
       </div>
 
     </div>
@@ -629,8 +628,8 @@
 
     <div class="proof-grid">
       <div class="proof-item">
-        <h3>Document Processing</h3>
-        <p>Contracts, estimates, reports, and records — extracted, summarised, and routed automatically without manual review.</p>
+        <h3>Inbox &amp; Lead Intake</h3>
+        <p>Emails, enquiries, and incoming leads handled automatically — replies drafted, leads scored, and follow-ups queued without lifting a finger.</p>
       </div>
       <div class="proof-item">
         <h3>Client Communication</h3>
@@ -641,7 +640,7 @@
         <p>Connect your existing tools — CRM, scheduling, invoicing — and add AI decision layers that cut the steps between input and output.</p>
       </div>
       <div class="proof-item">
-        <h3>Trades & Field Service</h3>
+        <h3>Trades &amp; Field Service</h3>
         <p>From job-site notes to finished invoices: AI that understands the trades and automates the back-office work you're doing manually.</p>
       </div>
       <div class="proof-item">
@@ -658,21 +657,44 @@
   <div class="divider"></div>
 
   <!-- CTA -->
-  <section class="cta-section" id="demo">
-    <h2>Ready to See<br><span style="color:var(--orange)">What's Possible?</span></h2>
-    <p>Start with a diagnostic or book a live demo. No commitment, no jargon.</p>
+  <section class="cta-section" id="contact">
+    <h2>Less Admin.<br><span style="color:var(--orange)">More Job.</span></h2>
+    <p>20 minutes. No jargon, no commitment — just a straight look at where AI fits your workflow.</p>
     <div class="cta-buttons">
-      <button onclick="openModal('diagnostic')" class="btn-primary">Start Diagnostic</button>
-      <button onclick="openModal('demo')" class="btn-primary">Book a Demo</button>
+      <button onclick="openModal('conversation')" class="btn-primary">Book a Workflow Conversation</button>
     </div>
   </section>
 
-  <!-- MODAL: BUSINESS DIAGNOSTIC -->
+  <!-- MODAL: WORKFLOW CONVERSATION -->
+  <div class="modal-overlay" id="modal-conversation" onclick="overlayClick(event,'conversation')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('conversation')">&times;</button>
+      <div class="modal-body" id="modal-body-conversation">
+        <div class="modal-eyebrow">REORK AI — WORKFLOW CONVERSATION</div>
+        <h2>Book a Workflow Conversation</h2>
+        <form class="modal-form" onsubmit="submitModal(event,'conversation','https://reork-backend.onrender.com/api/demo-access-request')">
+          <input type="text"  name="name"     placeholder="Your name"                required />
+          <input type="email" name="email"    placeholder="Your email"               required />
+          <input type="text"  name="company"  placeholder="Business name"            required />
+          <textarea           name="use_case" placeholder="What's eating your time? What would you like to handle automatically?" required></textarea>
+          <button type="submit" class="modal-submit" id="submit-conversation">Send My Request</button>
+          <div class="modal-status" id="status-conversation"></div>
+        </form>
+      </div>
+      <div class="modal-thankyou" id="thankyou-conversation">
+        <div class="modal-thankyou-icon">✅</div>
+        <h3>You're Booked.</h3>
+        <p>We'll be in touch within one business day to schedule your workflow conversation — scoped to your operation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BUSINESS DIAGNOSTIC (kept for direct-link access) -->
   <div class="modal-overlay" id="modal-diagnostic" onclick="overlayClick(event,'diagnostic')">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('diagnostic')">&times;</button>
       <div class="modal-body" id="modal-body-diagnostic">
-        <div class="modal-eyebrow">01 — DIAGNOSE</div>
+        <div class="modal-eyebrow">REORK AI — DIAGNOSTIC</div>
         <h2>Business Diagnostic</h2>
         <form class="modal-form" onsubmit="submitModal(event,'diagnostic','https://reork-backend.onrender.com/api/business-diagnostic')">
           <input type="text"  name="name"          placeholder="Your name"                              required />
@@ -705,54 +727,6 @@
     </div>
   </div>
 
-  <!-- MODAL: TRADES QUOTE -->
-  <div class="modal-overlay" id="modal-trades" onclick="overlayClick(event,'trades')">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('trades')">&times;</button>
-      <div class="modal-body" id="modal-body-trades">
-        <div class="modal-eyebrow">02 — QUOTE</div>
-        <h2>Trades Quote</h2>
-        <form class="modal-form" onsubmit="submitModal(event,'trades','https://reork-backend.onrender.com/api/trades-quote')">
-          <input type="text"  name="name"  placeholder="Your name"                                   required />
-          <input type="email" name="email" placeholder="Your email"                                  required />
-          <input type="text"  name="trade" placeholder="Trade type (e.g. Plumbing, Electrical, HVAC)" required />
-          <textarea           name="job"   placeholder="What do you want automated? Describe the job or workflow." required></textarea>
-          <button type="submit" class="modal-submit" id="submit-trades">Get My Quote</button>
-          <div class="modal-status" id="status-trades"></div>
-        </form>
-      </div>
-      <div class="modal-thankyou" id="thankyou-trades">
-        <div class="modal-thankyou-icon">✅</div>
-        <h3>Quote Request Sent.</h3>
-        <p>We'll scope your automation and get back to you with a detailed quote within one business day.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: DEMO REQUEST -->
-  <div class="modal-overlay" id="modal-demo" onclick="overlayClick(event,'demo')">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('demo')">&times;</button>
-      <div class="modal-body" id="modal-body-demo">
-        <div class="modal-eyebrow">03 — SEE IT</div>
-        <h2>Demo Request</h2>
-        <form class="modal-form" onsubmit="submitModal(event,'demo','https://reork-backend.onrender.com/api/demo-access-request')">
-          <input type="text"  name="name"    placeholder="Your name"             required />
-          <input type="email" name="email"   placeholder="Your email"            required />
-          <input type="text"  name="company" placeholder="Company"               required />
-          <textarea           name="use_case" placeholder="What would you like to see?" required></textarea>
-          <button type="submit" class="modal-submit" id="submit-demo">Request My Demo</button>
-          <div class="modal-status" id="status-demo"></div>
-        </form>
-      </div>
-      <div class="modal-thankyou" id="thankyou-demo">
-        <div class="modal-thankyou-icon">✅</div>
-        <h3>Demo Requested.</h3>
-        <p>We'll be in touch to schedule your live demo — scoped to your industry and workflow.</p>
-      </div>
-    </div>
-  </div>
-
   <script>
     function openModal(id) {
       document.getElementById('modal-' + id).classList.add('open');
@@ -770,7 +744,7 @@
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        ['diagnostic','trades','demo'].forEach(function(id) { closeModal(id); });
+        ['conversation','diagnostic'].forEach(function(id) { closeModal(id); });
       }
     });
 
@@ -797,7 +771,6 @@
         if (!res.ok) throw new Error('Server error');
         const json = await res.json().catch(function() { return {}; });
 
-        // For business-diagnostic: inject the returned diagnostic text
         if (id === 'diagnostic' && json.diagnostic) {
           const resultEl = document.getElementById('diagnostic-result');
           if (resultEl) resultEl.textContent = json.diagnostic;
@@ -817,7 +790,7 @@
   <!-- FOOTER -->
   <footer>
     <a href="#hero" class="footer-wordmark">REORK AI</a>
-    <p>© 2026 REORK AI — 1000148882 Ontario Inc.</p>
+    <p>&copy; 2026 REORK AI &mdash; 1000148882 Ontario Inc.</p>
     <a href="mailto:info@reorkai.com">info@reorkai.com</a>
   </footer>
 
