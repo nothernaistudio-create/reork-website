@@ -687,6 +687,127 @@
       to   { opacity: 1; transform: translateY(0);    }
     }
 
+    /* ── FOR AGENCIES ─────────────────────────────────────────── */
+    .agency-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .agency-inner {
+      background: var(--panel);
+      border: 1px solid var(--border-orange);
+      border-radius: 10px;
+      padding: 56px 48px;
+    }
+    .agency-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .agency-inner h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .agency-inner > p, .agency-inner .agency-desc {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+    .agency-bullets {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 32px;
+      margin-bottom: 40px;
+    }
+    .agency-bullets li {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .agency-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* ── DEMO CARDS ───────────────────────────────────────────── */
+    .demo-section {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px 80px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .demo-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .demo-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 24px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s;
+      display: block;
+    }
+    .demo-card:hover {
+      border-color: var(--border-orange);
+      background: var(--panel-hover);
+    }
+    .demo-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .demo-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .demo-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .demo-card-cta {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.5px;
+    }
+
     /* ── RESPONSIVE ───────────────────────────────────────────── */
     @media (max-width: 860px) {
       .service-grid {
@@ -697,6 +818,9 @@
       .proof-grid  { grid-template-columns: 1fr; }
       .example-inner { grid-template-columns: 1fr; gap: 40px; }
       .hiw-steps { grid-template-columns: 1fr 1fr; }
+      .agency-inner { padding: 36px 24px; }
+      .agency-bullets { grid-template-columns: 1fr; }
+      .demo-grid { grid-template-columns: 1fr; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       footer { flex-direction: column; text-align: center; }
@@ -704,6 +828,7 @@
     }
     @media (max-width: 560px) {
       .hiw-steps { grid-template-columns: 1fr; }
+      .agency-inner h2 { font-size: 26px; }
     }
   </style>
 </head>
@@ -853,6 +978,51 @@
       </div>
     </div>
   </section>
+
+  <div class="divider"></div>
+
+  <!-- FOR AGENCIES & CONSULTANTS -->
+  <section class="agency-section" id="agencies">
+    <div class="agency-inner">
+      <div class="agency-eyebrow">For Agencies &amp; Consultants</div>
+      <h2>AI Workflow Prototypes<br>for Your Clients</h2>
+      <p class="agency-desc">Your clients are starting to ask what AI can do. REORK helps you answer with a working prototype instead of a theory.</p>
+      <ul class="agency-bullets">
+        <li>Client problem → working AI workflow demo</li>
+        <li>You keep the client relationship</li>
+        <li>Photo, voice, email, form, or notes in</li>
+        <li>REORK builds and maintains the workflow layer</li>
+        <li>Structured output, saved record, next action out</li>
+        <li>Small scope — one workflow at a time, fast</li>
+      </ul>
+      <button onclick="openModal('conversation')" class="btn-primary">Talk to REORK</button>
+    </div>
+  </section>
+
+  <!-- LIVE DEMO CARDS -->
+  <div class="demo-section">
+    <p class="demo-label">Live Working Demos</p>
+    <div class="demo-grid">
+      <a class="demo-card" href="https://reork-backend.onrender.com/frankie-cockpit" target="_blank" rel="noopener">
+        <div class="demo-card-tag">Photo → Listing</div>
+        <h3>Frankie Fish Parts Brain</h3>
+        <p>Upload a photo of a used auto part. AI identifies it, assesses condition, sets a CAD price range, and writes a Facebook + Kijiji listing — ready to copy.</p>
+        <span class="demo-card-cta">Try it live →</span>
+      </a>
+      <a class="demo-card" href="https://reork-backend.onrender.com/parts-cockpit" target="_blank" rel="noopener">
+        <div class="demo-card-tag">VIN → Parts List</div>
+        <h3>Parts Cockpit + VIN Decoder</h3>
+        <p>Paste a 17-digit VIN. REORK pulls vehicle data from NHTSA, then generates 14–16 high-demand parts with CAD price ranges and sell-speed ratings.</p>
+        <span class="demo-card-cta">Try it live →</span>
+      </a>
+      <a class="demo-card" href="https://reork-backend.onrender.com/social-cockpit" target="_blank" rel="noopener">
+        <div class="demo-card-tag">One Click → 3 Posts</div>
+        <h3>Social Post Generator</h3>
+        <p>Pick a post type — small business, agency, or proof demo. Click generate. REORK writes 3 LinkedIn/Facebook posts in the REORK voice, ready to copy and post.</p>
+        <span class="demo-card-cta">Try it live →</span>
+      </a>
+    </div>
+  </div>
 
   <div class="divider"></div>
 
