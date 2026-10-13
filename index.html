@@ -1,1168 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>REORK AI — AI Systems for Small Business</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --orange: #ff5500;
-      --orange2: #ff7a2e;
-      --black: #0a0a0b;
-      --panel: #161618;
-      --panel-hover: #1d1d21;
-      --border: #2a2a2e;
-      --border-orange: rgba(255,85,0,0.45);
-      --text: #f0f0f2;
-      --muted: #888890;
-      --soft: #555560;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0c0f">
+<meta name="description" content="Make your business systems work together. REORK AI builds connected workflows across customers, jobs, documents, approvals and payments.">
+<title>REORK AI | Make your business systems work together</title>
+<style>
+:root{--bg:#0b0c0f;--panel:#15171c;--panel2:#1b1e24;--line:#303239;--text:#f3f1ef;--muted:#a4a7ae;--orange:#ff6a2b;--orange2:#ff995e;--soft:#d5d6db;--green:#b5e5be;--radius:17px;--max:1200px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}::selection{background:var(--orange);color:#121212}
+.container{width:min(var(--max),calc(100% - 48px));margin:auto}.top{position:sticky;top:0;z-index:20;background:#0b0c0fef;backdrop-filter:blur(16px);border-bottom:1px solid #292b30}.nav{height:77px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;gap:11px;align-items:center;font-weight:900;letter-spacing:.13em;font-size:19px}.brand-mark{background:var(--orange);color:#111;font-size:19px;font-weight:950;display:grid;place-items:center;width:39px;height:39px;border-radius:11px;letter-spacing:0}.brand em{font-size:10px;font-style:normal;color:var(--orange);letter-spacing:.22em;margin-left:3px}.menu{display:flex;align-items:center;gap:26px;font-size:13px;font-weight:650;color:#bec0c5}.menu a:hover{color:#fff}.btn,.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:10px;font-weight:800;font-size:14px;border:1px solid transparent;transition:transform .15s,background .15s}.btn{background:var(--orange);color:#14110e}.btn:hover{background:#ff8b50;transform:translateY(-1px)}.ghost{border-color:#505158;background:transparent;color:var(--text)}.ghost:hover{background:#25272d}.nav-cta{padding:11px 17px}.eyebrow{color:#ffae88;font-size:12px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}.hero{position:relative;overflow:hidden;border-bottom:1px solid #24262c;background:radial-gradient(550px 300px at 88% 10%,#fb6b2922,transparent),radial-gradient(600px 440px at 24% 80%,#37394129,transparent)}.hero::before{content:"";pointer-events:none;position:absolute;inset:0;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:49px 49px;mask-image:linear-gradient(90deg,transparent,#0009,transparent)}.hero-layout{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:94px 0 94px}.hero h1{font-size:clamp(43px,5.2vw,76px);line-height:1.035;letter-spacing:-.055em;margin:23px 0 24px;max-width:650px}.hero h1 span{color:var(--orange)}.lead{font-size:18px;color:#c3c4ca;line-height:1.68;max-width:565px;margin:0 0 28px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.under{color:#90929b;font-size:12px;margin-top:20px}.under b{color:#c4c5cb}.hero-micro{margin-top:45px;display:flex;gap:25px;flex-wrap:wrap;color:#c5c7cd;font-size:13px}.hero-micro span::before{content:"✓";color:var(--orange);margin-right:9px;font-weight:900}
+.sandbox{position:relative;border:1px solid #444046;border-radius:22px;box-shadow:0 18px 90px #0009;overflow:hidden;background:#121418}.sandbox-head{background:#1b1d23;border-bottom:1px solid var(--line);padding:15px 17px;display:flex;justify-content:space-between;align-items:center;gap:12px}.tiny-label{color:#aaaeb7;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:900}.lights{display:flex;gap:7px}.lights i{display:block;width:8px;height:8px;border-radius:50%;background:#ff7b6e}.lights i:nth-child(2){background:#f1b556}.lights i:nth-child(3){background:#9acfa8}.sandbox-body{padding:24px 24px 20px;min-height:380px}.connection{display:grid;grid-template-columns:1fr 28px 1fr;gap:9px;align-items:center;margin-bottom:18px}.endpoint{border:1px solid #414349;border-radius:12px;padding:16px 11px;background:#1d1f25}.endpoint strong{display:block;font-size:13px;margin-top:7px}.endpoint small{font-size:11px;color:#a7a9b1}.endpoint svg{width:19px;height:19px;stroke:var(--orange)}.link-arrows{font-size:27px;color:var(--orange);text-align:center}.sandbox-log{background:#0c0e11;border:1px solid #303339;border-radius:11px;padding:16px;color:#c6c8ce;min-height:128px;font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.9}.sandbox-log div{border-bottom:1px dashed #242932}.sandbox-log div:last-child{border:0}.sandbox-log b{color:var(--orange)}.sandbox-ctrl{border-top:1px solid var(--line);display:flex;align-items:center;gap:13px;justify-content:space-between;background:#1b1d23;padding:15px 20px}.sandbox-ctrl p{font-size:11px;color:#a7a9b1;margin:0}.sandbox-ctrl button{padding:9px 14px;white-space:nowrap}.status-dot{display:inline-block;width:7px;height:7px;border-radius:99px;background:var(--orange);margin-right:5px}
+.section{padding:99px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:31px}.section h2{font-size:clamp(32px,3.5vw,50px);line-height:1.07;letter-spacing:-.043em;margin:13px 0 0;max-width:730px}.section-head p{color:var(--muted);max-width:350px;margin:0 0 4px;font-size:15px}.subtle{color:var(--muted)}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.service{background:linear-gradient(160deg,#1a1c21,#111317);border:1px solid #36373e;border-radius:var(--radius);padding:28px;min-height:315px;display:flex;flex-direction:column}.number{color:var(--orange);font-size:12px;font-weight:900;letter-spacing:.2em}.service h3{font-size:25px;line-height:1.18;letter-spacing:-.025em;margin:23px 0 11px}.service p{color:#b4b5bc;font-size:14px;line-height:1.62;margin:0 0 24px}.service .foot{border-top:1px solid #37393e;padding-top:17px;color:#eeeeef;font-size:12px;font-weight:800;margin-top:auto}.service .foot::before{content:"→";color:var(--orange);margin-right:9px}
+.demo-section{background:#111318;border-top:1px solid #272931;border-bottom:1px solid #272931}.demo-grid{display:grid;grid-template-columns:.74fr 1.26fr;gap:50px;align-items:start}.demo-text p{color:#afb1b9}.demo-option{display:flex;flex-direction:column;gap:9px;margin-top:33px}.switcher{padding:14px 16px;text-align:left;background:#181a20;color:#dcdee2;border:1px solid #363941;border-radius:10px;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center}.switcher.active{border-color:var(--orange);background:#40241866;color:white}.switcher span{color:var(--orange);font-weight:950}.demo-pane{border:1px solid #41434b;border-radius:20px;background:#181a20;overflow:hidden}.demo-pane-header{padding:18px 23px;border-bottom:1px solid #363941;display:flex;justify-content:space-between;align-items:center;gap:12px}.tag{padding:5px 8px;color:#ffbd97;background:#5d331e40;border:1px solid #a75d374d;border-radius:5px;font-size:10px;font-weight:900;letter-spacing:.12em}.demo-pane-body{padding:23px}.request{padding:17px 19px;background:#0d0f13;border:1px solid #363941;border-radius:12px;min-height:94px}.request strong{display:block;font-size:14px}.request p{margin:6px 0 0;color:#b5b6bc;font-size:13px}.flowline{display:grid;grid-template-columns:26px 1fr 24px;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid #33343c;min-height:72px}.flowline:last-of-type{border-bottom:0}.flow-num{width:26px;height:26px;border-radius:50%;background:#35373d;color:#a6a7b0;font-size:12px;font-weight:900;display:grid;place-items:center}.flowline.active .flow-num,.flowline.done .flow-num{background:var(--orange);color:#17110e}.flowline strong{display:block;font-size:14px}.flowline small{color:#979aa4;font-size:12px}.flowline .state{font-size:15px;color:#777a82;text-align:right}.flowline.done .state{color:var(--green)}.flowline.active .state{color:var(--orange)}.demo-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:21px 0 7px}.demo-results{padding:13px;background:#0e1211;border:1px solid #3b6247;border-radius:10px;color:#c9ebce;font-size:13px;margin-top:13px;display:none}.fine{font-size:12px;color:#92949f;line-height:1.55}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.value-panel{border:1px solid #383b43;border-radius:18px;background:#17191f;padding:31px}.control{margin-top:27px}.control label{display:flex;justify-content:space-between;color:#c9cbd0;font-size:14px;gap:15px;margin-bottom:11px}.control output{color:#fff;font-weight:900;white-space:nowrap}.control input[type=range]{width:100%;accent-color:var(--orange)}.value-result{background:radial-gradient(420px 230px at 95% 0%,#fc65242e,transparent),#1b1e22;display:flex;justify-content:center;flex-direction:column;min-height:340px;border:1px solid #4d4039;border-radius:18px;padding:39px}.value-result .amount{font-size:clamp(50px,5vw,78px);line-height:1.1;font-weight:900;letter-spacing:-.06em;margin:17px 0;color:var(--orange)}.value-result p{color:#bec0c8;line-height:1.6}.value-result small{color:#92949c}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.step{border-top:2px solid #57595f;padding-top:23px}.step b{color:var(--orange);font-size:12px;letter-spacing:.15em}.step h3{font-size:20px;margin:12px 0 10px}.step p{font-size:14px;color:#adafb6;line-height:1.65}
+.cta-band{background:var(--orange);color:#17120f;border-radius:22px;padding:53px 56px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:60px}.cta-band h2{font-size:clamp(29px,3vw,46px);margin:0 0 16px;letter-spacing:-.04em;line-height:1.08}.cta-band p{margin:0;color:#362519;line-height:1.6}.contact-form{background:#111317;border-radius:15px;padding:23px;color:var(--text);display:grid;gap:13px}.contact-form label{font-size:12px;font-weight:800;color:#ddd}.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:12px 13px;background:#212329;border:1px solid #41444b;border-radius:8px;color:#f5f4f2;outline-color:var(--orange);margin-top:5px}.contact-form textarea{resize:vertical;min-height:96px}.contact-form .btn{width:100%}.contact-form p{color:#9fa1aa;font-size:11px}.contact-alt{text-align:center;font-size:13px;color:#c8c8cd}.contact-alt a{text-decoration:underline;color:#ffad80}
+.bottom{border-top:1px solid #34353a;padding:30px 0;color:#9396a1;font-size:12px}.bottom-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.bottom a{color:#dedede}.reveal{animation:fadeup .5s both}@keyframes fadeup{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:960px){.hero-layout{grid-template-columns:1fr;gap:35px;padding:70px 0}.hero h1{max-width:800px}.hero-micro{margin-top:30px}.demo-grid{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.cta-band{grid-template-columns:1fr}.menu .nav-link{display:none}}
+@media(max-width:640px){.container{width:calc(100% - 32px)}.nav{height:68px}.brand{font-size:16px}.brand-mark{height:34px;width:34px}.nav-cta{font-size:12px;padding:10px 12px}.hero-layout{padding:54px 0 65px}.hero h1{font-size:clamp(39px,10vw,54px)}.lead{font-size:16px}.hero-micro{gap:10px;display:grid}.sandbox-body{padding:18px 15px;min-height:355px}.sandbox-ctrl{padding:13px}.section{padding:69px 0}.section-head{display:block}.section-head p{margin-top:14px}.grid3,.value-grid,.steps{grid-template-columns:1fr}.service{min-height:unset}.demo-grid{gap:24px}.demo-pane-body{padding:16px}.value-panel,.value-result{padding:22px}.value-result{min-height:255px}.cta-band{padding:23px;border-radius:16px;gap:25px}.contact-form{padding:17px}.bottom-inner{display:block}.bottom-inner p{margin-bottom:12px}.menu{gap:0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Crosshatch texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(45deg,  rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 12px),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 12px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Orange ambient glow */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 700px 500px at 0% 100%,   rgba(255,85,0,0.14), transparent 65%),
-        radial-gradient(ellipse 700px 500px at 100% 100%, rgba(255,85,0,0.11), transparent 65%),
-        radial-gradient(ellipse 500px 300px at 50% 100%,  rgba(255,85,0,0.07), transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── NAV ──────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      background: #000;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      display: block;
-      height: 45px;
-      width: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    .nav-cta {
-      background: transparent;
-      color: var(--orange);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      padding: 9px 22px;
-      border-radius: 3px;
-      text-decoration: none;
-      border: 1px solid var(--orange);
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-    }
-    .nav-cta:hover {
-      background: var(--orange);
-      color: #111;
-      box-shadow: 0 0 24px rgba(255,85,0,0.4);
-    }
-
-    /* ── HERO ─────────────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 140px 24px 80px;
-    }
-
-    .hero-eyebrow {
-      font-family: 'Barlow', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 24px;
-      opacity: 0;
-      animation: fadeUp 0.55s ease forwards 0.15s;
-    }
-
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(58px, 9vw, 112px);
-      line-height: 0.92;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--text);
-      max-width: 960px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.3s;
-    }
-
-    .hero h1 .accent {
-      color: var(--orange);
-      text-shadow: 0 0 48px rgba(255,85,0,0.4);
-    }
-
-    .hero-chaos {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(28px, 3.5vw, 46px);
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 22px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.42s;
-    }
-
-    .hero-sub {
-      margin-top: 28px;
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 580px;
-      line-height: 1.75;
-      letter-spacing: 0.2px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.56s;
-    }
-
-    .hero-divider {
-      width: 48px;
-      height: 2px;
-      background: var(--orange);
-      margin: 40px auto 0;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.66s;
-    }
-
-    /* ── SERVICE BLOCKS ───────────────────────────────────────── */
-    .service-section {
-      position: relative;
-      z-index: 1;
-      padding: 0 24px 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 1080px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.75s;
-    }
-
-    .service-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 32px 26px 28px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s;
-    }
-
-    .service-card:hover {
-      border-color: var(--border-orange);
-      background: var(--panel-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 36px rgba(255,85,0,0.09);
-    }
-
-    .service-card:nth-child(1) { grid-column: 1 / 3; }
-    .service-card:nth-child(2) { grid-column: 3 / 5; }
-    .service-card:nth-child(3) { grid-column: 5 / 7; }
-    .service-card:nth-child(4) { grid-column: 2 / 4; }
-    .service-card:nth-child(5) { grid-column: 4 / 6; }
-
-    .service-trigger {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--soft);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-      line-height: 1.5;
-    }
-
-    .service-arrow {
-      font-size: 20px;
-      color: var(--orange);
-      margin-bottom: 18px;
-      line-height: 1;
-      opacity: 0.85;
-    }
-
-    .service-result {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 2.5px;
-      color: var(--text);
-      line-height: 1.12;
-      text-transform: uppercase;
-    }
-
-    /* ── WHAT WE BUILD ────────────────────────────────────────── */
-    .divider {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,85,0,0.45), transparent);
-    }
-
-    .proof-section {
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .section-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 20px;
-    }
-
-    .proof-section h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 5.5vw, 68px);
-      text-transform: uppercase;
-      line-height: 0.95;
-      margin-bottom: 24px;
-      letter-spacing: 3px;
-    }
-
-    .proof-section > p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 560px;
-      margin: 0 auto 64px;
-    }
-
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .proof-item {
-      background: var(--panel);
-      padding: 36px 28px;
-      text-align: left;
-      cursor: default;
-    }
-
-    .proof-item h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 10px;
-    }
-
-    .proof-item p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    /* ── CTA ──────────────────────────────────────────────────── */
-    .cta-section {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 100px 24px;
-      border-top: 1px solid var(--border);
-    }
-
-    .cta-section h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(48px, 7vw, 84px);
-      text-transform: uppercase;
-      line-height: 0.93;
-      margin-bottom: 20px;
-      letter-spacing: 3px;
-    }
-
-    .cta-section p {
-      font-size: 16px;
-      color: var(--muted);
-      margin-bottom: 48px;
-      line-height: 1.7;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--orange);
-      color: #111;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      padding: 18px 56px;
-      border-radius: 3px;
-      text-decoration: none;
-      border: 1px solid var(--orange);
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      background: #111;
-      color: var(--orange);
-      box-shadow: 0 0 36px rgba(255,85,0,0.35);
-      transform: translateY(-3px);
-    }
-
-    /* ── FOOTER ───────────────────────────────────────────────── */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-wordmark {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      letter-spacing: 5px;
-      color: var(--orange);
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    footer p { font-size: 13px; color: var(--soft); }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.2s;
-    }
-
-    footer a:hover { color: var(--orange); }
-
-    /* ── MODALS ───────────────────────────────────────────────── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.78);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .modal-overlay.open { display: flex; }
-
-    .modal {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      width: 100%;
-      max-width: 500px;
-      padding: 40px 36px 36px;
-      position: relative;
-      animation: fadeUp 0.25s ease forwards;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px; right: 18px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 24px;
-      cursor: pointer;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--text); }
-
-    .modal-eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--orange);
-      opacity: 0.7;
-      margin-bottom: 8px;
-    }
-
-    .modal h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 28px;
-      line-height: 1;
-    }
-
-    .modal-form { display: flex; flex-direction: column; gap: 10px; }
-
-    .modal-form input,
-    .modal-form textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      font-size: 14px;
-      padding: 11px 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .modal-form input::placeholder,
-    .modal-form textarea::placeholder { color: var(--soft); }
-    .modal-form input:focus,
-    .modal-form textarea:focus { border-color: var(--border-orange); }
-    .modal-form textarea { min-height: 96px; resize: vertical; }
-
-    .modal-submit {
-      background: var(--orange);
-      color: #111;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      padding: 13px 24px;
-      border-radius: 3px;
-      border: 1px solid var(--orange);
-      width: 100%;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    }
-    .modal-submit:hover { background: #111; color: var(--orange); box-shadow: 0 0 24px rgba(255,85,0,0.3); }
-    .modal-submit:disabled { opacity: 0.55; cursor: default; pointer-events: none; }
-
-    .modal-status { font-size: 13px; color: var(--muted); min-height: 18px; text-align: center; margin-top: 6px; line-height: 1.5; }
-    .modal-status.error { color: #ef4444; }
-
-    .modal-body { }
-    .modal-thankyou {
-      display: none;
-      text-align: center;
-      padding: 12px 0 8px;
-    }
-    .modal-thankyou.show { display: block; }
-    .modal-thankyou-icon { font-size: 44px; margin-bottom: 18px; }
-    .modal-thankyou h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px;
-      letter-spacing: 3px;
-      color: var(--orange);
-      margin-bottom: 12px;
-    }
-    .modal-thankyou p { font-size: 15px; color: var(--muted); line-height: 1.7; }
-
-    /* ── TRUST LINE ──────────────────────────────────────────── */
-    .trust-line {
-      position: relative;
-      z-index: 1;
-      padding: 0 24px 96px;
-      display: flex;
-      justify-content: center;
-    }
-    .trust-line p {
-      max-width: 700px;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.9;
-      border-left: 2px solid rgba(255,85,0,0.5);
-      padding-left: 24px;
-      text-align: left;
-    }
-
-    /* ── LIVE EXAMPLE ─────────────────────────────────────────── */
-    .example-section {
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-    .example-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: start;
-    }
-    .example-text .section-label { margin-bottom: 20px; }
-    .example-text h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(42px, 5.5vw, 68px);
-      text-transform: uppercase;
-      line-height: 0.95;
-      letter-spacing: 3px;
-      margin-bottom: 28px;
-    }
-    .example-copy {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 28px;
-    }
-    .btn-live {
-      display: inline-block;
-      background: transparent;
-      color: var(--orange);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      padding: 12px 28px;
-      border-radius: 3px;
-      border: 1px solid var(--orange);
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
-    }
-    .btn-live:hover {
-      background: var(--orange);
-      color: #111;
-      box-shadow: 0 0 24px rgba(255,85,0,0.35);
-      transform: translateY(-2px);
-    }
-    .example-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-top: 8px;
-    }
-    .example-bullets li {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--text);
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-left: 2px solid var(--orange);
-      border-radius: 4px;
-      padding: 14px 18px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .example-bullets li:hover {
-      background: var(--panel-hover);
-      border-color: var(--border-orange);
-      border-left-color: var(--orange);
-    }
-    .example-bullets li::before {
-      content: '→';
-      color: var(--orange);
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-
-    /* ── HOW IT WORKS ─────────────────────────────────────────── */
-    .hiw-section {
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hiw-section .section-label { margin-bottom: 52px; }
-    .hiw-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .hiw-step {
-      background: var(--panel);
-      padding: 40px 28px 36px;
-      text-align: left;
-      transition: background 0.2s;
-    }
-    .hiw-step:hover { background: var(--panel-hover); }
-    .hiw-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      letter-spacing: 2px;
-      color: var(--orange);
-      opacity: 0.35;
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-    .hiw-step p {
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.65;
-      font-weight: 500;
-    }
-
-    /* ── ANIMATION ────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
-
-    /* ── FOR AGENCIES ─────────────────────────────────────────── */
-    .agency-section {
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-    .agency-inner {
-      background: var(--panel);
-      border: 1px solid var(--border-orange);
-      border-radius: 10px;
-      padding: 56px 48px;
-    }
-    .agency-eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .agency-inner h2 {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 18px;
-    }
-    .agency-inner > p, .agency-inner .agency-desc {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 640px;
-      margin-bottom: 32px;
-    }
-    .agency-bullets {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 32px;
-      margin-bottom: 40px;
-    }
-    .agency-bullets li {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.6;
-      padding-left: 20px;
-      position: relative;
-    }
-    .agency-bullets li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--orange);
-      font-weight: 700;
-    }
-
-    /* ── DEMO CARDS ───────────────────────────────────────────── */
-    .demo-section {
-      position: relative;
-      z-index: 1;
-      padding: 0 24px 80px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-    .demo-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .demo-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 28px 24px 24px;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 0.2s, background 0.2s;
-      display: block;
-    }
-    .demo-card:hover {
-      border-color: var(--border-orange);
-      background: var(--panel-hover);
-    }
-    .demo-card-tag {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 10px;
-    }
-    .demo-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-    .demo-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .demo-card-cta {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--orange);
-      letter-spacing: 0.5px;
-    }
-
-    /* ── RESPONSIVE ───────────────────────────────────────────── */
-    @media (max-width: 860px) {
-      .service-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-      }
-      .service-card:nth-child(n) { grid-column: auto; }
-      .proof-grid  { grid-template-columns: 1fr; }
-      .example-inner { grid-template-columns: 1fr; gap: 40px; }
-      .hiw-steps { grid-template-columns: 1fr 1fr; }
-      .agency-inner { padding: 36px 24px; }
-      .agency-bullets { grid-template-columns: 1fr; }
-      .demo-grid { grid-template-columns: 1fr; }
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      footer { flex-direction: column; text-align: center; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-    }
-    @media (max-width: 560px) {
-      .hiw-steps { grid-template-columns: 1fr; }
-      .agency-inner h2 { font-size: 26px; }
-    }
-  </style>
+/* Connected operations identity: restrained orbital motif, not a stock galaxy photo. */
+:root{--bg:#08090b;--panel:#121418;--orange:#f77835;--orange2:#fb985a}
+.brand{letter-spacing:.045em;font-weight:820;gap:5px}.brand-word{white-space:nowrap;letter-spacing:.02em}.brand-infinity{color:var(--orange);font-size:35px;font-weight:450;line-height:1;margin-right:8px;text-shadow:0 0 16px #fc632936}.big-cap{font-size:1.32em;vertical-align:-.04em}.ring-o{position:relative;color:#f4ece6}.brand em{font-size:17px;letter-spacing:.06em;margin-left:7px}
+.hero{background:radial-gradient(650px 440px at 78% 42%,#64270c18,transparent 75%),linear-gradient(180deg,#090a0b,#101114 90%,#0a0b0d)}.hero::before{opacity:.35}.hero-layout{grid-template-columns:.96fr 1.04fr;gap:12px;padding:87px 0 74px;min-height:680px}.hero-copy{position:relative;z-index:2}.hero h1{font-size:clamp(45px,5.0vw,70px);max-width:670px;margin:17px 0 24px}.hero h1 span{display:block;color:var(--orange);text-shadow:0 6px 32px #b54e1a21}.lead{font-size:17px;line-height:1.62;max-width:560px}.hero-micro{margin-top:48px;gap:18px;font-size:12px}.hero-micro span::before{content:'↗';font-size:15px;color:var(--orange)}.btn{background:#fa7531}.orbit-panel{position:relative;min-width:0;width:100%;height:515px;isolation:isolate}.orbit-art{width:110%;height:100%;position:absolute;left:-6%;top:-15px;overflow:visible;filter:drop-shadow(0 0 16px #f66e1a12)}.orbit-label{position:absolute;display:flex;align-items:center;gap:10px;color:#e5ddd9;font-size:12px;font-weight:650;white-space:nowrap;z-index:2}.orb-icon{background:#171719ed;border:1px solid #ad653b71;border-radius:50%;width:42px;height:42px;display:grid;place-items:center;color:#ff9c62;font-size:19px;box-shadow:0 0 20px #fd69260d}.orb-requests{left:7%;top:20%}.orb-documents{right:0%;top:13%}.orb-jobs{left:6%;bottom:28%}.orb-approval{right:0%;top:48%}.orb-payments{right:7%;bottom:25%}.orbit-action{position:absolute;z-index:2;left:9%;right:4%;bottom:-22px;background:#101114ed;backdrop-filter:blur(10px);border:1px solid #473b348a;border-radius:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:15px 17px;box-shadow:0 14px 44px #0007}.orbit-action-copy p{color:#aeb0b6;font-size:12px;line-height:1.55;margin:4px 0 0}.orbit-run{background:#1c1918;border:1px solid #a95b31;color:#ffaf7a;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:850;white-space:nowrap}.orbit-run:hover{background:#3e2519}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.hero:has(.orbit-panel) .sandbox{display:none}
+@media(max-width:960px){.hero-layout{grid-template-columns:1fr;gap:5px;padding:68px 0 100px}.hero-copy{max-width:760px}.orbit-panel{height:480px;max-width:680px;margin:auto}.orbit-art{width:100%;left:0}.orbit-action{bottom:-32px}}
+@media(max-width:640px){.brand-infinity{font-size:30px;margin-right:4px}.brand-word{font-size:15px}.brand em{font-size:13px;margin-left:2px}.hero-layout{padding:56px 0 85px}.hero h1{font-size:clamp(39px,9.4vw,53px)}.hero-micro{gap:9px;margin-top:26px}.orbit-panel{height:335px;width:100%;margin-top:12px}.orbit-art{top:-14px;transform:scale(1.12)}.orbit-label{font-size:9px;gap:3px}.orb-icon{width:30px;height:30px;font-size:12px}.orb-requests{left:0;top:15%}.orb-documents{right:-2%;top:11%}.orb-jobs{left:1%;bottom:24%}.orb-approval{right:0;top:48%}.orb-payments{right:0;bottom:23%}.orbit-action{left:0;right:0;bottom:-38px;padding:12px;gap:8px}.orbit-run{padding:9px 10px;font-size:11px}.orbit-action-copy p{font-size:11px}}
+@media(prefers-reduced-motion:no-preference){.orbit-panel .orbit-art{animation:orbitArrival 1.3s ease-out both}.orb-icon{animation:softBreath 6s ease-in-out infinite}.orb-documents .orb-icon,.orb-jobs .orb-icon{animation-delay:-2s}.orbit-panel.step-1 .orb-requests .orb-icon,.orbit-panel.step-2 .orb-documents .orb-icon,.orbit-panel.step-3 .orb-jobs .orb-icon,.orbit-panel.step-4 .orb-approval .orb-icon{box-shadow:0 0 0 5px #fa7a2730,0 0 29px #fa7a274f;border-color:#ff9e64}@keyframes orbitArrival{from{opacity:.1;transform:translateY(8px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes softBreath{0%,100%{box-shadow:0 0 12px #fd69260b}50%{box-shadow:0 0 22px #fd69261e}}}
+</style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a href="#hero"><img src="REORK logo_2.png" alt="REORK AI" class="nav-logo" /></a>
-    <ul class="nav-links">
-      <li><a href="#systems">What We Handle</a></li>
-      <li><a href="#proof">What We Build</a></li>
-      <li><a href="mailto:info@reorkai.com">Contact</a></li>
-    </ul>
-    <button onclick="openModal('conversation')" class="nav-cta">Book a Conversation</button>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-eyebrow">REORK AI</div>
-    <h1>AI Systems for<br><span class="accent">Small Business</span></h1>
-    <p class="hero-chaos">Chaos to Structure.</p>
-    <p class="hero-sub">REORK builds practical AI workflows that handle repetitive work — emails, notes, leads, photos, quotes, and follow-ups — so you spend less time on admin and more time on the job.</p>
-    <div class="hero-divider"></div>
-  </section>
-
-  <!-- SERVICE BLOCKS -->
-  <section class="service-section" id="systems">
-    <div class="service-grid">
-
-      <div class="service-card">
-        <div class="service-trigger">Emails pile up</div>
-        <div class="service-arrow">→</div>
-        <div class="service-result">AI drafts the replies</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-trigger">Photo or details come in</div>
-        <div class="service-arrow">→</div>
-        <div class="service-result">Listing or quote generated</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-trigger">Lead arrives</div>
-        <div class="service-arrow">→</div>
-        <div class="service-result">Follow-up drafted automatically</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-trigger">Job notes</div>
-        <div class="service-arrow">→</div>
-        <div class="service-result">Clean summary &amp; next steps</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-trigger">Same questions every day</div>
-        <div class="service-arrow">→</div>
-        <div class="service-result">Answers drafted instantly</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- TRUST LINE -->
-  <div class="trust-line">
-    <p>Built for small businesses that run on emails, notes, photos, quotes, customer requests, and repeated follow-ups. No jargon. No giant software project. We start with one workflow that wastes time and make it easier to run.</p>
+<header class="top"><div class="container nav"><a class="brand" href="#top" aria-label="REORK AI home"><span class="brand-infinity" aria-hidden="true">∞</span><span class="brand-word"><span class="big-cap">R</span>E<span class="ring-o">O</span>R<span class="big-cap">K</span></span> <em>AI</em></a><nav class="menu" aria-label="Main navigation"><a class="nav-link" href="#solutions">Solutions</a><a class="nav-link" href="#demo">See it work</a><a class="nav-link" href="#value">Value</a><a class="btn nav-cta" href="#contact">Talk to REORK <span aria-hidden="true">↗</span></a></nav></div></header>
+<main id="top">
+<section class="hero"><div class="container hero-layout">
+<div class="hero-copy"><div class="eyebrow">AI SYSTEMS FOR REAL OPERATIONS</div><h1>Make your business <span>systems work together.</span></h1><p class="lead">Connect customer requests, jobs, documents, approvals and payments with workflows built around how your business actually runs.</p><div class="hero-actions"><a class="btn" href="#demo">See the workflow <span aria-hidden="true">→</span></a><a class="ghost" href="#contact">Request a build</a></div><p class="under">Your business stays in control. <b>AI handles the handoffs, humans approve the decisions.</b></p><div class="hero-micro"><span>Less manual work</span><span>Faster handoffs</span><span>Connected operations</span></div></div>
+<div class="orbit-panel" aria-label="Interactive illustration of connected business workflows">
+  <svg class="orbit-art" viewBox="0 0 600 540" role="img" aria-label="Business functions connected around a central REORK operations hub" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+    <radialGradient id="coreShade" cx="41%" cy="33%" r="70%"><stop stop-color="#362218"/><stop offset=".48" stop-color="#120f0f"/><stop offset=".86" stop-color="#070708"/><stop offset="1" stop-color="#080809"/></radialGradient>
+    <linearGradient id="arcOrange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9a441f" stop-opacity=".05"/><stop offset=".37" stop-color="#f97631" stop-opacity=".52"/><stop offset=".6" stop-color="#ed6a24" stop-opacity=".23"/><stop offset="1" stop-color="#e65c26" stop-opacity=".05"/></linearGradient>
+    <filter id="softLight"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="deepGlow"><feGaussianBlur stdDeviation="17"/></filter>
+   </defs>
+   <circle cx="304" cy="274" r="175" fill="#9b3f1d" opacity=".12" filter="url(#deepGlow)"/>
+   <g fill="none" transform="rotate(-17 303 270)">
+    <ellipse cx="303" cy="270" rx="263" ry="111" stroke="#925028" stroke-opacity=".19" stroke-width="1.4"/>
+    <ellipse cx="303" cy="270" rx="248" ry="122" stroke="url(#arcOrange)" stroke-width="2.2"/>
+    <ellipse cx="303" cy="270" rx="187" ry="91" stroke="#fd8946" stroke-opacity=".13" stroke-width="1.5"/>
+    <ellipse cx="303" cy="270" rx="187" ry="91" stroke="#fd8946" stroke-opacity=".25" stroke-width="11" filter="url(#softLight)"/>
+    <ellipse cx="303" cy="270" rx="163" ry="81" stroke="#fb7d36" stroke-opacity=".65" stroke-width="2.5"/>
+    <ellipse cx="303" cy="270" rx="158" ry="79" stroke="#fd833a" stroke-opacity=".31" stroke-width="10" filter="url(#softLight)"/>
+   </g>
+   <g fill="none" stroke="#dd642a" stroke-opacity=".15" stroke-width="1"><path d="M93 172 Q300 20 534 154"/><path d="M76 345 Q299 515 539 353"/><path d="M123 85 Q320 240 530 84"/></g>
+   <circle cx="304" cy="270" r="100" fill="none" stroke="#e56e35" stroke-opacity=".2" stroke-width="12" filter="url(#softLight)"/>
+   <circle cx="304" cy="270" r="99" fill="url(#coreShade)" stroke="#ee793a" stroke-width="1.65" stroke-opacity=".62"/>
+   <circle cx="304" cy="270" r="87" fill="none" stroke="#a35832" stroke-width=".6" stroke-opacity=".42"/>
+   <text x="304" y="259" text-anchor="middle" font-size="27" font-weight="800" fill="#efede9" letter-spacing="2">REORK</text>
+   <text x="304" y="282" text-anchor="middle" font-size="11" font-weight="700" fill="#ef8c56" letter-spacing="2.5">CONNECTED OPERATIONS</text>
+   <path d="M286 309 q18 -17 35 0" stroke="#f28a4a" stroke-opacity=".65" stroke-width="2" fill="none"/>
+   <g fill="#f58b46"><circle cx="62" cy="322" r="3.6"/><circle cx="487" cy="170" r="3.8"/><circle cx="538" cy="378" r="3"/></g>
+   <g fill="#ff8842" opacity=".48"><circle cx="100" cy="173" r="2"/><circle cx="430" cy="445" r="2"/><circle cx="527" cy="103" r="2.7"/><circle cx="189" cy="63" r="2"/></g>
+  </svg>
+  <div class="orbit-label orb-requests" data-step="1"><span class="orb-icon" aria-hidden="true">✉</span><span>Requests</span></div>
+  <div class="orbit-label orb-documents" data-step="2"><span class="orb-icon" aria-hidden="true">▤</span><span>Documents</span></div>
+  <div class="orbit-label orb-jobs" data-step="3"><span class="orb-icon" aria-hidden="true">▣</span><span>Jobs</span></div>
+  <div class="orbit-label orb-approval" data-step="4"><span class="orb-icon" aria-hidden="true">✓</span><span>Approvals</span></div>
+  <div class="orbit-label orb-payments"><span class="orb-icon" aria-hidden="true">▥</span><span>Payments</span></div>
+  <div class="orbit-action">
+   <div class="orbit-action-copy"><span class="tiny-label">LIVE INTERACTION / SAMPLE DATA</span><p id="heroStatus" aria-live="polite">See how a request becomes a checked next action. No live accounts connected.</p></div>
+   <button type="button" id="heroRun" class="orbit-run">Run example ↗</button>
   </div>
-
-  <div class="divider"></div>
-
-  <!-- WHAT WE BUILD -->
-  <section class="proof-section" id="proof">
-    <p class="section-label">What We Build</p>
-    <h2>Systems That<br>Do the Work.</h2>
-    <p>REORK AI builds custom automation and AI pipelines that fit inside your existing operations — not the other way around.</p>
-
-    <div class="proof-grid">
-      <div class="proof-item">
-        <h3>Inbox &amp; Lead Intake</h3>
-        <p>Emails, enquiries, and incoming leads handled automatically — replies drafted, leads scored, and follow-ups queued without lifting a finger.</p>
-      </div>
-      <div class="proof-item">
-        <h3>Client Communication</h3>
-        <p>Automated follow-ups, quote responses, job updates, and intake flows that keep clients informed without adding to your team's plate.</p>
-      </div>
-      <div class="proof-item">
-        <h3>Workflow Intelligence</h3>
-        <p>Connect your existing tools — CRM, scheduling, invoicing — and add AI decision layers that cut the steps between input and output.</p>
-      </div>
-      <div class="proof-item">
-        <h3>Trades &amp; Field Service</h3>
-        <p>From job-site notes to finished invoices: AI that understands the trades and automates the back-office work you're doing manually.</p>
-      </div>
-      <div class="proof-item">
-        <h3>Custom Data Pipelines</h3>
-        <p>Structured outputs from unstructured inputs. Turn emails, PDFs, forms, and voice notes into clean, usable business data.</p>
-      </div>
-      <div class="proof-item">
-        <h3>White-Label Systems</h3>
-        <p>Need AI under your brand? We build and hand off — or run it for you. Fully scoped, fully yours.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- LIVE EXAMPLE -->
-  <section class="example-section" id="live-example">
-    <div class="example-inner">
-      <div class="example-text">
-        <p class="section-label">Live Example</p>
-        <h2>Photo In.<br><span style="color:var(--orange)">Listing Out.</span></h2>
-        <p class="example-copy">Take a photo of a part, tool, tire, or item. REORK identifies it, creates a clean listing, suggests a price range, stores the record, and prepares buyer replies.</p>
-        <a href="https://reork-backend.onrender.com/parts-cockpit" target="_blank" rel="noopener" class="btn-live">See It Live</a>
-      </div>
-      <ul class="example-bullets">
-        <li>Photo or voice input</li>
-        <li>AI-generated item summary</li>
-        <li>Facebook / Kijiji listing copy</li>
-        <li>Price range suggestion</li>
-        <li>Inventory record saved</li>
-        <li>Buyer replies drafted</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="hiw-section" id="how-it-works">
-    <p class="section-label">How It Works</p>
-    <div class="hiw-steps">
-      <div class="hiw-step">
-        <div class="hiw-num">01</div>
-        <p>Show us the repetitive task.</p>
-      </div>
-      <div class="hiw-step">
-        <div class="hiw-num">02</div>
-        <p>We map the workflow.</p>
-      </div>
-      <div class="hiw-step">
-        <div class="hiw-num">03</div>
-        <p>We build a simple AI-assisted system that fits how you already work.</p>
-      </div>
-      <div class="hiw-step">
-        <div class="hiw-num">04</div>
-        <p>You approve, test, and use it.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- FOR AGENCIES & CONSULTANTS -->
-  <section class="agency-section" id="agencies">
-    <div class="agency-inner">
-      <div class="agency-eyebrow">For Agencies &amp; Consultants</div>
-      <h2>AI Workflow Prototypes<br>for Your Clients</h2>
-      <p class="agency-desc">Your clients are starting to ask what AI can do. REORK helps you answer with a working prototype instead of a theory.</p>
-      <ul class="agency-bullets">
-        <li>Client problem → working AI workflow demo</li>
-        <li>You keep the client relationship</li>
-        <li>Photo, voice, email, form, or notes in</li>
-        <li>REORK builds and maintains the workflow layer</li>
-        <li>Structured output, saved record, next action out</li>
-        <li>Small scope — one workflow at a time, fast</li>
-      </ul>
-      <button onclick="openModal('conversation')" class="btn-primary">Talk to REORK</button>
-    </div>
-  </section>
-
-  <!-- LIVE DEMO CARDS -->
-  <div class="demo-section">
-    <p class="demo-label">Live Working Demos</p>
-    <div class="demo-grid">
-      <a class="demo-card" href="https://reork-backend.onrender.com/parts-cockpit" target="_blank" rel="noopener">
-        <div class="demo-card-tag">VIN → Parts List</div>
-        <h3>Parts Cockpit</h3>
-        <p>Paste a 17-digit VIN. REORK pulls real vehicle data, then generates 14–16 high-demand parts with CAD price ranges and sell-speed ratings — instantly.</p>
-        <span class="demo-card-cta">Try it live →</span>
-      </a>
-      <a class="demo-card" href="https://reork-backend.onrender.com/social-cockpit" target="_blank" rel="noopener">
-        <div class="demo-card-tag">One Click → 3 Posts</div>
-        <h3>Social Post Generator</h3>
-        <p>Pick a post type — small business, agency, or proof demo. REORK writes 3 LinkedIn/Facebook posts in plain language, ready to copy and use.</p>
-        <span class="demo-card-cta">Try it live →</span>
-      </a>
-      <a class="demo-card" href="https://reork-backend.onrender.com/outreach-cockpit" target="_blank" rel="noopener">
-        <div class="demo-card-tag">Outreach Engine</div>
-        <h3>Outreach Cockpit</h3>
-        <p>Manage leads, set lanes (agency vs. direct), write and approve email sequences, track replies and next actions — all in one place with a 25-email daily cap.</p>
-        <span class="demo-card-cta">Try it live →</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <h2>Less Admin.<br><span style="color:var(--orange)">More Job.</span></h2>
-    <p>20 minutes. No jargon, no commitment — just a straight look at where AI fits your workflow.</p>
-    <div class="cta-buttons">
-      <button onclick="openModal('conversation')" class="btn-primary">Book a Workflow Conversation</button>
-    </div>
-  </section>
-
-  <!-- MODAL: WORKFLOW CONVERSATION -->
-  <div class="modal-overlay" id="modal-conversation" onclick="overlayClick(event,'conversation')">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('conversation')">&times;</button>
-      <div class="modal-body" id="modal-body-conversation">
-        <div class="modal-eyebrow">REORK AI — WORKFLOW CONVERSATION</div>
-        <h2>Book a Workflow Conversation</h2>
-        <form class="modal-form" onsubmit="submitModal(event,'conversation','https://reork-backend.onrender.com/api/demo-access-request')">
-          <input type="text"  name="name"     placeholder="Your name"                required />
-          <input type="email" name="email"    placeholder="Your email"               required />
-          <input type="text"  name="business_name"    placeholder="Business name"            required />
-          <textarea           name="business_problem" placeholder="What's eating your time? What would you like to handle automatically?" required></textarea>
-          <button type="submit" class="modal-submit" id="submit-conversation">Send My Request</button>
-          <div class="modal-status" id="status-conversation"></div>
-        </form>
-      </div>
-      <div class="modal-thankyou" id="thankyou-conversation">
-        <div class="modal-thankyou-icon">✅</div>
-        <h3>You're Booked.</h3>
-        <p>We'll be in touch within one business day to schedule your workflow conversation — scoped to your operation.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: BUSINESS DIAGNOSTIC (kept for direct-link access) -->
-  <div class="modal-overlay" id="modal-diagnostic" onclick="overlayClick(event,'diagnostic')">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('diagnostic')">&times;</button>
-      <div class="modal-body" id="modal-body-diagnostic">
-        <div class="modal-eyebrow">REORK AI — DIAGNOSTIC</div>
-        <h2>Business Diagnostic</h2>
-        <form class="modal-form" onsubmit="submitModal(event,'diagnostic','https://reork-backend.onrender.com/api/business-diagnostic')">
-          <input type="text"  name="name"          placeholder="Your name"                              required />
-          <input type="email" name="email"         placeholder="Your email"                             required />
-          <input type="text"  name="business_name" placeholder="Business name"                         required />
-          <input type="text"  name="industry"      placeholder="Industry (e.g. Retail, Construction, Accounting)" required />
-          <textarea           name="pain_point"    placeholder="What is your biggest operational headache?" required></textarea>
-          <button type="submit" class="modal-submit" id="submit-diagnostic">Send My Diagnostic</button>
-          <div class="modal-status" id="status-diagnostic"></div>
-        </form>
-      </div>
-      <div class="modal-thankyou" id="thankyou-diagnostic">
-        <div class="modal-thankyou-icon">✅</div>
-        <h3>Your Diagnostic</h3>
-        <p style="margin-bottom:16px;">A copy is on its way to your inbox. Here's your result:</p>
-        <div id="diagnostic-result" style="
-          text-align:left;
-          background:rgba(255,85,0,0.06);
-          border:1px solid rgba(255,85,0,0.25);
-          border-radius:4px;
-          padding:18px 20px;
-          font-size:13px;
-          color:var(--text);
-          line-height:1.75;
-          white-space:pre-wrap;
-          max-height:340px;
-          overflow-y:auto;
-        "></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function openModal(id) {
-      document.getElementById('modal-' + id).classList.add('open');
-      document.body.style.overflow = 'hidden';
+  <div id="heroLog" class="sr-only" aria-live="polite"><div><b>01</b> Customer request received</div></div>
+ </div>
+</div></section>
+<section class="section" id="solutions"><div class="container"><div class="section-head"><div><div class="eyebrow">What we build</div><h2>One business function, connected from end to end.</h2></div><p>No more buying another tool just to copy information between the tools you already have.</p></div><div class="grid3"><article class="service"><div class="number">01 / CUSTOMERS</div><h3>From first enquiry to getting paid.</h3><p>Capture requests, organize the job, prepare estimates, route decisions and connect completed work to billing records and follow-ups.</p><div class="foot">Fewer missed handoffs</div></article><article class="service"><div class="number">02 / TEAMS &amp; TRADES</div><h3>Make separate businesses coordinate.</h3><p>A plumber, electrician, supplier and contractor can exchange authorized requests, status updates and receipts without constant calls and manual re-entry.</p><div class="foot">Clear responsibilities and approvals</div></article><article class="service"><div class="number">03 / THE OFFICE</div><h3>Put repetitive administration to work.</h3><p>Connect emails, forms, documents, spreadsheets and existing software so information is captured once, checked and moved to the right next step.</p><div class="foot">Less time lost moving data</div></article></div></div></section>
+<section class="section demo-section" id="demo"><div class="container demo-grid"><div class="demo-text"><div class="eyebrow">Try a real interaction</div><h2>Give it a job. See where the work goes.</h2><p>Choose a familiar business problem. Run a sample process, watch the system prepare the next steps, then approve the example. Nothing is sent to anyone.</p><div class="demo-option" role="group" aria-label="Sample workflow"><button type="button" class="switcher active" data-case="customer" aria-pressed="true">Customer → job → approval <span>↗</span></button><button type="button" class="switcher" data-case="office" aria-pressed="false">Inbox → organized record <span>↗</span></button><button type="button" class="switcher" data-case="partner" aria-pressed="false">Business → another business <span>↗</span></button></div><p class="fine" style="margin-top:19px">Demo uses predefined fictional examples. It proves the interaction pattern, not a live integration with another business or AI.</p></div>
+<div class="demo-pane"><div class="demo-pane-header"><strong id="caseTitle">SERVICE REQUEST / WORK ORDER</strong><span class="tag">BROWSER DEMO</span></div><div class="demo-pane-body"><div class="request"><span class="tiny-label">INCOMING INFORMATION</span><strong id="incomingTitle">New service request</strong><p id="incomingDesc">“Please send somebody to inspect the leaking shutoff. I can send photos.”</p></div><div class="flowline" id="stage0"><span class="flow-num">1</span><div><strong id="stageTitle0">Capture</strong><small id="stageDesc0">Identify the request and customer details</small></div><span class="state" id="stageState0">○</span></div><div class="flowline" id="stage1"><span class="flow-num">2</span><div><strong id="stageTitle1">Organize</strong><small id="stageDesc1">Create a work record and flag missing details</small></div><span class="state" id="stageState1">○</span></div><div class="flowline" id="stage2"><span class="flow-num">3</span><div><strong id="stageTitle2">Approval gate</strong><small id="stageDesc2">Owner reviews the proposed response</small></div><span class="state" id="stageState2">○</span></div><div class="flowline" id="stage3"><span class="flow-num">4</span><div><strong id="stageTitle3">Prepare next action</strong><small id="stageDesc3">Save a draft and completion receipt</small></div><span class="state" id="stageState3">○</span></div><div class="demo-buttons"><button class="btn" id="runWorkflow" type="button">Process example →</button><button class="ghost" id="approveWorkflow" type="button" disabled>Approve demo</button><button class="ghost" id="resetWorkflow" type="button">Reset</button></div><div id="demoResult" class="demo-results" role="status" aria-live="polite"></div><p class="fine">The owner still authorizes commitments, payments and customer-facing messages. A real installation must be connected and tested against the business's own tools.</p><a class="ghost" style="margin-top:13px" href="workflow-demo.html">Try a working job-estimate calculator →</a></div></div>
+</div></section>
+<section class="section" id="value"><div class="container"><div class="section-head"><div><div class="eyebrow">The business test</div><h2>Is the wasted time worth fixing?</h2></div><p>Change the numbers. The estimate updates immediately, using your assumptions instead of invented customer results.</p></div><div class="value-grid"><div class="value-panel"><div class="eyebrow">Your current workload</div><div class="control"><label for="hours">Hours spent chasing information each week <output id="hoursOut">10 hours</output></label><input id="hours" type="range" min="1" max="40" value="10"></div><div class="control"><label for="rate">Estimated loaded cost of that time <output id="rateOut">$40/hour</output></label><input id="rate" type="range" min="20" max="150" step="5" value="40"></div><div class="control"><label for="save">Share of those hours that could be saved <output id="saveOut">40%</output></label><input id="save" type="range" min="10" max="80" step="5" value="40"></div><p class="fine" style="margin-top:29px">This model values time only. It does not assume you'll reduce payroll, gain sales or achieve a specific return.</p></div><div class="value-result"><div class="eyebrow">Illustrative time value per month</div><div id="valueAmount" class="amount" aria-live="polite">$693</div><p id="valueDetails">17.3 hours potentially recovered each month, based on 4.33 weeks per month.</p><small>Hypothetical only · No guarantee · Actual value depends on the workflow and business.</small><a class="ghost" href="#contact" style="align-self:flex-start;margin-top:27px">Show us your workflow →</a></div></div></div></section>
+<section class="section"><div class="container"><div class="section-head"><div><div class="eyebrow">How REORK works</div><h2>Start small enough to prove it. Build large enough to matter.</h2></div></div><div class="steps"><div class="step"><b>01 / OBSERVE</b><h3>Find the blockage</h3><p>We identify where a customer, invoice, document or job gets stuck and what that actually costs.</p></div><div class="step"><b>02 / CONNECT</b><h3>Use what exists</h3><p>We check your current tools first and build only the missing steps, routing and approvals.</p></div><div class="step"><b>03 / PROVE</b><h3>Test a complete run</h3><p>One request enters; a checked result, receipt and next action come out. Problems become visible.</p></div><div class="step"><b>04 / EXPAND</b><h3>Only when it pays</h3><p>Improve the proven workflow and connect the next function when the business case supports it.</p></div></div></div></section>
+<section class="section" id="contact" style="padding-top:26px"><div class="container"><div class="cta-band"><div><div class="eyebrow" style="color:#4a2412">Work with REORK</div><h2>Tell us what keeps getting passed from person to person.</h2><p>Show us the process. We'll look for the missing connection, explain what could be automated and scope a sensible first implementation. Email-first, remote-friendly.</p></div><form class="contact-form" id="contactForm"><label for="businessName">Business name<input id="businessName" name="businessName" placeholder="Your company" required maxlength="120"></label><label for="contactEmail">Email address<input id="contactEmail" name="contactEmail" type="email" placeholder="you@company.com" required maxlength="180"></label><label for="problem">What's getting stuck?<textarea id="problem" name="problem" placeholder="Tell us what work your people keep chasing, repeating or copying between systems." required maxlength="2000"></textarea></label><button type="submit" class="btn">Prepare my enquiry email ↗</button><p id="contactNotice" aria-live="polite">Prepare an email draft here; then choose whether to open and send it from your email app. Nothing is silently uploaded.</p><a id="contactPrepared" class="ghost" style="display:none;text-align:center" href="mailto:info@reorkai.com">Open prepared email ↗</a><div class="contact-alt">Or email <a href="mailto:info@reorkai.com">info@reorkai.com</a></div></form></div></div></section>
+</main>
+<footer class="bottom"><div class="container bottom-inner"><div><strong style="color:#eceeef">REORK AI</strong> <span>· Business workflow integration · Ontario, Canada</span><p>© <span id="year">2026</span> REORK AI · 1000148882 Ontario Inc.</p></div><div>Live customer accounts are not connected to the sample demo. <a href="mailto:info@reorkai.com">Contact ↗</a></div></div></footer>
+<script>
+(() => {
+  'use strict';
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const heroLog = document.getElementById('heroLog');
+  const heroStatus = document.getElementById('heroStatus');
+  const heroRun = document.getElementById('heroRun');
+  let heroStep = 0;
+  const heroLines = [
+    ['01','Customer request received'],['02','Missing details flagged'],['03','Work record prepared'],['04','Owner approval required']
+  ];
+  heroRun.addEventListener('click', () => {
+    heroStep = (heroStep + 1) % (heroLines.length + 1);
+    heroLog.replaceChildren();
+    for (const [n,text] of heroLines.slice(0,heroStep || 1)) {
+      const line = document.createElement('div');
+      const seq = document.createElement('b'); seq.textContent=n;
+      line.append(seq, document.createTextNode(' '+text));heroLog.appendChild(line);
     }
-
-    function closeModal(id) {
-      document.getElementById('modal-' + id).classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function overlayClick(e, id) {
-      if (e.target === document.getElementById('modal-' + id)) closeModal(id);
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        ['conversation','diagnostic'].forEach(function(id) { closeModal(id); });
-      }
+    heroStatus.textContent = heroStep === 4 ? 'Owner approval needed. No message or payment sent.' : ['','Customer request recorded.','Missing details identified.','Job information prepared.'][heroStep || 1];
+    document.querySelector('.orbit-panel').className='orbit-panel step-'+heroStep;
+    heroRun.textContent = heroStep === 4 ? 'Run again ↻' : 'Next step →';
+  });
+  const cases = {
+    customer: {heading:'SERVICE REQUEST / WORK ORDER',title:'New service request',incoming:'“Please send somebody to inspect the leaking shutoff. I can send photos.”',steps:[['Capture','Identify request and customer details'],['Organize','Create job record; request missing photos'],['Approval gate','Owner reviews scope and proposed response'],['Prepare next action','Draft customer reply; save receipt']],result:'Ready: draft requesting photos and site details. Job record saved in this demonstration. No customer contacted.'},
+    office: {heading:'OFFICE EMAIL / DOCUMENT HANDOFF',title:'Invoice and job update arrived',incoming:'“The site visit is complete. Please update the job and prepare the invoice paperwork.”',steps:[['Capture','Identify the customer and referenced job'],['Organize','Match paperwork and flag missing items'],['Approval gate','Bookkeeper confirms invoice-ready details'],['Prepare next action','Create an invoice-ready record and audit note']],result:'Ready: example invoice packet prepared for review. No accounting software or bank connected.'},
+    partner: {heading:'CONTRACTOR / SUBCONTRACTOR HANDOFF',title:'Trade schedule needs confirmation',incoming:'“Electrical rough-in is done. Can plumbing start Wednesday?”',steps:[['Capture','Log trade request and job reference'],['Organize','Check prerequisites in the sample work order'],['Approval gate','Responsible contractor authorizes the schedule'],['Prepare next action','Prepare subcontractor reply and handoff receipt']],result:'Ready: example schedule response and handoff receipt. No independent business has been contacted.'}
+  };
+  let current='customer',progress=0;
+  const run=document.getElementById('runWorkflow'),approve=document.getElementById('approveWorkflow'),reset=document.getElementById('resetWorkflow'),out=document.getElementById('demoResult');
+  function render() {
+    const c=cases[current];
+    document.getElementById('caseTitle').textContent=c.heading;
+    document.getElementById('incomingTitle').textContent=c.title;
+    document.getElementById('incomingDesc').textContent=c.incoming;
+    c.steps.forEach(([title,desc],i)=>{
+      const row=document.getElementById('stage'+i);row.classList.remove('active','done');
+      if(progress>=4 || (progress>=3&&i<=2) || (progress>=2&&i<=1)) row.classList.add('done');
+      else if(progress===1&&i===0)row.classList.add('done');
+      if(progress===2&&i===2)row.classList.add('active');
+      document.getElementById('stageTitle'+i).textContent=title;
+      document.getElementById('stageDesc'+i).textContent=desc;
+      document.getElementById('stageState'+i).textContent=row.classList.contains('done')?'✓':row.classList.contains('active')?'!':'○';
     });
-
-    async function submitModal(e, id, url) {
-      e.preventDefault();
-      const form    = e.target;
-      const btn     = document.getElementById('submit-' + id);
-      const status  = document.getElementById('status-' + id);
-
-      const data = {};
-      new FormData(form).forEach(function(v, k) { data[k] = v; });
-
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-      status.textContent = '';
-      status.className = 'modal-status';
-
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('Server error');
-        const json = await res.json().catch(function() { return {}; });
-
-        if (id === 'diagnostic' && json.diagnostic) {
-          const resultEl = document.getElementById('diagnostic-result');
-          if (resultEl) resultEl.textContent = json.diagnostic;
-        }
-
-        document.getElementById('modal-body-' + id).style.display = 'none';
-        document.getElementById('thankyou-' + id).classList.add('show');
-      } catch (err) {
-        status.textContent = 'Something went wrong. Please try again or email info@reorkai.com';
-        status.className = 'modal-status error';
-        btn.disabled = false;
-        btn.textContent = form.querySelector('[type=submit]').dataset.label || 'Submit';
-      }
-    }
-  </script>
-
-  <!-- FOOTER -->
-  <footer>
-    <a href="#hero" class="footer-wordmark">REORK AI</a>
-    <p>&copy; 2026 REORK AI &mdash; 1000148882 Ontario Inc.</p>
-    <a href="mailto:info@reorkai.com">info@reorkai.com</a>
-  </footer>
-
+    run.disabled=progress!==0;
+    approve.disabled=progress!==2;
+    out.style.display=progress===2||progress===4?'block':'none';
+    if(progress===2) out.textContent='WAITING FOR OWNER: The next action needs a human decision. No external action taken.';
+    if(progress===4) out.textContent=c.result;
+  }
+  document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{
+    current=b.dataset.case;progress=0;
+    document.querySelectorAll('[data-case]').forEach(el=>{el.classList.toggle('active',el===b);el.setAttribute('aria-pressed',String(el===b))});
+    render();
+  }));
+  run.addEventListener('click',()=>{progress=2;render();});
+  approve.addEventListener('click',()=>{progress=4;render();});
+  reset.addEventListener('click',()=>{progress=0;render();});
+  render();
+  const hours=document.getElementById('hours'),rate=document.getElementById('rate'),save=document.getElementById('save');
+  const fmt=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD',maximumFractionDigits:0}).format(n);
+  function recalc(){const h=+hours.value,r=+rate.value,s=+save.value/100,t=h*4.33*s;
+    document.getElementById('hoursOut').textContent=h+' hours';
+    document.getElementById('rateOut').textContent=fmt(r)+'/hour';
+    document.getElementById('saveOut').textContent=Math.round(s*100)+'%';
+    document.getElementById('valueAmount').textContent=fmt(t*r);
+    document.getElementById('valueDetails').textContent=t.toFixed(1)+' hours potentially recovered each month, based on 4.33 weeks per month.';
+  }
+  [hours,rate,save].forEach(x=>x.addEventListener('input',recalc));recalc();
+  document.getElementById('contactForm').addEventListener('submit',e=>{
+    e.preventDefault(); const form=e.currentTarget;
+    if(!form.reportValidity())return;
+    const name=document.getElementById('businessName').value.trim(),email=document.getElementById('contactEmail').value.trim(),problem=document.getElementById('problem').value.trim();
+    if(!name||!email||!problem)return;
+    const subject='Workflow enquiry from '+name;
+    const body='Business: '+name+'\nReply to: '+email+'\n\nWhat needs improving:\n'+problem+'\n\nSent voluntarily from the REORK AI website.';
+    const url='mailto:info@reorkai.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    document.getElementById('contactNotice').textContent='Email prepared. Open it when ready, then review and press Send in your email application.';
+    const link=document.getElementById('contactPrepared'); link.href=url;link.style.display='inline-flex';
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>REORK | Customer-to-Cash Operations Demo</title>
+<meta name="description" content="A hands-on demonstration of a customer inquiry moving through verified inputs, scope, calculated estimate, human approval and prepared customer response." />
+<style>
+:root { color-scheme:dark; --bg:#0b0e12;--panel:#141a22;--panel2:#19222c;--border:#303b47;--text:#f4f7f9;--muted:#9aa8b8;--accent:#fa6b3d;--ok:#64d3ba;--warn:#eec881;--radius:14px }
+* {box-sizing:border-box} body {margin:0;background:radial-gradient(ellipse at 75% 0%,#1b2930 0%,var(--bg) 60%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif} a{color:#e9a08d} button,input,textarea,select{font:inherit} button{cursor:pointer} .wrap{width:min(1210px,calc(100% - 36px));margin:0 auto} .top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;border-bottom:1px solid var(--border)} .wordmark{font-weight:900;font-size:25px;letter-spacing:.07em;color:var(--accent)}.mini{font-size:12px;color:var(--muted)} .pill{border:1px solid #71543d;border-radius:50px;color:#f6c99d;padding:6px 12px;font-size:12px;background:#372819}h1{font-size:clamp(30px,4.4vw,53px);letter-spacing:-.045em;line-height:1.05;margin:26px 0 12px;max-width:870px}h2{font-size:20px;margin:0 0 15px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 8px}p{margin:0 0 14px}.muted{color:var(--muted)}.intro{max-width:820px;color:#bfccd5;font-size:16px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:24px 0 26px}.flow div{border:1px solid var(--border);padding:12px;border-radius:9px;background:var(--panel);text-align:center;font-weight:650;font-size:13px}.flow span{display:block;color:var(--accent);font-size:11px;letter-spacing:.07em;margin-bottom:4px}.layout{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:18px;align-items:start}.card{background:linear-gradient(180deg,rgba(23,31,40,.98),rgba(18,24,31,.98));border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:0 15px 40px rgba(0,0,0,.18)}.card+.card{margin-top:16px}.field{display:block;margin-bottom:17px}.field>span{font-weight:700;font-size:12px;color:#d0dce5;display:block;margin-bottom:6px}.field small{display:block;color:var(--muted);margin-top:5px}.field input,.field textarea {display:block;width:100%;background:#0b1117;border:1px solid #495563;border-radius:8px;padding:11px 13px;color:var(--text);outline-offset:3px}.field input:focus,.field textarea:focus{outline:2px solid var(--accent)}.field textarea{min-height:105px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.unit{position:relative}.unit b{position:absolute;right:13px;top:10px;color:var(--muted);font-size:12px}.unit input{padding-right:48px}.numbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{background:#101922;border:1px solid #304453;border-radius:10px;padding:13px}.metric span{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:22px;letter-spacing:-.04em}.total{background:#1c302e;border:1px solid #44796e;border-radius:11px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0}.total strong{font-size:30px;color:#bdf6e8;letter-spacing:-.04em}.notice{margin:12px 0;border-radius:8px;padding:12px 14px;border:1px solid #695330;background:#2d271c;color:#f7e5bf}.notice.ok{background:#122c28;border-color:#2f645b;color:#9ce8d8}.notice.bad{background:#371e1d;border-color:#995b4c;color:#ffc6b4}.check{display:flex;gap:10px;align-items:flex-start;margin:15px 0;color:#cbd6dd}.check input{width:20px;height:20px;accent-color:var(--accent);flex:0 0 auto}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.btn{border:1px solid #53616e;background:#1d2833;color:#fff;padding:10px 15px;border-radius:8px;font-weight:750}.btn.primary{background:var(--accent);color:#160b08;border-color:var(--accent)}.btn:disabled{cursor:not-allowed;opacity:.43}.output{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;background:#0b1116;border:1px solid #334450;border-radius:9px;padding:16px;min-height:190px;max-height:445px;overflow:auto}.badge-status{display:inline-flex;border:1px solid #525e6c;border-radius:6px;padding:3px 9px;font-size:11px;color:#dae4e9;letter-spacing:.05em;font-weight:800;margin-bottom:14px}.details{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:17px;border-top:1px solid var(--border);margin:18px 0 0}.footer{border-top:1px solid var(--border);padding:24px 0 40px;margin-top:35px;color:var(--muted);font-size:13px}.hide-print{}.sub{color:var(--muted);font-size:12px}.label{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent);font-weight:850}button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.flow div:last-child{grid-column:span 2}.card{padding:19px}}@media(max-width:550px){.two,.numbers{grid-template-columns:1fr}.top{align-items:flex-start}.pill{max-width:130px}.flow{grid-template-columns:1fr}.flow div:last-child{grid-column:span 1}.total strong{font-size:24px}}
+@media print{body{background:#fff;color:#000}.hide-print,.top,.intro,.flow,.left,.footer{display:none!important}.wrap{width:100%}.layout{display:block}.card{background:#fff;color:#000;border:none;box-shadow:none;padding:0}.output{color:#000;background:#fff;border:none;max-height:none}.badge-status{color:#000}.total{color:#000;background:#fff}.total strong{color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div><div class="wordmark">REORK<span style="color:#fff">.</span></div><div class="mini">AI-assisted operations for small businesses</div></div><span class="pill">INTERACTIVE PROTOTYPE · NOT LIVE SERVICE</span></header>
+<main>
+<p class="label" style="margin-top:28px">One complete business process</p>
+<h1>From an incoming request to a customer-ready response.</h1>
+<p class="intro">Change the project inputs and the calculations change. Missing details stop the quote. Potential safety issues trigger an inspection gate. A person approves the result. This prototype runs entirely in your browser, without sending or storing customer data.</p>
+<div class="flow" aria-label="Operating steps"><div><span>01</span>CAPTURE REQUEST</div><div><span>02</span>CHECK MISSING DATA</div><div><span>03</span>CALCULATE ESTIMATE</div><div><span>04</span>HUMAN APPROVAL</div><div><span>05</span>PREPARE RESPONSE</div></div>
+<div class="layout">
+<section class="left" aria-label="Project intake and estimate inputs">
+<div class="card">
+<h2>1. Customer inquiry</h2>
+<label class="field"><span>Customer / project</span><input id="contact" value="Example homeowner" maxlength="100" autocomplete="off" /></label>
+<label class="field"><span>Customer request</span><textarea id="description" maxlength="1800">Please replace the old deck surface boards. The framing has not been inspected yet.</textarea><small>Try adding “support post is rotten” to see the safety gate.</small></label>
+<div class="two"><label class="field"><span>Measured deck surface</span><div class="unit"><input id="area" type="number" min="1" max="10000" step="0.1" value="100" /><b>sq ft</b></div><small>Clear this field to trigger a missing-information response.</small></label><label class="field"><span>Board waste allowance</span><div class="unit"><input id="waste" type="number" min="0" max="30" step="1" value="10"/><b>%</b></div><small>For cuts and unusable offcuts.</small></label></div>
+</div>
+<div class="card">
+<h2>2. Editable price inputs</h2>
+<p class="muted">Illustrative Canadian-dollar budget inputs, <strong>not live retailer quotes</strong>. All prices exclude delivery and site-specific extras.</p>
+<div class="two"><label class="field"><span>PT 2×6×12 board (CAD)</span><input id="boardPrice" type="number" min="0" step="0.01" value="24.72" /></label><label class="field"><span>Exterior screws, 900 box (CAD)</span><input id="screwPrice" type="number" min="0" step="0.01" value="39.98" /></label></div>
+<label class="field"><span>Illustrative labour rate (CAD / sq ft)</span><input id="labourRate" type="number" min="0" step="0.01" value="12" /></label>
+<label class="check"><input type="checkbox" id="includeHst" /> <span>Show illustrative 13% Ontario HST on estimate. Actual tax treatment requires confirmation.</span></label>
+<label class="check"><input type="checkbox" id="approved" /> <span><strong>Operator approval:</strong> I reviewed inputs, exclusions and scope. This does not bypass an inspection warning.</span></label>
+</div>
+</section>
+<section aria-label="Computed outcome and customer communication">
+<div class="card">
+<h2>3. Live calculation</h2>
+<div id="status" class="notice" role="status">Reviewing inputs…</div>
+<div id="metrics" class="numbers" aria-live="polite"><div class="metric"><span>Deck boards</span><strong id="boards">—</strong></div><div class="metric"><span>Screw boxes</span><strong id="screws">—</strong></div><div class="metric"><span>Materials</span><strong id="materials">—</strong></div><div class="metric"><span>Labour</span><strong id="labour">—</strong></div></div>
+<div class="total"><span>Calculated scenario total</span><strong id="total">—</strong></div>
+<p class="sub" id="calculation">Formula: boards = round up [area × (1+waste) / 5.5 sq ft]; labour = area × rate. Assumes 5.5 in exposed width for 12 ft boards.</p>
+<div class="details"><span class="mini">No AI calls</span><span class="mini">No customer contact</span><span class="mini">No payment taken</span></div>
+</div>
+<div class="card" style="margin-top:16px"><h2>4. Prepared customer response</h2><span id="resultStatus" class="badge-status">DRAFT</span><div id="response" class="output" aria-live="polite"></div>
+<div class="actions hide-print"><button id="copy" class="btn primary" type="button">Copy draft</button><button id="export" class="btn" type="button">Export work order (JSON)</button><button id="print" class="btn" type="button">Print review</button></div>
+<p class="sub" style="margin-top:14px">The draft is never emailed by this prototype. An actual customer-facing system would require approved communications, evidence, security and delivery integrations.</p></div>
+</section>
+</div>
+</main>
+<footer class="footer"><strong style="color:#e8f0f5">REORK AI | Prototype evidence</strong><p style="margin-top:6px">This is a functioning deterministic business-process demonstration, not an autonomous AI worker, final construction quote, building-code review, production invoicing or evidence of customer sales. No client identity, images, files or bank information are sent from this page.</p><p>Only qualified, reviewed work is intended for real customer delivery. © REORK AI. Preview may be opened as a standalone HTML file.</p></footer>
+</div>
+<script>
+/** REORK customer-to-cash demonstration core.
+ * Pure, deterministic and dependency-free. No AI, messaging or payment integrations.
+ * Cents calculations are rounded at each displayed line to avoid binary-float drift.
+ */
+const DEMO_PRICES = Object.freeze({ board: 24.72, screwBox: 39.98, labourPerSqFt: 12, taxRate: .13 });
+const structuralWords = /\b(unsafe|unstable|falling|collapse(?:d|ing)?|broken guard|rotted|rot(?:ting)?|ledger|footing|joist|support post|structural|sinking|load.bearing|railing loose)\b/i;
+const roundMoney = n => Math.round((n + Number.EPSILON) * 100) / 100;
+const isValidCost = v => Number.isFinite(Number(v)) && Number(v) >= 0 && Number(v) <= 1_000_000 && v !== '' && v !== null;
+
+function inspectRequest(input) {
+  const missing = [];
+  if (!String(input.contact ?? '').trim()) missing.push('Customer or project name');
+  if (!String(input.description ?? '').trim()) missing.push('Description of requested work');
+  const area = Number(input.area);
+  if (input.area === '' || input.area === null || !Number.isFinite(area) || area <= 0 || area > 10_000) missing.push('Positive measured deck surface area (1–10,000 sq ft)');
+  for (const [key, label] of [ ['boardPrice','2×6 board unit price'], ['screwPrice','Screw box price'], ['labourRate','Labour rate per square foot'] ]) {
+    if (!isValidCost(input[key])) missing.push(label);
+  }
+  const structuralReview = structuralWords.test(String(input.description ?? ''));
+  return { missing, structuralReview, canCalculate: missing.length === 0, readyForCustomerQuote: missing.length === 0 && !structuralReview && input.approved === true };
+}
+
+function computeEstimate(input) {
+  const gate = inspectRequest(input);
+  if (!gate.canCalculate) return { ...gate, estimate: null };
+  const area = Number(input.area);
+  const waste = Number(input.waste ?? 10);
+  if (!Number.isFinite(waste) || waste < 0 || waste > 30) return { ...gate, missing: [...gate.missing, 'Waste must be 0–30%'], canCalculate: false, readyForCustomerQuote: false, estimate: null };
+  // Nominal 2x6x12 board, assumed exposed face 5.5 in x 12 ft = 5.5 sq ft/board.
+  const boards = Math.ceil(Math.round(area * (1 + waste / 100) * 1e6) / 1e6 / 5.5);
+  const screwBoxes = Math.ceil(area * 6 / 900);  // 6 screws / sq ft budgeting assumption, 900/box
+  const boardTotal = roundMoney(boards * Number(input.boardPrice));
+  const fastenersTotal = roundMoney(screwBoxes * Number(input.screwPrice));
+  const materials = roundMoney(boardTotal + fastenersTotal);
+  const labour = roundMoney(area * Number(input.labourRate));
+  const subtotal = roundMoney(materials + labour);
+  const hst = input.includeHst ? roundMoney(subtotal * DEMO_PRICES.taxRate) : 0;
+  const total = roundMoney(subtotal + hst);
+  return { ...gate, estimate: { area, boards, screwBoxes, boardTotal, fastenersTotal, materials, labour, subtotal, hst, total, waste } };
+}
+
+const money = n => Number(n).toLocaleString('en-CA', { style:'currency', currency:'CAD' });
+function prepareResponse(input) {
+  const result = computeEstimate(input);
+  const customer = String(input.contact || 'Customer').trim();
+  const subject = `REORK demonstration | ${customer} | ${result.structuralReview ? 'Site inspection' : 'Deck request'}`;
+  const common = '\n\nThis is a process demonstration using editable illustrative prices, not a contractor quotation, site inspection or commitment. All messages require a person to approve and send.';
+  if (result.missing.length) return { subject, status:'NEEDS INFORMATION', body:`Hello ${customer},\n\nThanks for the project details. Before a reliable estimate can be prepared, we need: ${result.missing.join('; ')}.` + common, ...result };
+  if (result.structuralReview) return { subject, status:'SAFETY REVIEW', body:`Hello ${customer},\n\nThanks for the project information. Your description raises possible structural or guard safety concerns. We cannot offer a repair price based only on surface measurements. A competent site inspection and confirmed repair scope are needed before a quote can be approved.` + common, ...result };
+  if (!input.approved) return { subject, status:'AWAITING HUMAN APPROVAL', body:'The calculation is ready for operator review. Confirm the quantities, excluded work and pricing before preparing a customer-facing estimate.', ...result };
+  const e = result.estimate;
+  return { subject, status:'APPROVED DRAFT • NOT SENT', body:`Hello ${customer},\n\nBased on the information supplied, here is a preliminary estimate for replacement of ${e.area} sq ft of existing deck surface.\n\n2×6×12 boards: ${e.boards} × ${money(input.boardPrice)} = ${money(e.boardTotal)}\nExterior screws: ${e.screwBoxes} box(es) = ${money(e.fastenersTotal)}\nMaterials: ${money(e.materials)}\nIllustrative labour: ${money(e.labour)}\n${input.includeHst ? `Illustrative HST: ${money(e.hst)}\n` : 'Tax not included.\n'}ESTIMATED TOTAL: ${money(e.total)}\n\nExcluded until separately inspected and priced: railings, stairs, framing, footings, demolition, delivery, disposal, finishes and permit/inspection requirements. Measurements and final commercial terms must be checked before a binding quote.` + common, ...result };
+}
+
+const ids=['contact','description','area','waste','boardPrice','screwPrice','labourRate','includeHst','approved'];
+const elements=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)]));
+const byId=id=>document.getElementById(id);
+const currency=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(n);
+const value=()=>Object.fromEntries(ids.map(id=>[id,elements[id].type==='checkbox'?elements[id].checked:elements[id].value]));
+let latest={};
+function render(){
+ const input=value();const calc=computeEstimate(input); const resp=prepareResponse(input);latest={input,calc,resp};
+ const s=byId('status');s.className='notice';
+ if(calc.missing.length){s.textContent='INPUT REQUIRED: '+calc.missing.join('; ');s.classList.add('bad');}
+ else if(calc.structuralReview){s.textContent='STOP: Possible structural or guard problem. Budget calculation is illustrative only; customer quote blocked until site inspection and validated scope.';s.classList.add('bad');}
+ else if(!input.approved){s.textContent='CALCULATED. Awaiting owner approval. No message has been sent.';}
+ else{s.textContent='APPROVED DRAFT PREPARED. Still not sent to anyone.';s.classList.add('ok');}
+ const e=calc.estimate; for(const [id,val] of [['boards',e?.boards],['screws',e?.screwBoxes],['materials',e?.materials],['labour',e?.labour],['total',e?.total]])byId(id).textContent=val===undefined?'—':(['boards','screws'].includes(id)?val:currency(val));
+ byId('resultStatus').textContent=resp.status;byId('response').textContent='SUBJECT: '+resp.subject+'\n\n'+resp.body;
+}
+ids.forEach(id=>elements[id].addEventListener('input',render));
+byId('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(byId('response').textContent);byId('copy').textContent='Copied';setTimeout(()=>byId('copy').textContent='Copy draft',1800);}catch{byId('response').focus();byId('copy').textContent='Select draft and copy';}});
+byId('export').addEventListener('click',()=>{
+ const {input,calc,resp}=latest;
+ const safe={schema:'reork.demo.workorder.v1',generatedAt:new Date().toISOString(),project:input.contact,description:input.description,inputs:{area:input.area,waste:input.waste,boardPrice:input.boardPrice,screwPrice:input.screwPrice,labourRate:input.labourRate,includeHst:input.includeHst},operatorApproved:input.approved===true,missing:calc.missing,structuralReview:calc.structuralReview,calculation:calc.estimate,customerDraftStatus:resp.status,customerDraft:resp.body,disclaimer:'Demonstration only. No message sent or payment collected.'};
+ const blob=new Blob([JSON.stringify(safe,null,2)],{type:'application/json'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='reork-example-workorder.json';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+});
+byId('print').addEventListener('click',()=>window.print());
+render();
+</script>
+</body></html>
