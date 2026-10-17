@@ -66,4 +66,14 @@ button.addEventListener('click',()=>{
   table.append(body);output.append(table);
  }catch(e){const error=document.createElement('p');error.className='warn';error.textContent=e.message;output.append(error);}
 });
-</script></body></html>
+</script>
+<script id="MARKETING_SOURCE_PASS_THROUGH">
+// Carry only a whitelisted, anonymous business-campaign source to the paid-service page.
+(function () {
+  const src = new URLSearchParams(location.search).get('utm_source');
+  if (!['linkedin','facebook','google'].includes(src)) return;
+  const link = document.querySelector('a[href="/ai-shopping-catalog-review.html"]');
+  if (link) link.setAttribute('href', '/ai-shopping-catalog-review.html?utm_source=' + src + '&utm_medium=organic');
+})();
+</script>
+</body></html>
