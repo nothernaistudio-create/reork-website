@@ -33,11 +33,37 @@
 const $ = id => document.getElementById(id);
 const configs={
  service:{name:'SERVICE',required:['reference','customer','email','details','priority'],sample:'reference,customer,email,details,priority\nSR-1201,Ashley Morris,ashley@example.com,Leaking kitchen tap,normal\nSR-1202,Harbour Foods,ops@example.com,Power outage in cold room,urgent\nSR-1203,River Street Retail,,Install replacement fitting,normal',cols:{reference:['reference','ticket','job','job id','job_id'],customer:['customer','client','name'],email:['email','customer email','contact email'],details:['details','description','issue','request'],priority:['priority','urgency','status']},rule:r=>{let p=r.priority.toLowerCase();if(['urgent','emergency','critical'].includes(p))return {status:'review',reasons:['Urgent request requires a human dispatch/safety review.']};if(!['normal','low','routine'].includes(p))return {status:'review',reasons:['Unrecognized priority: confirm with an operator.']};return {status:'ready',reasons:[]}}},
- invoice:{name:'INVOICES',required:['reference','customer','email','amount','due_date'],sample:'invoice,customer,email,amount,due_date\nINV-4100,North Lake Supplies,finance@example.com,1700.00,2026-09-17\nINV-4101,Pine Yard Hotel,admin@example.com,520.00,2026-12-01\nINV-4102,General Stores,accounts@example.com,-10,2026-09-18',cols:{reference:['reference','invoice','invoice id','invoice number'],customer:['customer','client','company'],email:['email','billing email','customer email'],amount:['amount','balance','total','amount due'],due_date:['due_date','due date','due','payment due']},rule:r=>{let a=Number(r.amount.replace(/[, $]/g,''));if(!Number.isFinite(a)||a<=0)return {status:'blocked',reasons:['Amount must be a positive number.']};if(!/^\d{4}-\d{2}-\d{2}$/.test(r.due_date)||!Number.isFinite(Date.parse(r.due_date+'T12:00:00Z'))||new Date(r.due_date+'T12:00:00Z').toISOString().slice(0,10)!==r.due_date)return {status:'blocked',reasons:['Due date must be a real YYYY-MM-DD date.']};if(r.due_date < new Date().toISOString().slice(0,10))return {status:'review',reasons:['Due date passed: operator must approve any reminder.']};return {status:'ready',reasons:[]}}},
- supplier:{name:'SUPPLIERS',required:['reference','customer','email','item','quantity'],sample:'po,vendor,email,item,quantity\nPO-033,East Hardware,sales@example.com,Fasteners 8mm,25\nPO-034,Warehouse Co,orders@example.com,Pipe elbows 90 degree,12\nPO-035,Depot North,buyers@example.com,Bearing kits,0',cols:{reference:['reference','po','po number','purchase order','order'],customer:['customer','vendor','supplier','company'],email:['email','supplier email','contact'],item:['item','description','product','part'],quantity:['quantity','qty','units']},rule:r=>{const q=Number(r.quantity);if(!Number.isInteger(q)||q<1)return {status:'blocked',reasons:['Quantity must be a positive whole number.']};return {status:'ready',reasons:[]}}}
+ invoice:{name:'INVOICES',required:['reference','customer','email','amount','due_date'],sample:'invoice,customer,email,amount,due_date\nINV-4100,North Lake Supplies,finance@example.com,1700.00,2026-09-17\nINV-4101,Pine Yard Hotel,admin@example.com,520.00,2026-12-01\nINV-4102,General Stores,accounts@example.com,-10,2026-09-18',cols:{reference:['reference','invoice','invoice id','invoice number'],customer:['customer','client','company'],email:['email','billing email','customer email'],amount:['amount','balance','total','amount due'],due_date:['due_date','due date','due','payment due']},rule:r=>{const raw=r.amount.trim();const legal=/^\$?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$/.test(raw);let a=legal?Number(raw.replace(/[,$]/g,'')):NaN;if(!Number.isFinite(a)||a<=0)return {status:'blocked',reasons:['Amount must be a positive number.']};if(!/^\d{4}-\d{2}-\d{2}$/.test(r.due_date)||!Number.isFinite(Date.parse(r.due_date+'T12:00:00Z'))||new Date(r.due_date+'T12:00:00Z').toISOString().slice(0,10)!==r.due_date)return {status:'blocked',reasons:['Due date must be a real YYYY-MM-DD date.']};if(r.due_date < new Date().toISOString().slice(0,10))return {status:'review',reasons:['Due date passed: operator must approve any reminder.']};return {status:'ready',reasons:[]}}},
+ supplier:{name:'SUPPLIERS',required:['reference','customer','email','item','quantity'],sample:'po,vendor,email,item,quantity\nPO-033,East Hardware,sales@example.com,Fasteners 8mm,25\nPO-034,Warehouse Co,orders@example.com,Pipe elbows 90 degree,12\nPO-035,Depot North,buyers@example.com,Bearing kits,0',cols:{reference:['reference','po','po number','purchase order','order'],customer:['customer','vendor','supplier','company'],email:['email','supplier email','contact'],item:['item','description','product','part'],quantity:['quantity','qty','units']},rule:r=>{const q=/^\d+$/.test(r.quantity)?Number(r.quantity):NaN;if(!Number.isSafeInteger(q)||q<1)return {status:'blocked',reasons:['Quantity must be a positive whole number.']};return {status:'ready',reasons:[]}}}
 };
 let current=[],approved=new Set(),currentMode='service';
-function parseCsv(text){const rows=[];let field='',row=[],inside=false;for(let i=0;i<text.length;i++){let c=text[i];if(c==='"'){if(inside&&text[i+1]==='"'){field+='"';i++}else inside=!inside}else if(c===','&&!inside){row.push(field);field=''}else if((c==='\n'||c==='\r')&&!inside){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(z=>z.trim().length))rows.push(row);row=[];field=''}else field+=c;}if(inside)throw Error('Unclosed quotation mark in CSV.');row.push(field);if(row.some(z=>z.trim().length))rows.push(row);return rows;}
+function parseCsv(text){
+ const rows=[];let row=[],field='',state='start';
+ const push=()=>{row.push(field);field='';state='start'};
+ for(let i=0;i<text.length;i++){
+  const c=text[i];
+  if(state==='quoted'){
+   if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else state='closed'}
+   else field+=c;
+   continue;
+  }
+  if(c==='"'){
+   if(state!=='start')throw Error('Unexpected quotation mark in CSV field.');
+   state='quoted';continue;
+  }
+  if(c===',' || c==='\n' || c==='\r'){
+   if(c==='\r' && text[i+1]==='\n')i++;
+   push();
+   if(c!==','){if(row.some(v=>v.trim().length))rows.push(row);row=[]}
+   continue;
+  }
+  if(state==='closed')throw Error('Characters after closing CSV quotation mark.');
+  field+=c;state='unquoted';
+ }
+ if(state==='quoted')throw Error('Unclosed quotation mark in CSV.');
+ push();if(row.some(v=>v.trim().length))rows.push(row);
+ return rows;
+}
 function validateEmail(v){return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(v)}
 function normalize(text,mode){if(new TextEncoder().encode(text).length>262144)throw Error('CSV exceeds 256 KB.');const conf=configs[mode],rows=parseCsv(text.trim());if(rows.length<2)throw Error('Include one header row and at least one data record.');if(rows.length>101)throw Error('Maximum 100 data records per run.');let headers=rows[0].map(h=>h.trim().toLowerCase().replace(/\s+/g,' '));if(new Set(headers).size!==headers.length)throw Error('Duplicate column names in CSV header.');const mapping={};for(let key of conf.required){const idx=headers.findIndex(h=>conf.cols[key].includes(h));if(idx<0)throw Error('Required column missing: '+key+' (supported headers: '+conf.cols[key].join(', ')+').');mapping[key]=idx;}
  const seen=new Set();return rows.slice(1).map((fields,i)=>{const data={};for(let k of conf.required)data[k]=(fields[mapping[k]]||'').trim();let reasons=[];if(fields.length!==headers.length)reasons.push('CSV column count does not match header.');for(let k of conf.required)if(!data[k])reasons.push('Missing '+k.replace('_',' ')+'.');if(data.email&&!validateEmail(data.email))reasons.push('Invalid email address.');if(data.reference){if(seen.has(data.reference))reasons.push('Duplicate reference in this batch.');seen.add(data.reference);}const rule=conf.rule(data);let status=reasons.length?'blocked':rule.status;return {row:i+2,data,status,reasons:[...reasons,...rule.reasons]}})}
