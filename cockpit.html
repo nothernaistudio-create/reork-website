@@ -313,7 +313,7 @@
              placeholder="Describe your task..." autocomplete="off" />
       <button class="mic hide" id="s1Mic" title="Voice input">🎙</button>
     </div>
-    <button class="btn btn-lime" id="s1Btn" data-lbl="Send to Command" onclick="sendTask()">
+    <button class="btn btn-lime" id="s1Btn" data-lbl="Record Owner Command" onclick="sendTask()">
       Send to Command
     </button>
     <div class="status" id="s1St"></div>
@@ -401,6 +401,17 @@
   // ─────────────────────────────────────────────────────────────────────────────
 
   const TASK_HOOK        = 'https://reork-backend.onrender.com/api/command-intake';
+  // Owner secret is entered only when the owner actually sends a command.
+  // Never bake a runner token into this public site or write one to storage.
+  let cockpitToken = '';
+  function authorizeCommand() {
+    if (cockpitToken) return cockpitToken;
+    const entered = window.prompt('REORK owner authorization: enter your employee runner token. It stays in this tab only and is not saved.');
+    if (!entered || !entered.trim()) return '';
+    cockpitToken = entered.trim();
+    return cockpitToken;
+  }
+
   const CONTINUITY_HOOK  = 'https://hooks.zapier.com/hooks/catch/26852495/4yljr4c/';
   const MEETING_ENDPOINT = 'https://reork-backend.onrender.com/api/meeting';
 
@@ -425,22 +436,38 @@
   async function sendTask() {
     const val = document.getElementById('s1Input').value.trim();
     if (!val) { setStatus('s1St', 'Enter a task first.', 'err'); return; }
+    if (val.length > 4000) { setStatus('s1St', 'Maximum 4000 characters.', 'err'); return; }
+    const token = authorizeCommand();
+    if (!token) { setStatus('s1St', 'Not sent. Owner authorization is required.', 'err'); return; }
     btnLoad('s1Btn', 'Sending...');
-    setStatus('s1St', '<span class="spin"></span> Sending to Command Center...', 'run');
+    setStatus('s1St', '<span class="spin"></span> Recording in REORK queue...', 'run');
     try {
       const r = await fetch(TASK_HOOK, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: val }),
+        headers: { 'Content-Type': 'application/json', 'x-reork-runner-token': token },
+        body: JSON.stringify({ message: val })
       });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      setStatus('s1St', '✔ Task logged to Command Center.', 'ok');
+      const result = await r.json();
+      if (!r.ok || result.ok !== true || result.task_recorded !== true || !result.task_key) {
+        if (r.status === 401) cockpitToken = '';
+        throw new Error((result && result.error) || ('HTTP ' + r.status));
+      }
+      const key = String(result.task_key);
+      // DOM textContent avoids interpreting any remote response as markup.
+      const label = '✔ Recorded in Supabase: ' + key +
+        '. Status: ' + String(result.queue_status || 'queued') +
+        '. Not yet executed or verified.';
+      const status = document.getElementById('s1St');
+      status.textContent = label;
+      status.className = 'status ok';
       document.getElementById('s1Input').value = '';
     } catch(e) {
-      console.error(e);
-      setStatus('s1St', '✖ Send failed. Check connection.', 'err');
+      const status = document.getElementById('s1St');
+      status.textContent = '✖ Not confirmed in REORK queue: ' + e.message;
+      status.className = 'status err';
+    } finally {
+      btnReset('s1Btn');
     }
-    btnReset('s1Btn');
   }
   document.getElementById('s1Input').addEventListener('keydown', e => { if (e.key === 'Enter') sendTask(); });
 

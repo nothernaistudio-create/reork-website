@@ -1,0 +1,24 @@
+name: Owner Cockpit Command CI
+
+on:
+  pull_request:
+    paths:
+      - 'cockpit.html'
+      - 'tests/cockpit-command.test.js'
+      - '.github/workflows/cockpit-command-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify browser command receipt and owner auth
+        run: node --test tests/cockpit-command.test.js
