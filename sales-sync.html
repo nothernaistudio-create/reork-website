@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c1015">
+<meta name="description" content="REORK AI builds verified sales-to-operations workflows. Explore a synthetic Gumroad-to-Airtable sale, duplicate, refund and missed-event demonstration.">
+<title>Sales to Airtable | REORK AI</title>
+<link rel="canonical" href="https://www.reorkai.com/sales-sync.html">
+<link rel="icon" type="image/png" href="/REORK%20logo_2.png">
+<meta property="og:title" content="Sales to Airtable | REORK AI">
+<meta property="og:description" content="A transparent demonstration of sale matching, duplicate protection, refund updates and missed-event checks.">
+<style>
+:root{color-scheme:dark;--bg:#0c1015;--surface:#141a21;--raised:#1b222b;--line:#35414e;--ink:#f5f2ed;--muted:#a7b4c0;--accent:#ff935a;--soft:#e8c7a9;--good:#a6e4bf;--warn:#ffd19a;--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(980px 650px at 85% -120px,#61351d44,transparent),var(--bg);font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button{font:inherit;cursor:pointer}.wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+nav{border-bottom:1px solid #ffffff19;background:#0b0f14ed;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}.nav-content{display:flex;align-items:center;justify-content:space-between;min-height:75px;gap:16px}.logo{font-weight:950;letter-spacing:.12em;text-decoration:none;font-size:22px}.logo span{color:var(--accent)}.menu{display:flex;align-items:center;gap:26px}.menu a{font-size:14px;text-decoration:none;font-weight:650;color:#e4e5e7}.menu a:hover{color:var(--accent)}
+.btn,.ghost{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:13px 19px;font-size:14px;font-weight:850;border:1px solid transparent}.btn{background:var(--accent);color:#16100e}.btn:hover{background:#ffae81}.ghost{border-color:#65717d;color:var(--ink)}.ghost:hover{background:#ffffff13}
+.hero{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:56px;padding:100px 0 90px}.eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:.23em;font-weight:850;color:var(--accent)}h1,h2,h3{letter-spacing:-.04em;line-height:1.12}h1{font-size:clamp(45px,5.5vw,74px);margin:17px 0 23px}h1 span{color:var(--accent)}.lede{font-size:18px;line-height:1.67;color:#c0c8d0;max-width:580px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 22px}.note{font-size:12px;color:var(--muted);line-height:1.5}.pill-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}.pill{border:1px solid #56616c;padding:7px 12px;border-radius:999px;color:#d6dee6;font-size:12px;font-weight:750}
+.visual{border:1px solid #596069;border-radius:20px;background:linear-gradient(145deg,#232932,#12181f 65%);padding:25px;box-shadow:0 30px 100px #0008}.visual-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:26px}.tiny{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:#b6bec7;font-weight:850}.dot{width:8px;height:8px;display:inline-block;background:var(--good);border-radius:50%;margin-right:5px}.unit{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;border:1px solid #4a5560;background:#171e26;border-radius:13px;padding:17px;margin-bottom:10px}.unit-icon{width:44px;height:44px;background:#ff935a1a;border:1px solid #ff935a55;display:grid;place-items:center;color:var(--accent);border-radius:11px;font-weight:900}.unit b{display:block}.unit small{color:#a6b0ba}.connector{text-align:center;color:var(--accent);font-size:22px;margin:1px 0 10px}.visual-foot{font:12px/1.6 ui-monospace,Consolas,monospace;color:#bfcdd7;border-top:1px dashed #58616a;padding-top:18px;margin-top:23px}.visual-foot b{color:var(--good)}
+section.block{padding:83px 0;border-top:1px solid #ffffff17}.section-top{max-width:750px}.section-top h2{font-size:clamp(31px,3.6vw,49px);margin:12px 0 16px}.section-top p{color:#b7c2cb;line-height:1.65}.demo-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:27px;margin-top:32px}.panel{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:27px}.panel h3{margin:0 0 13px;font-size:23px}.panel p{color:#b8c3cd;font-size:14px}.stack{display:grid;gap:11px;margin-top:20px}.sample{border:1px solid #59646e;background:#222a33;color:var(--ink);width:100%;text-align:left;border-radius:10px;padding:13px 15px;font-weight:750}.sample:hover{background:#303945}.sample small{display:block;color:#adbac5;font-size:11px;font-weight:500;margin-top:3px}.table-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:480px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #38434f;font-size:13px}th{color:#b7c4ce;text-transform:uppercase;font-size:10px;letter-spacing:.08em}td{color:#f0f0ef}.table-tag{border:1px solid #477458;color:var(--good);border-radius:99px;padding:3px 8px;font-size:11px}.table-tag.refund{border-color:#9c7651;color:var(--warn)}.readout{border-radius:10px;background:#0d171c;border:1px solid #4b7065;color:#c4ead4;padding:13px 15px;margin:20px 0 0;font-size:13px;min-height:53px}#recordCount{font-variant-numeric:tabular-nums;color:var(--good)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:29px}.feature{background:#171e25;border:1px solid #34404b;border-radius:15px;padding:24px}.feature .count{font-size:12px;color:var(--accent);font-weight:850}.feature h3{font-size:21px;margin:16px 0 12px}.feature p{font-size:14px;color:#b9c4ce;margin:0}
+.cta{background:linear-gradient(110deg,#f69a61,#ed7544);color:#21140f;border-radius:20px;padding:42px 48px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}.cta h2{font-size:clamp(26px,3vw,39px);margin:0 0 12px}.cta p{margin:0;max-width:690px;color:#40281d}.cta .btn{background:#141b22;color:white;white-space:nowrap}.cta .btn:hover{background:#2b323a}
+footer{border-top:1px solid #ffffff25;color:#a7b2bf;padding:27px 0;font-size:13px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}footer a{color:#e6e6e7}
+@media(max-width:900px){.hero,.demo-layout{grid-template-columns:1fr}.hero{gap:34px;padding:66px 0 60px}.visual{max-width:620px}.features{grid-template-columns:1fr 1fr}.cta{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{width:calc(100% - 30px)}.nav-content{min-height:66px}.menu{gap:12px}.menu a:first-child{display:none}.logo{font-size:18px}.hero{padding:57px 0}.lede{font-size:16px}.visual{padding:17px}.features{grid-template-columns:1fr}.panel{padding:17px}.cta{padding:27px 22px}.cta .btn{white-space:normal}.pill-row{gap:6px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav-content"><a class="logo" href="/"><span>∞</span> REORK AI</a><div class="menu"><a href="/">Home</a><a href="#demo">Test the concept</a><a class="btn" href="mailto:info@reorkai.com?subject=Sales%20integration%20project">Discuss a build ↗</a></div></div></nav>
+<main>
+<section class="wrap hero">
+<div><div class="eyebrow">REORK WORKFLOW EXAMPLE / SALES OPERATIONS</div><h1>Every sale accounted for. <span>Every missing handoff visible.</span></h1><p class="lede">Connect sales from Gumroad to Airtable without relying on a silent, unverified copy-and-paste job. Match by sale ID, distinguish repeat notifications from new purchases and know when a transfer needs attention.</p>
+<div class="actions"><a class="btn" href="mailto:info@reorkai.com?subject=Sales%20integration%20project">Discuss a fixed-scope build ↗</a><a class="ghost" href="#demo">Try the sample workflow</a></div>
+<p class="note">Built for real seller-owned accounts only with authorization. The interactive example below uses fictional records and makes no calls to Gumroad or Airtable.</p>
+<div class="pill-row"><span class="pill">Sale-ID matching</span><span class="pill">Repeat-event handling</span><span class="pill">Refund visibility</span><span class="pill">Verification-first delivery</span></div></div>
+<div class="visual" aria-label="Illustration of a sale passing through verification and into a sales record">
+<div class="visual-head"><span class="tiny">WORKFLOW ARCHITECTURE</span><span class="tiny"><span class="dot"></span>ILLUSTRATIVE</span></div>
+<div class="unit"><span class="unit-icon">01</span><div><b>Gumroad purchase event</b><small>Sale identifier received</small></div></div><div class="connector" aria-hidden="true">↓</div>
+<div class="unit"><span class="unit-icon">02</span><div><b>Verify the sale</b><small>Read authentic sale record; reject mismatch</small></div></div><div class="connector" aria-hidden="true">↓</div>
+<div class="unit"><span class="unit-icon">03</span><div><b>Airtable sales ledger</b><small>Create or update using the same sale ID</small></div></div>
+<div class="visual-foot">Synthetic prototype check: <b>9 / 9 automated tests passed</b><br>Live seller-account connection: <b>not configured</b></div>
+</div>
+</section>
+<section class="block" id="demo"><div class="wrap"><div class="section-top"><div class="eyebrow">Try the logic</div><h2>Don't trust a green checkmark. Test what happens when things go wrong.</h2><p>Use the buttons to simulate receiving a sale, receiving the same event twice, a refund, and a missed event. This browser-only illustration is not a live Gumroad or Airtable integration.</p></div>
+<div class="demo-layout">
+<div class="panel"><h3>Sample events</h3><p>Each button updates the fictional sales ledger beside it. Nothing is saved or transmitted.</p><div class="stack">
+<button class="sample" id="newSale" type="button">01 / Receive a sample sale<small>Write sale 1001 into a sample ledger</small></button>
+<button class="sample" id="repeatSale" type="button">02 / Receive the same sale again<small>Do not create a second purchase</small></button>
+<button class="sample" id="refundSale" type="button">03 / Refund that sale<small>Update the existing row</small></button>
+<button class="sample" id="missingSale" type="button">04 / Simulate a missing event<small>Flag a sale as needing a reconciliation check</small></button>
+<button class="sample" id="reset" type="button">Reset demonstration<small>Clear the browser-only sample</small></button>
+</div></div>
+<div class="panel"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><h3 style="margin:0">Illustrative sales ledger</h3><strong id="recordCount" aria-live="polite">0 records</strong></div>
+<div class="table-scroll"><table><thead><tr><th>Sale ID</th><th>Buyer</th><th>Amount</th><th>Status</th></tr></thead><tbody id="rows"><tr><td colspan="4">No sample sales yet.</td></tr></tbody></table></div>
+<div class="readout" id="result" role="status" aria-live="polite">Choose a sample event to see what the workflow should do.</div>
+<p class="note">This demo shows intended behavior, not proof of a deployed customer installation. Before delivery, a real approved test purchase must appear exactly once in the owner's Airtable base.</p>
+</div></div></div></section>
+<section class="block"><div class="wrap"><div class="section-top"><div class="eyebrow">A useful small build</div><h2>Deliver the outcome, not a stack of subscriptions.</h2><p>REORK scopes integrations around the actual store and fields, and tests with customer-approved accounts before handover. We do not claim an example screen proves a live sale synchronized.</p></div>
+<div class="features">
+<div class="feature"><span class="count">01 / INTAKE</span><h3>Exact fields</h3><p>Sale ID, buyer email, date, product, amount, currency and refund state, based on the seller's authorized records.</p></div>
+<div class="feature"><span class="count">02 / RELIABILITY</span><h3>One sale, one record</h3><p>Record matching on unique sale ID, with upstream verification and visible errors rather than quiet data loss.</p></div>
+<div class="feature"><span class="count">03 / ACCEPTANCE</span><h3>Prove it live</h3><p>Test a real approved purchase, a repeated notification and a refund. Scope historical imports and independent reconciliation separately.</p></div>
+</div></div></section>
+<section class="wrap" style="padding:20px 0 85px"><div class="cta"><div><h2>Have a sales handoff that can't afford to fail?</h2><p>Tell us the source, destination, monthly volume and which events must be captured. We'll propose a bounded build and a test you can personally verify before accepting delivery.</p></div><a class="btn" href="mailto:info@reorkai.com?subject=Sales%20integration%20project">Email REORK AI ↗</a></div></section>
+</main>
+<footer><div class="wrap foot"><span>REORK AI · Ontario, Canada · Workflow engineering</span><span><a href="/">Home</a> · <a href="/connection-lab.html">Connection Lab</a> · <a href="mailto:info@reorkai.com">info@reorkai.com</a></span></div></footer>
+<script>
+(function () {
+  'use strict';
+  var tbody = document.getElementById('rows');
+  var result = document.getElementById('result');
+  var count = document.getElementById('recordCount');
+  var state = new Map();
+  function render(message) {
+    tbody.replaceChildren();
+    var records = Array.from(state.values());
+    count.textContent = records.length + (records.length === 1 ? ' record' : ' records');
+    if (!records.length) {
+      var emptyRow = document.createElement('tr');
+      var emptyCell = document.createElement('td');
+      emptyCell.colSpan = 4; emptyCell.textContent = 'No sample sales yet.';
+      emptyRow.appendChild(emptyCell); tbody.appendChild(emptyRow);
+    }
+    records.forEach(function (sale) {
+      var row = document.createElement('tr');
+      [sale.id, sale.buyer, sale.amount, sale.status].forEach(function (value, i) {
+        var cell = document.createElement('td');
+        if (i === 3) {
+          var tag = document.createElement('span');
+          tag.className = 'table-tag' + (value === 'Refunded' ? ' refund' : '');
+          tag.textContent = value;
+          cell.appendChild(tag);
+        } else cell.textContent = value;
+        row.appendChild(cell);
+      });
+      tbody.appendChild(row);
+    });
+    result.textContent = message;
+  }
+  document.getElementById('newSale').addEventListener('click', function () {
+    state.set('sample-1001', { id:'sample-1001', buyer:'buyer@example.com', amount:'$45.00', status:'Paid' });
+    render('Sample sale 1001 is present. A real implementation must verify the seller-owned Gumroad record first.');
+  });
+  document.getElementById('repeatSale').addEventListener('click', function () {
+    if (!state.has('sample-1001')) {
+      render('No original sample exists. Receive sample sale 1001 first.');
+      return;
+    }
+    render('Duplicate notification detected. Record count stays the same because Sale ID matches.');
+  });
+  document.getElementById('refundSale').addEventListener('click', function () {
+    if (!state.has('sample-1001')) { render('No sample purchase to refund. Receive sample sale 1001 first.'); return; }
+    state.set('sample-1001', { id:'sample-1001', buyer:'buyer@example.com', amount:'$45.00', status:'Refunded' });
+    render('Refund updates the existing fictional sale rather than creating another purchase.');
+  });
+  document.getElementById('missingSale').addEventListener('click', function () {
+    render('Example gap flagged: a sale notification may be missing. A production build needs a separately scoped reconciliation check.');
+  });
+  document.getElementById('reset').addEventListener('click', function () { state.clear(); render('Sample reset. Nothing was sent or stored.'); });
+})();
+</script>
+</body>
+</html>
