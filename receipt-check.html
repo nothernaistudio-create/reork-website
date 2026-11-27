@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="REORK ReceiptCheck beta compares expected business records against delivered records in the browser to identify missing, duplicated, unexpected or changed items. No upload required.">
+<meta name="theme-color" content="#0c1015"><title>ReceiptCheck Beta | REORK AI</title>
+<link rel="canonical" href="https://www.reorkai.com/receipt-check.html"><link rel="icon" type="image/png" href="/REORK%20logo_2.png">
+<style>
+:root{color-scheme:dark;--bg:#0b1116;--panel:#18212a;--border:#364552;--ink:#f3f4f1;--muted:#bac6cd;--accent:#ff935a;--success:#b5e5c2;--warn:#fbd091;--max:1060px}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:radial-gradient(700px 400px at 87% 0%,#62391a50,transparent),var(--bg)}a{color:inherit}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.wrap{max-width:var(--max);margin:auto;padding:0 20px}.top{border-bottom:1px solid #ffffff26}.top .wrap{min-height:73px;display:flex;align-items:center;justify-content:space-between;gap:15px}.logo{font-weight:950;font-size:19px;text-decoration:none;letter-spacing:.09em}.logo span{color:var(--accent)}.top-links{display:flex;gap:20px;font-size:13px;font-weight:700}.top-links a{text-decoration:none;color:#d2dce3}
+.hero{padding:86px 0 52px}.kicker{font-size:12px;font-weight:850;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}h1,h2{line-height:1.1;letter-spacing:-.045em}h1{font-size:clamp(45px,6vw,70px);max-width:820px;margin:16px 0 20px}h1 em{font-style:normal;color:var(--accent)}h2{font-size:32px;margin:0 0 14px}.lede{max-width:820px;color:#c0ccd5;font-size:18px;margin-bottom:19px}.status{font-size:13px;color:#d5e3da;display:inline-flex;align-items:center;gap:9px;background:#1e342f;border:1px solid #45735f;border-radius:30px;padding:7px 13px}.status i{display:inline-block;width:7px;height:7px;border-radius:100%;background:#b7ebc5}
+.notice{color:#aab7c1;font-size:12px;margin:16px 0}.workspace{display:grid;grid-template-columns:1fr 1fr;gap:17px;padding-bottom:24px}.panel{border:1px solid var(--border);background:var(--panel);border-radius:17px;padding:24px;min-width:0}.panel h2{font-size:24px}.panel p{color:var(--muted);font-size:14px;margin:0 0 17px}label{font-size:14px;font-weight:800;display:block;margin:0 0 7px}input[type=file]{max-width:100%;padding:12px;background:#101820;border:1px solid #4e6170;border-radius:10px;cursor:pointer;font-size:13px}code{color:#ffb48a;background:#342a28;border-radius:5px;padding:2px 5px}small{color:#98a6b0;display:block;margin-top:10px}
+.btn,.ghost{background:var(--accent);color:#1a120f;border:1px solid transparent;padding:13px 18px;border-radius:10px;font-weight:850;font-size:14px}.btn:hover{background:#ffb083}.ghost{background:transparent;color:#f3f4f1;border-color:#687987}.ghost:hover{background:#ffffff16}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:25px}.results{border:1px solid var(--border);background:var(--panel);border-radius:17px;padding:25px;margin-bottom:34px}.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin:18px 0 23px}.stat{border:1px solid #495563;border-radius:12px;padding:14px;background:#111b24}.stat b{display:block;font-size:28px;line-height:1.2;font-variant-numeric:tabular-nums}.stat span{font-size:12px;color:#bcc8d1}.stat.good b{color:var(--success)}.stat.bad b{color:var(--warn)}
+.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:540px}th,td{text-align:left;padding:13px 11px;border-bottom:1px solid #394956;font-size:13px;word-break:break-word}th{text-transform:uppercase;letter-spacing:.08em;color:#a9bac6;font-size:11px}td{color:#e4e9ec}#message{color:#c0d5c9;min-height:22px}#error{color:#ffbea1;min-height:22px;font-size:14px}
+.rules{padding:20px 0 75px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.rules p,.rules li{color:#b6c5cf;font-size:14px}.rules ul{padding-left:19px}.rules a{color:#ffba96}.footer{border-top:1px solid #35434d;padding:24px 0;color:#afbac4;font-size:13px}
+@media(max-width:760px){.workspace,.rules{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:52px 0 35px}.top-links{gap:12px}.results{padding:17px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head><body>
+<header class="top"><div class="wrap"><a class="logo" href="/"><span>∞</span> REORK AI</a><nav class="top-links"><a href="/">Home</a><a href="/sales-sync.html">Sales sample</a><a href="mailto:info@reorkai.com?subject=ReceiptCheck%20pilot">Contact</a></nav></div></header>
+<main>
+<section class="wrap hero"><div class="kicker">REORK RECEIPTCHECK / FUNCTIONAL BETA</div><h1>A workflow said success. <em>Did the records arrive?</em></h1><p class="lede">Compare what should exist with what actually appeared. Find missing, unexpected, repeated or changed records, then export a clear issue list. Works with spreadsheet exports from many tools without connecting a customer account.</p><div class="status"><i aria-hidden="true"></i> Runs entirely in this browser · files are not uploaded</div><p class="notice">Beta scope: manual CSV comparison only, not automatic monitoring, not a live payment verification service and not proof that either source export is complete.</p></section>
+<section class="wrap workspace" aria-label="Choose two CSV exports">
+<div class="panel"><h2>1. Expected records</h2><p>Export the transactions, orders or jobs you believe should have been processed.</p><label for="expected">Source CSV</label><input type="file" id="expected" accept=".csv,text/csv"><small>Required: <code>id</code>. Optional: <code>amount,currency,status</code>.</small></div>
+<div class="panel"><h2>2. Delivered records</h2><p>Export the records from the system where they should have arrived.</p><label for="delivered">Destination CSV</label><input type="file" id="delivered" accept=".csv,text/csv"><small>Use the same unique ID in both files. Up to 5,000 data rows and 1 MB per file.</small></div>
+</section>
+<section class="wrap" aria-label="Run comparison">
+<div class="controls"><button class="btn" id="compare" type="button">Compare records →</button><button class="ghost" id="sample" type="button">Try fictional sample</button><button class="ghost" id="download" type="button" disabled>Export issue report CSV</button></div>
+<div id="error" role="alert" aria-live="polite"></div>
+<div class="results"><div class="kicker">RECONCILIATION REPORT</div><h2 id="reportTitle">What didn't make it?</h2><div id="message" role="status" aria-live="polite">Select two CSV files or try the fictional sample.</div>
+<div class="stat-grid" id="stats"><div class="stat good"><b id="matched">0</b><span>Matching IDs</span></div><div class="stat bad"><b id="missing">0</b><span>Missing</span></div><div class="stat bad"><b id="mismatch">0</b><span>Changed</span></div><div class="stat bad"><b id="duplicate">0</b><span>Duplicated IDs</span></div><div class="stat bad"><b id="unexpected">0</b><span>Unexpected</span></div></div>
+<div class="table-scroll"><table><thead><tr><th>Record ID</th><th>Issue</th><th>Details</th></tr></thead><tbody id="issueRows"><tr><td colspan="3">No comparison run yet.</td></tr></tbody></table></div>
+</div></section>
+<section class="wrap rules"><div><h2>What it checks</h2><ul><li>Whether each expected ID appears in the destination</li><li>Whether a destination record has no matching source</li><li>Whether either export includes repeated IDs</li><li>Whether shared amount, currency or status fields differ</li><li>Exportable exception list for repair and rechecking</li></ul></div>
+<div><h2>What it does not check</h2><p>It cannot prove that a source export contains every genuine transaction, verify payment settlement, log into a customer's account, identify why a transfer failed or monitor future events. Real automated receipt monitoring would require authorized source and destination connectors, independent checks, security controls and tested alerts.</p><p>Have a real broken workflow? <a href="mailto:info@reorkai.com?subject=Record%20reconciliation%20pilot">Discuss a limited pilot with REORK AI.</a> Do not email us private customer data until a suitable secure transfer is arranged.</p></div></section>
+</main>
+<footer class="footer"><div class="wrap">REORK AI · Ontario, Canada · Functionally useful beta, not a subscription product or claimed customer deployment</div></footer>
+<script src="/assets/receipt-check-core.js"></script>
+<script>
+(function () {
+  'use strict';
+  var core = window.ReorkReceiptCheck;
+  var expected = document.getElementById('expected'), delivered = document.getElementById('delivered');
+  var error = document.getElementById('error'), message = document.getElementById('message'), rows = document.getElementById('issueRows');
+  var download = document.getElementById('download');
+  var issues = [];
+  function setReport(out, label) {
+    issues = out.issues;
+    error.textContent = '';
+    for (var key of ['matched','missing','mismatch','duplicate','unexpected']) document.getElementById(key).textContent = String(out.counts[key]);
+    message.textContent = label + ': ' + out.counts.expected + ' expected rows, ' + out.counts.delivered + ' delivered rows; ' + issues.length + ' distinct issues.';
+    rows.replaceChildren();
+    if (!issues.length) {
+      var ok = document.createElement('tr'), cell = document.createElement('td');
+      cell.colSpan = 3; cell.textContent = 'The compared records match. This does not prove the source export is complete.';
+      ok.appendChild(cell); rows.appendChild(ok);
+    }
+    for (var issue of issues) {
+      var tr = document.createElement('tr');
+      for (var value of [issue.id, issue.type, issue.detail]) {
+        var td = document.createElement('td'); td.textContent = value; tr.appendChild(td);
+      }
+      rows.appendChild(tr);
+    }
+    download.disabled = !issues.length;
+  }
+  function fail(e) { error.textContent = e && e.message ? e.message : 'Comparison failed.'; download.disabled = true; issues = []; message.textContent = 'Fix the input and try again.'; }
+  document.getElementById('sample').addEventListener('click', function () {
+    try {
+      var source = core.parseCsv('id,amount,currency,status\nORD-101,29.00,USD,paid\nORD-102,20.00,USD,paid\nORD-103,14.00,USD,paid\nORD-104,15.00,USD,paid');
+      var target = core.parseCsv('id,amount,currency,status\nORD-101,29,USD,paid\nORD-103,14.00,USD,refunded\nORD-104,15.00,USD,paid\nORD-104,15.00,USD,paid\nORD-105,20.00,USD,paid');
+      setReport(core.compare(source,target), 'Fictional sample');
+    } catch (e) { fail(e); }
+  });
+  document.getElementById('compare').addEventListener('click', async function () {
+    try {
+      if (!expected.files.length || !delivered.files.length) throw Error('Choose both CSV files, or try the fictional sample.');
+      var f1 = expected.files[0], f2 = delivered.files[0];
+      if (f1.size > core.MAX_BYTES || f2.size > core.MAX_BYTES) throw Error('File exceeds 1 MB beta limit.');
+      var texts = await Promise.all([f1.text(),f2.text()]);
+      setReport(core.compare(core.parseCsv(texts[0]),core.parseCsv(texts[1])), 'Your local CSV comparison');
+    } catch(e) { fail(e); }
+  });
+  download.addEventListener('click', function () {
+    if (!issues.length) return;
+    var blob = new Blob([core.exportIssues(issues)], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob), anchor = document.createElement('a');
+    anchor.href = url; anchor.download = 'reork-receiptcheck-issues.csv';
+    document.body.appendChild(anchor); anchor.click(); anchor.remove();
+    URL.revokeObjectURL(url);
+  });
+})();
+</script>
+</body></html>

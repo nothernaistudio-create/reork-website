@@ -1,0 +1,26 @@
+name: ReceiptCheck Functional Beta Tests
+
+on:
+  pull_request:
+    paths:
+      - 'receipt-check.html'
+      - 'assets/receipt-check-core.js'
+      - 'tests/receipt-check.test.js'
+      - 'sitemap.xml'
+      - '.github/workflows/receipt-check-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Test functional reconciliation beta
+        run: node --test tests/receipt-check.test.js
