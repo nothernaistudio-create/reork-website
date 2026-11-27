@@ -1,0 +1,26 @@
+name: Sales Integration Website Tests
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'sales-sync.html'
+      - 'sitemap.xml'
+      - 'tests/sales-sync.test.js'
+      - '.github/workflows/sales-sync-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify honest storefront and demo behavior
+        run: node --test tests/sales-sync.test.js
